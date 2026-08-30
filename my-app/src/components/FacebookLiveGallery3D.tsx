@@ -145,15 +145,44 @@ export const FacebookLiveGallery3D: React.FC<FacebookLiveGallery3DProps> = ({ on
             </p>
           </div>
 
-          <a
-            href="https://www.facebook.com/tribeniminatifoundation/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold rounded-2xl shadow-md text-xs uppercase tracking-wider transition-all cursor-pointer shrink-0"
-          >
-            <span>Follow on Facebook</span>
-            <span className="material-symbols-outlined text-[18px]">open_in_new</span>
-          </a>
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
+            <a
+              href="https://www.facebook.com/tribeniminatifoundation/photos_by"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-4 py-2.5 bg-white hover:bg-slate-100 text-[#1877F2] font-bold rounded-xl border border-slate-200/80 shadow-xs text-xs uppercase tracking-wider transition-all cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-[16px]">photo_library</span>
+              <span>All Photos</span>
+            </a>
+            <a
+              href="https://www.facebook.com/tribeniminatifoundation/reels/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-4 py-2.5 bg-white hover:bg-slate-100 text-[#EA580C] font-bold rounded-xl border border-slate-200/80 shadow-xs text-xs uppercase tracking-wider transition-all cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-[16px]">movie</span>
+              <span>Reels</span>
+            </a>
+            <a
+              href="https://www.instagram.com/minatifoundation/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-4 py-2.5 bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white font-bold rounded-xl shadow-xs text-xs uppercase tracking-wider transition-all cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-[16px]">photo_camera</span>
+              <span>Instagram</span>
+            </a>
+            <a
+              href="https://www.facebook.com/tribeniminatifoundation/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-5 py-2.5 bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold rounded-xl shadow-md text-xs uppercase tracking-wider transition-all cursor-pointer"
+            >
+              <span>Follow Page</span>
+              <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+            </a>
+          </div>
         </div>
 
         {/* Category Filter Tabs */}

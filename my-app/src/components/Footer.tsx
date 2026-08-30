@@ -30,31 +30,49 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenDonate }) => {
                 Institutional altruism driven by statutory transparency and emotional commitment.
               </p>
 
-              <div className="flex gap-4">
+              <div className="flex items-center gap-3">
                 <a
-                  href="/transparency"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (onNavigate) onNavigate('transparency');
-                  }}
-                  className="material-symbols-outlined text-[#64748B] cursor-pointer hover:text-[#4b41e1] hover:-translate-y-1 transition-all duration-300"
-                  title="Verified Ledgers"
+                  href="https://www.facebook.com/tribeniminatifoundation/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-all shadow-xs"
+                  title="Official Facebook Page"
                 >
-                  qr_code_2
+                  <span className="material-symbols-outlined text-[18px]">public</span>
                 </a>
                 <a
-                  href="https://tribeni-minati-foundation-website.vercel.app"
-                  className="material-symbols-outlined text-[#64748B] cursor-pointer hover:text-[#4b41e1] hover:-translate-y-1 transition-all duration-300"
-                  title="Official Portal"
+                  href="https://www.instagram.com/minatifoundation/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-[#E4405F] hover:bg-gradient-to-tr hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF] hover:text-white transition-all shadow-xs"
+                  title="Instagram: @minatifoundation"
                 >
-                  language
+                  <span className="material-symbols-outlined text-[18px]">photo_camera</span>
+                </a>
+                <a
+                  href="https://www.facebook.com/tribeniminatifoundation/photos_by"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-[#4b41e1] hover:bg-[#4b41e1] hover:text-white transition-all shadow-xs"
+                  title="Facebook Field Photos"
+                >
+                  <span className="material-symbols-outlined text-[18px]">photo_library</span>
+                </a>
+                <a
+                  href="https://www.facebook.com/tribeniminatifoundation/reels/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-[#F59E0B] hover:bg-[#F59E0B] hover:text-[#111827] transition-all shadow-xs"
+                  title="Facebook Reels & Field Video Clips"
+                >
+                  <span className="material-symbols-outlined text-[18px]">movie</span>
                 </a>
                 <a
                   href="mailto:tribeniminatifoundation@gmail.com"
-                  className="material-symbols-outlined text-[#64748B] cursor-pointer hover:text-[#4b41e1] hover:-translate-y-1 transition-all duration-300"
+                  className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-700 hover:bg-[#111827] hover:text-white transition-all shadow-xs"
                   title="Email Secretariat"
                 >
-                  mail
+                  <span className="material-symbols-outlined text-[18px]">mail</span>
                 </a>
               </div>
             </div>
