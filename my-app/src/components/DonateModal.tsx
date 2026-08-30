@@ -271,25 +271,28 @@ export const DonateModal: React.FC<DonateModalProps> = ({
                   <select
                     value={pillar}
                     onChange={(e) => setPillar(e.target.value)}
-                    className="w-full px-4 py-3 rounded-2xl bg-white border border-black/[0.08] text-xs font-semibold text-[#151C18] focus:outline-hidden focus:border-[#1B3B2B]"
+                    className="w-full px-4 py-3 rounded-2xl bg-white border border-slate-200 text-xs font-semibold text-[#191c1e] focus:outline-hidden focus:border-[#4b41e1]"
                   >
                     <option value="General Impact Fund (Where needed most)">
                       General Impact Fund (Where needed most)
                     </option>
-                    <option value="Minati Free Education & Infant Care">
-                      Minati Free Education &amp; Infant Care
+                    <option value="Free Child Remedial Education Coaching Center">
+                      Free Child Remedial Education Coaching Center (Mogra/Tribeni)
                     </option>
-                    <option value="Emergency Grassroots Healthcare & Oxygen Bank">
-                      Emergency Grassroots Healthcare &amp; Oxygen Bank
+                    <option value="Infant Winter Bedding & Blanket Distribution Relief">
+                      Infant Winter Bedding &amp; Blanket Distribution Relief (Dhaniakhali)
                     </option>
-                    <option value="Smart Green Mobility (E-Rickshaw Fleet)">
-                      Smart Green Mobility (E-Rickshaw Fleet)
+                    <option value="Rural Diagnostic Health & Mobile Eye Camps">
+                      Rural Diagnostic Health &amp; Mobile Eye Camps (Hooghly)
                     </option>
-                    <option value="Sustainable Agribusiness & Biofloc Aquaculture">
-                      Sustainable Agribusiness &amp; Biofloc Aquaculture
+                    <option value="Women SHG Tailoring & Jute Craft Center">
+                      Women SHG Tailoring &amp; Jute Craft Center (Tribeni)
                     </option>
-                    <option value="Women Self-Help & Micro-Enterprise Hubs">
-                      Women Self-Help &amp; Micro-Enterprise Hubs
+                    <option value="Voluntary Blood Donation & Emergency Support Cell">
+                      Voluntary Blood Donation &amp; Emergency Support Cell
+                    </option>
+                    <option value="Emergency Food Security & Annadaan Relief">
+                      Emergency Food Security &amp; Annadaan Relief
                     </option>
                   </select>
                 </div>
