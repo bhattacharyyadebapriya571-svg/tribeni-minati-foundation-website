@@ -1,69 +1,89 @@
 import React from 'react';
 import { SDG_DATA } from '../data/foundationData';
-import { Globe } from 'lucide-react';
+import type { PageId } from '../types';
 
-export const SDGSection: React.FC = () => {
+interface SDGSectionProps {
+  onNavigate?: (page: PageId) => void;
+}
+
+export const SDGSection: React.FC<SDGSectionProps> = ({ onNavigate }) => {
   return (
-    <section className="py-24 sm:py-32 bg-white relative border-b border-black/[0.06]">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-        {/* Header */}
-        <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-[#4E8B65] bg-[#4E8B65]/10 border border-[#4E8B65]/20 mb-4">
-            <Globe className="w-3.5 h-3.5" />
-            Global Framework Alignment
+    <section className="w-full py-16 lg:py-24 bg-white border-t border-slate-200/60">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+          <div className="max-w-2xl">
+            <span className="font-label-caps text-xs uppercase text-[#4b41e1] tracking-widest font-bold block mb-2">
+              Global Alignment &amp; UN Framework
+            </span>
+            <h2 className="font-headline-lg text-3xl sm:text-4xl font-bold text-[#191c1e]">
+              Sustainable Development Goals (SDGs)
+            </h2>
+            <p className="font-body-base text-base text-[#45464d] mt-2">
+              Aligning our grassroots Hooghly interventions with the United Nations 2030 Agenda for Sustainable Development.
+            </p>
           </div>
-          <h2 className="font-['DM_Serif_Display'] text-3xl sm:text-4xl lg:text-5xl text-[#0F1F16] leading-tight tracking-tight mb-4">
-            Towards Achieving the UN Sustainable Development Goals (SDGs)
-          </h2>
-          <p className="text-base text-[#5A6B62] leading-relaxed">
-            All programs undertaken by Tribeni Minati Foundation are strictly mapped to the United Nations 2030 Agenda for Sustainable Development, delivering measurable global impact at the grassroots level.
-          </p>
+
+          {onNavigate && (
+            <button
+              onClick={() => onNavigate('programs')}
+              className="flex items-center gap-2 text-[#4b41e1] font-semibold hover:text-[#645efb] transition-colors group px-4 py-2 rounded-xl hover:bg-indigo-50/50 cursor-pointer text-sm font-mono shrink-0"
+            >
+              <span>Explore Programs</span>
+              <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">
+                arrow_forward
+              </span>
+            </button>
+          )}
         </div>
 
-        {/* SDG Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* SDG Double-Bezel Bento Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {SDG_DATA.map((sdg) => (
             <div
               key={sdg.number}
-              className="p-6 rounded-2xl bg-[#FAFAFA] border border-black/[0.06] hover:border-black/20 hover:shadow-md transition-all flex flex-col justify-between group"
+              className="bg-[#f2f4f6] p-2 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
             >
-              <div>
-                {/* SDG Number Badge */}
-                <div
-                  className="w-12 h-12 rounded-xl text-white font-bold text-lg flex items-center justify-center mb-4 shadow-sm group-hover:scale-105 transition-transform"
-                  style={{ backgroundColor: sdg.color }}
-                >
-                  {sdg.number}
+              <div className="bg-white rounded-[22px] p-6 flex flex-col justify-between h-full space-y-4">
+                
+                <div className="flex items-center justify-between">
+                  <div
+                    className="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-extrabold font-mono text-xl shadow-md"
+                    style={{ backgroundColor: sdg.color }}
+                  >
+                    0{sdg.number}
+                  </div>
+                  <span className="font-mono text-xs text-[#64748B] font-bold">
+                    UN SDG Goal
+                  </span>
                 </div>
 
-                <h4 className="text-base font-bold text-gray-900 mb-2 leading-snug">
-                  SDG {sdg.number}: {sdg.title}
-                </h4>
-
-                <p className="text-xs text-gray-600 leading-relaxed mb-4">
-                  {sdg.description}
-                </p>
-              </div>
-
-              {/* Programs Tag Strip */}
-              <div className="pt-3 border-t border-black/[0.04]">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1.5">
-                  TMF Interventions:
+                <div className="space-y-1.5">
+                  <h3 className="font-headline-md text-lg font-bold text-[#191c1e] group-hover:text-[#4b41e1] transition-colors">
+                    {sdg.title}
+                  </h3>
+                  <p className="font-body-base text-xs text-[#45464d] leading-relaxed">
+                    {sdg.description}
+                  </p>
                 </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {sdg.ourPrograms.map((prog) => (
-                    <span
-                      key={prog}
-                      className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-[#1C3D2F]/5 text-[#1C3D2F]"
-                    >
-                      {prog}
-                    </span>
+
+                <div className="pt-3 border-t border-slate-100 space-y-1">
+                  <span className="text-[10px] uppercase font-mono text-[#64748B] font-bold block">
+                    Active TMF Program:
+                  </span>
+                  {sdg.ourPrograms.map((prog, idx) => (
+                    <div key={idx} className="text-xs font-semibold text-[#191c1e] truncate">
+                      • {prog}
+                    </div>
                   ))}
                 </div>
+
               </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

@@ -1,97 +1,67 @@
-import React, { useState, useRef } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import React from 'react';
 import { TESTIMONIALS_DATA } from '../data/foundationData';
-import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
-
-const SPRING = { type: 'spring' as const, stiffness: 300, damping: 30 };
 
 export const Testimonial: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-60px' });
-
-  const current = TESTIMONIALS_DATA[currentIndex];
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS_DATA.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + TESTIMONIALS_DATA.length) % TESTIMONIALS_DATA.length);
-  };
-
   return (
-    <section className="py-24 sm:py-28 bg-[#F2F7F4] relative overflow-hidden">
-      <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={SPRING}
-          className="text-center relative"
-        >
-          {/* Quote Icon */}
-          <div className="w-12 h-12 rounded-2xl bg-[#4E8B65]/15 text-[#1C3D2F] flex items-center justify-center mx-auto mb-6">
-            <Quote className="w-6 h-6" />
-          </div>
+    <section className="w-full py-16 lg:py-24 bg-[#f7f9fb] border-t border-slate-200/60">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <span className="font-label-caps text-xs uppercase text-[#4b41e1] font-bold tracking-widest">
+            Stakeholder &amp; Beneficiary Testimonials
+          </span>
+          <h2 className="font-headline-lg text-3xl sm:text-4xl lg:text-5xl font-bold text-[#191c1e] tracking-tight">
+            Voices from the Field
+          </h2>
+          <p className="font-body-base text-base text-[#45464d]">
+            Authentic reflections from medical officers, CSR partners, and rural families whose lives have been transformed.
+          </p>
+        </div>
 
-          <AnimatePresence mode="wait">
-            <motion.blockquote
-              key={currentIndex}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.25 }}
-              className="mb-8"
+        {/* Testimonials Double-Bezel Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {TESTIMONIALS_DATA.map((t, i) => (
+            <div
+              key={i}
+              className="bg-[#f2f4f6] p-2 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
             >
-              <p className="font-['DM_Serif_Display'] italic text-xl sm:text-2xl lg:text-3xl text-[#1C3D2F] leading-relaxed tracking-tight max-w-3xl mx-auto">
-                "{current.quote}"
-              </p>
+              <div className="bg-white rounded-[22px] p-6 sm:p-8 flex flex-col justify-between h-full space-y-6">
+                
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="px-3 py-1 bg-indigo-50 text-[#4b41e1] rounded-full text-xs font-mono font-bold">
+                      {t.category}
+                    </span>
+                    <span className="material-symbols-outlined text-[#F59E0B] text-2xl">
+                      format_quote
+                    </span>
+                  </div>
 
-              <div className="mt-8 flex items-center justify-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#1C3D2F] text-white flex items-center justify-center font-bold text-xs">
-                  {current.avatarText}
+                  <p className="font-body-base text-sm text-[#45464d] italic leading-relaxed">
+                    "{t.quote}"
+                  </p>
                 </div>
-                <div className="text-left">
-                  <div className="text-sm font-bold text-[#111111]">{current.author}</div>
-                  <div className="text-xs text-[#6B7A72]">
-                    {current.role}, <strong>{current.organization}</strong>
+
+                <div className="pt-4 border-t border-slate-100 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#111827] text-white flex items-center justify-center font-bold text-xs font-mono shrink-0">
+                    {t.avatarText}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-headline-md text-sm font-bold text-[#191c1e] truncate">
+                      {t.author}
+                    </div>
+                    <div className="font-mono text-[11px] text-[#64748B] truncate">
+                      {t.role} · {t.organization}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.blockquote>
-          </AnimatePresence>
 
-          {/* Navigation Controls */}
-          <div className="flex items-center justify-center gap-3 mt-4">
-            <button
-              onClick={handlePrev}
-              className="p-2 rounded-full border border-black/10 bg-white hover:bg-gray-50 text-gray-700 transition-colors cursor-pointer"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <div className="flex items-center gap-1.5">
-              {TESTIMONIALS_DATA.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentIndex(i)}
-                  className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
-                    currentIndex === i ? 'w-6 bg-[#1C3D2F]' : 'bg-gray-300'
-                  }`}
-                  aria-label={`Go to slide ${i + 1}`}
-                />
-              ))}
+              </div>
             </div>
-            <button
-              onClick={handleNext}
-              className="p-2 rounded-full border border-black/10 bg-white hover:bg-gray-50 text-gray-700 transition-colors cursor-pointer"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-        </motion.div>
+          ))}
+        </div>
+
       </div>
     </section>
   );

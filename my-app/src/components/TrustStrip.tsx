@@ -1,5 +1,4 @@
 import React from 'react';
-import { ShieldCheck, FileCheck, Building2, Heart, ArrowRight } from 'lucide-react';
 import { TMF_META, LEGAL_DOCS } from '../data/tmfVerifiedData';
 import type { LegalDocument } from '../data/tmfVerifiedData';
 
@@ -16,54 +15,62 @@ export const TrustStrip: React.FC<TrustStripProps> = ({
 
   const trustItems = [
     {
-      icon: <ShieldCheck className="w-5 h-5 text-emerald-600" />,
+      icon: 'verified',
+      color: 'text-[#4b41e1]',
+      bg: 'bg-indigo-50',
       title: 'Registered Society',
-      subtitle: `Act XXVI · Reg No. ${TMF_META.newRegNo}`,
+      subtitle: `Act XXVI of 1961 · Reg: ${TMF_META.newRegNo}`,
       badge: 'Est. 2013',
     },
     {
-      icon: <FileCheck className="w-5 h-5 text-blue-600" />,
+      icon: 'policy',
+      color: 'text-blue-600',
+      bg: 'bg-blue-50',
       title: 'NITI Aayog DARPAN',
-      subtitle: `Govt. ID: ${TMF_META.ngoDarpanId}`,
+      subtitle: `Unique ID: ${TMF_META.ngoDarpanId}`,
       badge: 'Verified NGO',
     },
     {
-      icon: <Heart className="w-5 h-5 text-amber-600" />,
-      title: '12A & 80G Tax Exempt',
-      subtitle: '50% Income Tax Deduction on Contributions',
-      badge: 'Form 10BE',
+      icon: 'receipt_long',
+      color: 'text-emerald-700',
+      bg: 'bg-emerald-50',
+      title: '12A & 80G Certified',
+      subtitle: '50% Tax Deduction · Form 10BE Filing',
+      badge: 'Tax Exemption',
     },
     {
-      icon: <Building2 className="w-5 h-5 text-indigo-600" />,
+      icon: 'account_balance',
+      color: 'text-amber-700',
+      bg: 'bg-amber-50',
       title: 'Central Bank of India',
-      subtitle: 'Official Verified Account in Padmapukur',
-      badge: 'Verified Bank',
+      subtitle: 'Official Account: 5894594000',
+      badge: 'Treasury Bank',
     },
   ];
 
   return (
-    <div className="py-6 bg-white border-y border-black/[0.06] relative z-20">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 flex flex-col lg:flex-row items-center justify-between gap-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-center flex-1 w-full">
+    <div className="w-full py-6 bg-white border-y border-slate-200/60 relative z-20">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-center flex-1 w-full">
           {trustItems.map((item, idx) => (
             <div
               key={idx}
               onClick={() => onOpenDocument && onOpenDocument(regDoc)}
-              className="flex items-center gap-3.5 p-2 rounded-2xl hover:bg-[#FAF8F5] transition-colors cursor-pointer group"
+              className="flex items-center gap-3.5 p-3 rounded-2xl bg-[#f7f9fb] hover:bg-white hover:shadow-md border border-border-subtle transition-all cursor-pointer group"
             >
-              <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] border border-black/[0.06] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs">
-                {item.icon}
+              <div className={`w-10 h-10 rounded-xl ${item.bg} ${item.color} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>
+                <span className="material-symbols-outlined text-[22px]">{item.icon}</span>
               </div>
               <div className="space-y-0.5 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-[#151C18] truncate">
+                  <span className="text-xs font-bold text-[#191c1e] truncate font-headline-md">
                     {item.title}
                   </span>
-                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-black/[0.04] text-[#5C6760]">
+                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md bg-white border border-border-subtle text-[#64748B]">
                     {item.badge}
                   </span>
                 </div>
-                <div className="text-[11px] text-[#5C6760] truncate font-mono">
+                <div className="text-[11px] text-[#64748B] truncate font-mono">
                   {item.subtitle}
                 </div>
               </div>
@@ -74,10 +81,10 @@ export const TrustStrip: React.FC<TrustStripProps> = ({
         {onNavigateTransparency && (
           <button
             onClick={onNavigateTransparency}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1B3B2B] hover:underline shrink-0 cursor-pointer"
+            className="flex items-center gap-1.5 text-xs font-bold text-[#4b41e1] hover:text-[#645efb] shrink-0 cursor-pointer font-mono"
           >
-            <span>All Documents</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <span>Verify Certificates</span>
+            <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
           </button>
         )}
       </div>

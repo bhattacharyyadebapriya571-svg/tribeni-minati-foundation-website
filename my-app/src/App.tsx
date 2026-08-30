@@ -3,6 +3,13 @@ import { CustomCursor3D } from './components/CustomCursor3D';
 import { AmbientCanvas3D } from './components/AmbientCanvas3D';
 import { Nav } from './components/Nav';
 import { Hero } from './components/Hero';
+import { TrustStrip } from './components/TrustStrip';
+import { StatBar } from './components/StatBar';
+import { PartnerMarquee } from './components/PartnerMarquee';
+import { FacebookLiveGallery3D } from './components/FacebookLiveGallery3D';
+import { SDGSection } from './components/SDGSection';
+import { Testimonial } from './components/Testimonial';
+import { FAQ } from './components/FAQ';
 import { ProgramExplorer } from './components/ProgramExplorer';
 import { MinatiBento3D } from './components/MinatiBento3D';
 import { InitiativesGrid } from './components/InitiativesGrid';
@@ -237,31 +244,55 @@ function App() {
               onExploreWork={() => handleNavigate('programs')}
             />
 
-            {/* 2. The 6-Pillar M-I-N-A-T-I Bento Matrix */}
+            {/* 2. Statutory Proof & 80G Trust Credentials Strip */}
+            <TrustStrip
+              onOpenDocument={handleOpenDocument}
+              onNavigateTransparency={() => handleNavigate('transparency')}
+            />
+
+            {/* 3. Key Milestone & Live Impact Number Ticker */}
+            <StatBar />
+
+            {/* 4. The 6-Pillar M-I-N-A-T-I Bento Matrix */}
             <MinatiBento3D />
 
-            {/* 3. Core Initiatives Showcase */}
+            {/* 5. Core Initiatives Showcase */}
             <InitiativesGrid onNavigate={handleNavigate} />
 
-            {/* 4. Leadership & Executive Secretariat Spotlight */}
+            {/* 6. Leadership & Executive Secretariat Spotlight (Rudra Adhya Speech) */}
             <LeadershipSpotlight
               onNavigate={handleNavigate}
               onOpenDonate={() => handleOpenDonate()}
             />
 
-            {/* 5. Live Section 80G Tax Exemption & Impact Calculator */}
+            {/* 7. Corporate & Institutional Partners Marquee */}
+            <PartnerMarquee />
+
+            {/* 8. Facebook Live Field Photojournalism & Real Engagement Feed */}
+            <FacebookLiveGallery3D onOpenDonate={() => handleOpenDonate()} />
+
+            {/* 9. United Nations Sustainable Development Goals (SDG) Matrix */}
+            <SDGSection onNavigate={handleNavigate} />
+
+            {/* 10. Stakeholder & Field Testimonials */}
+            <Testimonial />
+
+            {/* 11. Live Section 80G Tax Exemption & Impact Calculator */}
             <TaxCalculatorWidget onDonateWithAmount={(amt, cause) => handleOpenDonate(amt, cause)} />
 
-            {/* 5. Statutory PDF & Legal Compliance File Vault */}
+            {/* 12. Statutory PDF & Legal Compliance File Vault */}
             <DocumentGallerySection onOpenDocument={handleOpenDocument} />
 
-            {/* 6. Central Bank of India Official Banking & Wire Gateway */}
+            {/* 13. Central Bank of India Official Banking & Wire Gateway */}
             <BankingGateway
               onOpenDonateModal={() => handleOpenDonate()}
               onOpenDocument={handleOpenDocument}
             />
 
-            {/* 7. Emotional Closing Signature Call to Action */}
+            {/* 14. Frequently Asked Questions Accordion */}
+            <FAQ />
+
+            {/* 15. Emotional Closing Signature Call to Action */}
             <FinalCTASection onOpenDonate={() => handleOpenDonate()} />
           </>
         )}

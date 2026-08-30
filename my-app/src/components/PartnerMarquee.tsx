@@ -1,43 +1,34 @@
 import React from 'react';
 import { CORPORATE_PARTNERS } from '../data/foundationData';
-import { Handshake } from 'lucide-react';
 
 export const PartnerMarquee: React.FC = () => {
   return (
-    <section className="py-16 bg-white border-b border-slate-200/80 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 mb-8 text-center">
-        <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-blue-700 bg-blue-50 px-3.5 py-1 rounded-full border border-blue-200 mb-2">
-          <Handshake className="w-3.5 h-3.5 text-blue-600" />
-          Trusted By Industry Leaders
+    <div className="w-full py-10 bg-white border-y border-slate-200/60 overflow-hidden">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+        
+        <div className="text-center mb-6">
+          <span className="font-label-caps text-xs uppercase text-[#64748B] font-bold tracking-widest">
+            Institutional Stakeholders &amp; Public Collaborators
+          </span>
         </div>
-        <h3 className="font-['DM_Serif_Display'] text-2xl sm:text-3xl text-slate-900">
-          Partners in Sustainable Grassroots Transformation
-        </h3>
-      </div>
 
-      {/* Marquee Track */}
-      <div className="relative w-full overflow-hidden">
-        {/* Left / Right Fades */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-
-        <div className="flex gap-4 animate-marquee whitespace-nowrap py-2">
-          {/* Double list for smooth infinite scroll */}
-          {[...CORPORATE_PARTNERS, ...CORPORATE_PARTNERS].map((partner, idx) => (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {CORPORATE_PARTNERS.map((partner, i) => (
             <div
-              key={`${partner.name}-${idx}`}
-              className="inline-flex flex-col justify-center px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-xs shrink-0 hover:border-blue-500/40 hover:bg-white hover:shadow-md transition-all"
+              key={i}
+              className="p-4 rounded-2xl bg-[#f7f9fb] border border-border-subtle hover:border-[#4b41e1]/40 hover:bg-white hover:shadow-md transition-all text-center space-y-1 group"
             >
-              <div className="text-sm font-bold text-slate-900 font-sans">
+              <div className="font-headline-md text-sm font-bold text-[#191c1e] group-hover:text-[#4b41e1] transition-colors">
                 {partner.name}
               </div>
-              <div className="text-[10px] text-blue-600 font-medium mt-0.5">
-                {partner.category} · {partner.description}
+              <div className="font-mono text-[11px] text-[#64748B]">
+                {partner.category}
               </div>
             </div>
           ))}
         </div>
+
       </div>
-    </section>
+    </div>
   );
 };

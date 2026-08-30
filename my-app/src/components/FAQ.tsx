@@ -1,77 +1,67 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FAQ_DATA } from '../data/foundationData';
-import { HelpCircle, ChevronDown } from 'lucide-react';
+import { FAQS_DATA } from '../data/foundationData';
 
 export const FAQ: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIdx, setOpenIdx] = useState<number | null>(0);
 
-  const toggleAccordion = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+  const toggle = (i: number) => {
+    setOpenIdx(openIdx === i ? null : i);
   };
 
   return (
-    <section className="py-24 sm:py-32 bg-white text-slate-900 relative border-b border-slate-200/80 overflow-hidden">
-      <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-10">
-        <div className="text-center max-w-xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-blue-700 bg-blue-50 border border-blue-200 mb-4 shadow-xs">
-            <HelpCircle className="w-3.5 h-3.5 text-blue-600" />
-            Frequently Answered Questions
-          </div>
-          <h2 className="font-['DM_Serif_Display'] text-3xl sm:text-4xl lg:text-5xl text-slate-900 leading-tight tracking-tight mb-3">
-            Clear Answers for Donors & CSR Teams
+    <section className="w-full py-16 lg:py-24 bg-white border-t border-slate-200/60">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <span className="font-label-caps text-xs uppercase text-[#4b41e1] font-bold tracking-widest">
+            Statutory &amp; Operational Clarity
+          </span>
+          <h2 className="font-headline-lg text-3xl sm:text-4xl lg:text-5xl font-bold text-[#191c1e] tracking-tight">
+            Frequently Asked Questions
           </h2>
-          <p className="text-sm text-slate-600">
-            Everything you need to know regarding tax deductions, corporate compliance, and field operations.
+          <p className="font-body-base text-base text-[#45464d]">
+            Essential statutory details on Section 80G tax deductions, direct bank wire transfers, and volunteer participation.
           </p>
         </div>
 
-        {/* Accordion list */}
-        <div className="space-y-3">
-          {FAQ_DATA.map((faq, i) => {
-            const isOpen = openIndex === i;
+        {/* Accordion List */}
+        <div className="max-w-3xl mx-auto space-y-4">
+          {FAQS_DATA.map((faq, i) => {
+            const isOpen = openIdx === i;
             return (
               <div
-                key={faq.question}
-                className="rounded-2xl bg-slate-50 border border-slate-200/90 overflow-hidden transition-colors"
+                key={i}
+                className="bg-[#f2f4f6] p-1.5 rounded-2xl shadow-xs transition-all"
               >
-                <button
-                  onClick={() => toggleAccordion(i)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-white transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 border border-blue-200 px-2.5 py-0.5 rounded-full shrink-0">
-                      {faq.category}
-                    </span>
-                    <span className="text-sm sm:text-base font-bold text-slate-900 leading-snug">
+                <div className="bg-white rounded-xl overflow-hidden">
+                  <button
+                    onClick={() => toggle(i)}
+                    className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors"
+                  >
+                    <span className="font-headline-md text-base sm:text-lg font-bold text-[#191c1e]">
                       {faq.question}
                     </span>
-                  </div>
-                  <ChevronDown
-                    className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-300 ${
-                      isOpen ? 'rotate-180 text-blue-600' : ''
-                    }`}
-                  />
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25 }}
+                    <span
+                      className={`material-symbols-outlined text-[#4b41e1] text-2xl transition-transform duration-300 shrink-0 ${
+                        isOpen ? 'rotate-180' : ''
+                      }`}
                     >
-                      <div className="px-6 pb-6 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200/60 pt-4 bg-white">
-                        {faq.answer}
-                      </div>
-                    </motion.div>
+                      expand_more
+                    </span>
+                  </button>
+
+                  {isOpen && (
+                    <div className="px-5 pb-6 sm:px-6 pt-0 font-body-base text-sm text-[#45464d] leading-relaxed border-t border-slate-100 mt-2 pt-4">
+                      {faq.answer}
+                    </div>
                   )}
-                </AnimatePresence>
+                </div>
               </div>
             );
           })}
         </div>
+
       </div>
     </section>
   );
