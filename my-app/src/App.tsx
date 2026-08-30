@@ -37,46 +37,72 @@ import type { PageId, PillarItem } from './types';
 import type { LegalDocument } from './data/tmfVerifiedData';
 
 // Helper to translate URL path into app state
-function parseUrlPath(pathname: string): { page: PageId; programId: string } {
-  const clean = pathname.toLowerCase().replace(/\/+$/, '') || '/';
+// Helper to translate URL path or hash into app state
+function parseUrlPath(pathname: string, hash: string = ''): { page: PageId; programId: string } {
+  let clean = pathname.toLowerCase().replace(/\/+$/, '') || '/';
+  
+  // If pathname is root but hash is provided, use hash
+  if ((clean === '/' || clean === '') && hash) {
+    const rawHash = hash.replace(/^#\/?/, '').toLowerCase();
+    if (rawHash) clean = `/${rawHash}`;
+  }
 
   if (clean === '' || clean === '/' || clean === '/home') {
     return { page: 'home', programId: 'healthcare' };
   }
-  if (clean === '/about' || clean === '/about-us') {
+  if (clean === '/about' || clean === '/about-us' || clean === '/genesis') {
     return { page: 'about', programId: 'healthcare' };
   }
-  if (clean === '/programs' || clean === '/programmes') {
+  if (
+    clean === '/programs' ||
+    clean === '/initiatives' ||
+    clean === '/programmes' ||
+    clean === '/pillars' ||
+    clean === '/projects'
+  ) {
     return { page: 'programs', programId: 'healthcare' };
   }
-  if (clean.startsWith('/programs/') || clean.startsWith('/program/')) {
+  if (
+    clean.startsWith('/programs/') ||
+    clean.startsWith('/program/') ||
+    clean.startsWith('/initiatives/') ||
+    clean.startsWith('/initiative/')
+  ) {
     const id = clean.split('/')[2] || 'healthcare';
     return { page: 'program', programId: id };
   }
-  if (clean === '/events' || clean === '/camps' || clean === '/calendar') {
+  if (clean === '/events' || clean === '/camps' || clean === '/calendar' || clean === '/drives') {
     return { page: 'events', programId: 'healthcare' };
   }
   if (
     clean === '/donor-portal' ||
     clean === '/donor-dashboard' ||
     clean === '/80g' ||
-    clean === '/my-donations'
+    clean === '/my-donations' ||
+    clean === '/donations' ||
+    clean === '/receipts'
   ) {
     return { page: 'donor-portal', programId: 'healthcare' };
   }
-  if (clean === '/stories' || clean === '/impact' || clean === '/case-studies') {
+  if (clean === '/stories' || clean === '/impact' || clean === '/case-studies' || clean === '/testimonials') {
     return { page: 'stories', programId: 'healthcare' };
   }
-  if (clean === '/gallery' || clean === '/photos' || clean === '/media') {
+  if (clean === '/gallery' || clean === '/photos' || clean === '/media' || clean === '/photo-archive') {
     return { page: 'gallery', programId: 'healthcare' };
   }
-  if (clean === '/transparency' || clean === '/compliance' || clean === '/audit') {
+  if (
+    clean === '/transparency' ||
+    clean === '/compliance' ||
+    clean === '/audit' ||
+    clean === '/reports' ||
+    clean === '/financials'
+  ) {
     return { page: 'transparency', programId: 'healthcare' };
   }
-  if (clean === '/volunteer' || clean === '/join' || clean === '/act') {
+  if (clean === '/volunteer' || clean === '/join' || clean === '/act' || clean === '/pass' || clean === '/youth') {
     return { page: 'volunteer', programId: 'healthcare' };
   }
-  if (clean === '/contact' || clean === '/reach-us') {
+  if (clean === '/contact' || clean === '/reach-us' || clean === '/secretariat' || clean === '/offices') {
     return { page: 'contact', programId: 'healthcare' };
   }
 
@@ -91,9 +117,9 @@ function stateToPath(page: PageId, programId?: string): string {
     case 'about':
       return '/about';
     case 'programs':
-      return '/programs';
+      return '/initiatives';
     case 'program':
-      return `/programs/${programId || 'healthcare'}`;
+      return `/initiatives/${programId || 'healthcare'}`;
     case 'events':
       return '/events';
     case 'donor-portal':
@@ -114,7 +140,7 @@ function stateToPath(page: PageId, programId?: string): string {
 }
 
 function App() {
-  const initial = parseUrlPath(window.location.pathname);
+  const initial = parseUrlPath(window.location.pathname, window.location.hash);
   const [currentPage, setCurrentPage] = useState<PageId>(initial.page);
   const [selectedProgramId, setSelectedProgramId] = useState<string>(initial.programId);
 
@@ -127,10 +153,10 @@ function App() {
   const [selectedDoc, setSelectedDoc] = useState<LegalDocument | null>(null);
   const [selectedPillarForModal, setSelectedPillarForModal] = useState<PillarItem | null>(null);
 
-  // Synchronize on browser Back/Forward (popstate)
+  // Synchronize on browser Back/Forward (popstate) & hashchange
   useEffect(() => {
-    const handlePopState = () => {
-      const parsed = parseUrlPath(window.location.pathname);
+    const handleUrlChange = () => {
+      const parsed = parseUrlPath(window.location.pathname, window.location.hash);
       setCurrentPage(parsed.page);
       setSelectedProgramId(parsed.programId);
 
@@ -140,14 +166,18 @@ function App() {
       }
     };
 
-    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('popstate', handleUrlChange);
+    window.addEventListener('hashchange', handleUrlChange);
 
     // Initial check for hash or query
     if (window.location.hash === '#donate' || window.location.search.includes('donate=true')) {
       setDonateOpen(true);
     }
 
-    return () => window.removeEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handleUrlChange);
+      window.removeEventListener('hashchange', handleUrlChange);
+    };
   }, []);
 
   // Primary URL-Push Navigation Handler
