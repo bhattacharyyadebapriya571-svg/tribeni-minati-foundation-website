@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FileText, Download, Eye, ShieldCheck, Scale } from 'lucide-react';
 import { LEGAL_DOCS, TMF_META } from '../data/tmfVerifiedData';
+import { GridSweepContainer, GridSweepItem } from './motion/GridSweep';
+import { MotionFocusGroup, MotionFocusItem } from './motion/MotionFocus';
 import type { LegalDocument } from '../data/tmfVerifiedData';
 
 interface DocumentGalleryProps {
@@ -78,77 +80,83 @@ export const DocumentGallerySection: React.FC<DocumentGalleryProps> = ({ onOpenD
           ))}
         </div>
 
-        {/* PDF File Gallery Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredDocs.map((doc) => (
-            <div key={doc.id} className="double-bezel-outer group">
-              <div className="double-bezel-inner p-6 sm:p-7 flex flex-col justify-between h-full space-y-5">
-                {/* File Header */}
-                <div>
-                  <div className="flex items-start justify-between gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200/80 flex items-center justify-center text-amber-800 shadow-2xs group-hover:scale-105 transition-transform">
-                      <FileText className="w-6 h-6" />
+        {/* PDF File Gallery Cards Grid — HorizonX GridSweep & MotionFocus */}
+        <MotionFocusGroup>
+          <GridSweepContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" stagger={0.07}>
+            {filteredDocs.map((doc) => (
+              <GridSweepItem key={doc.id}>
+                <MotionFocusItem id={doc.id}>
+                  <div className="double-bezel-outer group h-full">
+                    <div className="double-bezel-inner p-6 sm:p-7 flex flex-col justify-between h-full space-y-5">
+                      {/* File Header */}
+                      <div>
+                        <div className="flex items-start justify-between gap-3 mb-4">
+                          <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200/80 flex items-center justify-center text-amber-800 shadow-2xs group-hover:scale-105 transition-transform">
+                            <FileText className="w-6 h-6" />
+                          </div>
+
+                          <div className="flex flex-col items-end">
+                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200/80">
+                              {doc.category}
+                            </span>
+                            <span className="text-[10px] font-mono text-slate-400 mt-1">
+                              Verified PDF Record
+                            </span>
+                          </div>
+                        </div>
+
+                        <h3 className="font-['DM_Serif_Display'] text-xl text-[#151C18] group-hover:text-[#1B3B2B] transition-colors leading-snug">
+                          {doc.title}
+                        </h3>
+
+                        <p className="text-xs text-[#5C6760] mt-2 leading-relaxed line-clamp-2">
+                          {doc.description}
+                        </p>
+                      </div>
+
+                      {/* Metadata Details */}
+                      <div className="pt-4 border-t border-black/[0.05] space-y-2 text-xs font-mono">
+                        <div className="flex items-center justify-between text-[#5C6760]">
+                          <span>Identifier:</span>
+                          <strong className="text-[#151C18] truncate max-w-[170px]">
+                            {doc.regNumber}
+                          </strong>
+                        </div>
+
+                        <div className="flex items-center justify-between text-[#5C6760]">
+                          <span>Issuing Authority:</span>
+                          <span className="text-slate-700 truncate max-w-[170px]">
+                            {doc.authority}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Interactive Action Buttons */}
+                      <div className="pt-2 flex items-center gap-2">
+                        <button
+                          onClick={() => onOpenDocument(doc)}
+                          className="flex-1 py-2.5 px-3 rounded-xl bg-[#1B3B2B] hover:bg-[#26533D] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-xs transition-all cursor-pointer"
+                        >
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>View PDF</span>
+                        </button>
+
+                        <a
+                          href={doc.fileUrl}
+                          download={doc.fileName}
+                          className="p-2.5 rounded-xl bg-black/[0.03] hover:bg-black/[0.06] text-slate-700 border border-black/[0.06] transition-colors cursor-pointer"
+                          title="Download Document"
+                        >
+                          <Download className="w-4 h-4" />
+                        </a>
+                      </div>
                     </div>
-
-                    <div className="flex flex-col items-end">
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200/80">
-                        {doc.category}
-                      </span>
-                      <span className="text-[10px] font-mono text-slate-400 mt-1">
-                        Verified PDF Record
-                      </span>
-                    </div>
                   </div>
-
-                  <h3 className="font-['DM_Serif_Display'] text-xl text-[#151C18] group-hover:text-[#1B3B2B] transition-colors leading-snug">
-                    {doc.title}
-                  </h3>
-
-                  <p className="text-xs text-[#5C6760] mt-2 leading-relaxed line-clamp-2">
-                    {doc.description}
-                  </p>
-                </div>
-
-                {/* Metadata Details */}
-                <div className="pt-4 border-t border-black/[0.05] space-y-2 text-xs font-mono">
-                  <div className="flex items-center justify-between text-[#5C6760]">
-                    <span>Identifier:</span>
-                    <strong className="text-[#151C18] truncate max-w-[170px]">
-                      {doc.regNumber}
-                    </strong>
-                  </div>
-
-                  <div className="flex items-center justify-between text-[#5C6760]">
-                    <span>Issuing Authority:</span>
-                    <span className="text-slate-700 truncate max-w-[170px]">
-                      {doc.authority}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Interactive Action Buttons */}
-                <div className="pt-2 flex items-center gap-2">
-                  <button
-                    onClick={() => onOpenDocument(doc)}
-                    className="flex-1 py-2.5 px-3 rounded-xl bg-[#1B3B2B] hover:bg-[#26533D] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-xs transition-all cursor-pointer"
-                  >
-                    <Eye className="w-3.5 h-3.5" />
-                    <span>View PDF</span>
-                  </button>
-
-                  <a
-                    href={doc.fileUrl}
-                    download={doc.fileName}
-                    className="p-2.5 rounded-xl bg-black/[0.03] hover:bg-black/[0.06] text-slate-700 border border-black/[0.06] transition-colors cursor-pointer"
-                    title="Download Document"
-                  >
-                    <Download className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+                </MotionFocusItem>
+              </GridSweepItem>
+            ))}
+          </GridSweepContainer>
+        </MotionFocusGroup>
       </div>
     </section>
   );

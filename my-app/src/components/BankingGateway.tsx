@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TMF_META, LEGAL_DOCS } from '../data/tmfVerifiedData';
+import { MotionFocusGroup, MotionFocusItem } from './motion/MotionFocus';
 import type { LegalDocument } from '../data/tmfVerifiedData';
 
 interface BankingGatewayProps {
@@ -64,67 +65,75 @@ export const BankingGateway: React.FC<BankingGatewayProps> = ({
                 </div>
               </div>
 
-              {/* Account Fields with Instant Copy Buttons */}
-              <div className="space-y-3 font-mono text-xs">
+              {/* Account Fields with Instant Copy Buttons — HorizonX MotionFocus */}
+              <MotionFocusGroup className="space-y-3 font-mono text-xs">
                 
                 {/* Account Name */}
-                <div className="p-4 bg-[#f7f9fb] rounded-2xl border border-border-subtle flex items-center justify-between">
-                  <div>
-                    <span className="text-[#64748B] block text-[10px] uppercase">Account Beneficiary</span>
-                    <span className="font-bold text-[#191c1e] text-sm">{TMF_META.bank.accountName}</span>
+                <MotionFocusItem id="bank-name">
+                  <div className="p-4 bg-[#f7f9fb] rounded-2xl border border-border-subtle flex items-center justify-between">
+                    <div>
+                      <span className="text-[#64748B] block text-[10px] uppercase">Account Beneficiary</span>
+                      <span className="font-bold text-[#191c1e] text-sm">{TMF_META.bank.accountName}</span>
+                    </div>
+                    <button
+                      onClick={() => handleCopy(TMF_META.bank.accountName, 'name')}
+                      className="p-2 rounded-xl bg-white hover:bg-indigo-50 text-[#4b41e1] border border-border-subtle cursor-pointer text-xs font-bold"
+                    >
+                      {copiedField === 'name' ? 'COPIED' : 'COPY'}
+                    </button>
                   </div>
-                  <button
-                    onClick={() => handleCopy(TMF_META.bank.accountName, 'name')}
-                    className="p-2 rounded-xl bg-white hover:bg-indigo-50 text-[#4b41e1] border border-border-subtle cursor-pointer text-xs font-bold"
-                  >
-                    {copiedField === 'name' ? 'COPIED' : 'COPY'}
-                  </button>
-                </div>
+                </MotionFocusItem>
 
                 {/* Account Number */}
-                <div className="p-4 bg-[#f7f9fb] rounded-2xl border border-border-subtle flex items-center justify-between">
-                  <div>
-                    <span className="text-[#64748B] block text-[10px] uppercase">Account Number</span>
-                    <span className="font-bold text-[#191c1e] text-base sm:text-lg">{TMF_META.bank.accountNumber}</span>
+                <MotionFocusItem id="bank-acc">
+                  <div className="p-4 bg-[#f7f9fb] rounded-2xl border border-border-subtle flex items-center justify-between">
+                    <div>
+                      <span className="text-[#64748B] block text-[10px] uppercase">Account Number</span>
+                      <span className="font-bold text-[#191c1e] text-base sm:text-lg">{TMF_META.bank.accountNumber}</span>
+                    </div>
+                    <button
+                      onClick={() => handleCopy(TMF_META.bank.accountNumber, 'acc')}
+                      className="p-2 rounded-xl bg-white hover:bg-indigo-50 text-[#4b41e1] border border-border-subtle cursor-pointer text-xs font-bold"
+                    >
+                      {copiedField === 'acc' ? 'COPIED' : 'COPY'}
+                    </button>
                   </div>
-                  <button
-                    onClick={() => handleCopy(TMF_META.bank.accountNumber, 'acc')}
-                    className="p-2 rounded-xl bg-white hover:bg-indigo-50 text-[#4b41e1] border border-border-subtle cursor-pointer text-xs font-bold"
-                  >
-                    {copiedField === 'acc' ? 'COPIED' : 'COPY'}
-                  </button>
-                </div>
+                </MotionFocusItem>
 
                 {/* IFSC & MICR */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="p-4 bg-[#f7f9fb] rounded-2xl border border-border-subtle flex items-center justify-between">
-                    <div>
-                      <span className="text-[#64748B] block text-[10px] uppercase">IFSC Code</span>
-                      <span className="font-bold text-[#191c1e] text-sm">{TMF_META.bank.ifsc}</span>
+                  <MotionFocusItem id="bank-ifsc">
+                    <div className="p-4 bg-[#f7f9fb] rounded-2xl border border-border-subtle flex items-center justify-between h-full">
+                      <div>
+                        <span className="text-[#64748B] block text-[10px] uppercase">IFSC Code</span>
+                        <span className="font-bold text-[#191c1e] text-sm">{TMF_META.bank.ifsc}</span>
+                      </div>
+                      <button
+                        onClick={() => handleCopy(TMF_META.bank.ifsc, 'ifsc')}
+                        className="p-1.5 rounded-lg bg-white hover:bg-indigo-50 text-[#4b41e1] border border-border-subtle cursor-pointer text-[10px] font-bold"
+                      >
+                        {copiedField === 'ifsc' ? 'COPIED' : 'COPY'}
+                      </button>
                     </div>
-                    <button
-                      onClick={() => handleCopy(TMF_META.bank.ifsc, 'ifsc')}
-                      className="p-1.5 rounded-lg bg-white hover:bg-indigo-50 text-[#4b41e1] border border-border-subtle cursor-pointer text-[10px] font-bold"
-                    >
-                      {copiedField === 'ifsc' ? 'COPIED' : 'COPY'}
-                    </button>
-                  </div>
+                  </MotionFocusItem>
 
-                  <div className="p-4 bg-[#f7f9fb] rounded-2xl border border-border-subtle flex items-center justify-between">
-                    <div>
-                      <span className="text-[#64748B] block text-[10px] uppercase">MICR Code</span>
-                      <span className="font-bold text-[#191c1e] text-sm">{TMF_META.bank.micr}</span>
+                  <MotionFocusItem id="bank-micr">
+                    <div className="p-4 bg-[#f7f9fb] rounded-2xl border border-border-subtle flex items-center justify-between h-full">
+                      <div>
+                        <span className="text-[#64748B] block text-[10px] uppercase">MICR Code</span>
+                        <span className="font-bold text-[#191c1e] text-sm">{TMF_META.bank.micr}</span>
+                      </div>
+                      <button
+                        onClick={() => handleCopy(TMF_META.bank.micr, 'micr')}
+                        className="p-1.5 rounded-lg bg-white hover:bg-indigo-50 text-[#4b41e1] border border-border-subtle cursor-pointer text-[10px] font-bold"
+                      >
+                        {copiedField === 'micr' ? 'COPIED' : 'COPY'}
+                      </button>
                     </div>
-                    <button
-                      onClick={() => handleCopy(TMF_META.bank.micr, 'micr')}
-                      className="p-1.5 rounded-lg bg-white hover:bg-indigo-50 text-[#4b41e1] border border-border-subtle cursor-pointer text-[10px] font-bold"
-                    >
-                      {copiedField === 'micr' ? 'COPIED' : 'COPY'}
-                    </button>
-                  </div>
+                  </MotionFocusItem>
                 </div>
 
-              </div>
+              </MotionFocusGroup>
 
             </div>
 

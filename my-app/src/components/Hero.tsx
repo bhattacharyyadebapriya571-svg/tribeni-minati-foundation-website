@@ -1,5 +1,7 @@
 import React from 'react';
 import { TMF_META } from '../data/tmfVerifiedData';
+import { MotionColumn } from './motion/MotionColumn';
+import { MotionFocusGroup, MotionFocusItem } from './motion/MotionFocus';
 
 interface HeroProps {
   onOpenDonate: () => void;
@@ -9,13 +11,13 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onOpenDonate, onExploreWork }) => {
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative w-full overflow-hidden pb-16 lg:pb-32 pt-16 lg:pt-24 reveal active">
+      {/* Hero Section — HorizonX MotionColumn Parallax */}
+      <section className="relative w-full overflow-hidden pb-16 lg:pb-32 pt-16 lg:pt-24">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left Content */}
-            <div className="lg:col-span-6 flex flex-col gap-6 reveal stagger-1 active">
+            <MotionColumn speed={0.05} className="lg:col-span-6 flex flex-col gap-6">
               
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-md rounded-full border border-border-subtle shadow-sm w-max hover:shadow-md transition-shadow">
@@ -57,10 +59,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDonate, onExploreWork }) => {
                   Explore Work
                 </button>
               </div>
-            </div>
+            </MotionColumn>
 
             {/* Right Image */}
-            <div className="lg:col-span-6 relative reveal stagger-2 active">
+            <MotionColumn speed={-0.05} className="lg:col-span-6 relative">
               <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] bg-[#f2f4f6] p-2 group hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.15)] transition-all duration-500 transform hover:-translate-y-2">
                 <img
                   src="/tmf-assets/real-field-photos/tmf-field-1.jpeg"
@@ -82,47 +84,55 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDonate, onExploreWork }) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </MotionColumn>
 
           </div>
         </div>
       </section>
 
-      {/* Impact Metrics (Floating Card) */}
-      <section className="relative w-full z-20 -mt-12 lg:-mt-24 mb-16 lg:mb-32 reveal stagger-3 active">
+      {/* Impact Metrics (Floating Card) — HorizonX MotionFocus */}
+      <section className="relative w-full z-20 -mt-12 lg:-mt-24 mb-16 lg:mb-32">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
           <div className="bg-white/70 backdrop-blur-2xl rounded-3xl shadow-[0_20px_40px_-15px_rgba(15,23,42,0.1)] border border-white/50 p-8 md:p-12 hover:shadow-[0_30px_60px_-15px_rgba(15,23,42,0.15)] transition-shadow duration-500">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 divide-y md:divide-y-0 md:divide-x divide-slate-200/50">
+            <MotionFocusGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 divide-y md:divide-y-0 md:divide-x divide-slate-200/50">
               
-              <div className="flex flex-col gap-2 pt-4 md:pt-0 px-4 group">
-                <h3 className="font-stat-lg text-3xl sm:text-4xl text-[#111827] group-hover:scale-110 origin-left transition-transform duration-300">
-                  500+
-                </h3>
-                <p className="font-label-caps text-xs text-[#45464d]">Children Coached</p>
-              </div>
+              <MotionFocusItem id="metric-coached" className="pt-4 md:pt-0 px-4">
+                <div className="flex flex-col gap-2 group">
+                  <h3 className="font-stat-lg text-3xl sm:text-4xl text-[#111827] group-hover:scale-110 origin-left transition-transform duration-300">
+                    500+
+                  </h3>
+                  <p className="font-label-caps text-xs text-[#45464d]">Children Coached</p>
+                </div>
+              </MotionFocusItem>
 
-              <div className="flex flex-col gap-2 pt-4 md:pt-0 px-4 group">
-                <h3 className="font-stat-lg text-3xl sm:text-4xl text-[#111827] group-hover:scale-110 origin-left transition-transform duration-300">
-                  1,200+
-                </h3>
-                <p className="font-label-caps text-xs text-[#45464d]">Relief Kits Distributed</p>
-              </div>
+              <MotionFocusItem id="metric-relief" className="pt-4 md:pt-0 px-4">
+                <div className="flex flex-col gap-2 group">
+                  <h3 className="font-stat-lg text-3xl sm:text-4xl text-[#111827] group-hover:scale-110 origin-left transition-transform duration-300">
+                    1,200+
+                  </h3>
+                  <p className="font-label-caps text-xs text-[#45464d]">Relief Kits Distributed</p>
+                </div>
+              </MotionFocusItem>
 
-              <div className="flex flex-col gap-2 pt-4 md:pt-0 px-4 group">
-                <h3 className="font-stat-lg text-3xl sm:text-4xl text-[#4b41e1] group-hover:scale-110 origin-left transition-transform duration-300">
-                  100%
-                </h3>
-                <p className="font-label-caps text-xs text-[#45464d]">Tax Exempt (80G)</p>
-              </div>
+              <MotionFocusItem id="metric-tax" className="pt-4 md:pt-0 px-4">
+                <div className="flex flex-col gap-2 group">
+                  <h3 className="font-stat-lg text-3xl sm:text-4xl text-[#4b41e1] group-hover:scale-110 origin-left transition-transform duration-300">
+                    100%
+                  </h3>
+                  <p className="font-label-caps text-xs text-[#45464d]">Tax Exempt (80G)</p>
+                </div>
+              </MotionFocusItem>
 
-              <div className="flex flex-col gap-2 pt-4 md:pt-0 px-4 group">
-                <h3 className="font-stat-lg text-3xl sm:text-4xl text-[#111827] group-hover:scale-110 origin-left transition-transform duration-300">
-                  10+
-                </h3>
-                <p className="font-label-caps text-xs text-[#45464d]">Years Ground Service</p>
-              </div>
+              <MotionFocusItem id="metric-years" className="pt-4 md:pt-0 px-4">
+                <div className="flex flex-col gap-2 group">
+                  <h3 className="font-stat-lg text-3xl sm:text-4xl text-[#111827] group-hover:scale-110 origin-left transition-transform duration-300">
+                    10+
+                  </h3>
+                  <p className="font-label-caps text-xs text-[#45464d]">Years Ground Service</p>
+                </div>
+              </MotionFocusItem>
 
-            </div>
+            </MotionFocusGroup>
           </div>
         </div>
       </section>
