@@ -1,0 +1,99 @@
+/* ==========================================================================
+   TRIBENI MINATI FOUNDATION DESIGN SYSTEM TOKENS
+   Calibrated via NVIDIA Nemotron 550B & Token Architecture Skill
+   Three-Layer Token Hierarchy: Primitive -> Semantic -> Component
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------------
+     1. PRIMITIVE TOKENS (Base Values)
+     ------------------------------------------------------------------------ */
+  /* Brand Green / Earth Matrix */
+  --tmf-green-950: #0B1911;
+  --tmf-green-900: #111A15;
+  --tmf-green-800: #192720;
+  --tmf-green-700: #1B3B2B;
+  --tmf-green-600: #26533D;
+  --tmf-green-500: #347D5B;
+  --tmf-green-400: #4E8B65;
+  --tmf-green-100: #E6F3EC;
+  --tmf-green-50:  #F2F7F4;
+
+  /* Saffron Gold / Warm Trust */
+  --tmf-amber-900: #78350F;
+  --tmf-amber-700: #B45309;
+  --tmf-amber-600: #D97706;
+  --tmf-amber-500: #F59E0B;
+  --tmf-amber-400: #FBBF24;
+  --tmf-amber-100: #FEF3C7;
+  --tmf-amber-50:  #FFFBEB;
+
+  /* Neutral Editorial Paper */
+  --tmf-cream-100: #FAF8F5;
+  --tmf-cream-50:  #FDFBF7;
+  --tmf-slate-900: #0F172A;
+  --tmf-slate-800: #1E293B;
+  --tmf-slate-700: #334155;
+  --tmf-slate-600: #475569;
+  --tmf-slate-500: #64748B;
+  --tmf-slate-200: #E2E8F0;
+  --tmf-slate-100: #F1F5F9;
+
+  /* Typography Families */
+  --tmf-font-serif: 'DM Serif Display', Georgia, serif;
+  --tmf-font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --tmf-font-bengali: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
+  --tmf-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Elevation Radii */
+  --tmf-radius-sm: 8px;
+  --tmf-radius-md: 12px;
+  --tmf-radius-lg: 16px;
+  --tmf-radius-xl: 24px;
+  --tmf-radius-2xl: 32px;
+  --tmf-radius-full: 9999px;
+
+  /* ------------------------------------------------------------------------
+     2. SEMANTIC TOKENS (Purpose Aliases)
+     ------------------------------------------------------------------------ */
+  --color-brand-primary: var(--tmf-green-700);
+  --color-brand-primary-hover: var(--tmf-green-600);
+  --color-brand-accent: var(--tmf-amber-600);
+  --color-brand-accent-hover: var(--tmf-amber-700);
+
+  --color-surface-base: var(--tmf-cream-50);
+  --color-surface-subtle: var(--tmf-cream-100);
+  --color-surface-elevated: #FFFFFF;
+  --color-surface-dark: var(--tmf-green-900);
+  --color-surface-dark-card: var(--tmf-green-800);
+
+  --color-text-headline: var(--tmf-green-950);
+  --color-text-body: var(--tmf-slate-700);
+  --color-text-muted: var(--tmf-slate-500);
+  --color-text-on-dark: #E8E3D7;
+  --color-text-on-dark-muted: rgba(232, 227, 215, 0.7);
+
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-border-dark: rgba(255, 255, 255, 0.08);
+
+  /* ------------------------------------------------------------------------
+     3. COMPONENT TOKENS (Specific Elements)
+     ------------------------------------------------------------------------ */
+  /* Buttons */
+  --btn-primary-bg: var(--color-brand-primary);
+  --btn-primary-text: #FFFFFF;
+  --btn-primary-hover-bg: var(--color-brand-primary-hover);
+  --btn-donate-bg: var(--color-brand-accent);
+  --btn-donate-text: #FFFFFF;
+  --btn-donate-hover-bg: var(--color-brand-accent-hover);
+
+  /* Trust Badges */
+  --badge-verified-bg: var(--tmf-green-50);
+  --badge-verified-text: var(--tmf-green-700);
+  --badge-verified-border: var(--tmf-green-100);
+
+  /* Cards */
+  --card-hero-radius: var(--tmf-radius-2xl);
+  --card-bento-radius: var(--tmf-radius-xl);
+  --card-glass-blur: blur(16px);
+}

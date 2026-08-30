@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://tribeni-minati-foundation-website.vercel.app/sitemap.xml

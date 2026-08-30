@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "uiux-pro-max"
+version = "1.0.0"
+description = "AI skill that acts like an expert UI/UX designer — Design System Generator for AI coding assistants"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Minati Vision", email = "dev@minativisionsevafoundation.org" }]
+keywords = ["ui", "ux", "design", "ai", "cli", "design-system", "mcp"]
+
+dependencies = [
+    "typer[all]>=0.12.0",
+    "rich>=13.0.0",
+    "httpx>=0.27.0",
+    "pydantic>=2.7.0",
+    "jinja2>=3.1.0",
+    "python-dotenv>=1.0.0",
+    "colorama>=0.4.6",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.4.0",
+    "mypy>=1.10.0",
+]
+
+[project.scripts]
+uiux = "uiux_pro_max.cli:app"
+
+[project.entry-points."ai_plugin"]
+uiux_pro_max = "uiux_pro_max.plugin:UIUXPlugin"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["uiux_pro_max*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+strict = true
+python_version = "3.10"

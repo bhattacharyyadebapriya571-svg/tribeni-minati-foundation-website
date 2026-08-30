@@ -1,0 +1,674 @@
+# TITLE: Keep Claude Code Updated
+
+## [SYSTEM]
+
+
+## [USER]
+I think it all has either github repo or other methods
+give me one unified method to install all these
+
+## [SYSTEM]
+
+
+## [SYSTEM]
+
+
+## [SYSTEM]
+
+
+## [SYSTEM]
+
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [ASSISTANT]
+হ্যাঁ — তোমার ধারণাটা ঠিক। এগুলো ২৫টা আলাদা “software package” নয়। এগুলোর মধ্যে **Claude Code plugins, MCP servers/connectors, Obsidian plugin এবং কিছু external marketplace tools** মিশে আছে।
+
+বর্তমানে সবচেয়ে clean unified approach হলো:
+
+> **Claude Code = base platform → Official Plugin Marketplace = বেশিরভাগ tools → MCP/Connectors = external services → 2–3 special tools আলাদা করে।**
+
+Anthropic এখন plugins-কে এমনভাবে বানিয়েছে যাতে একটি plugin-এর মধ্যেই **skills + agents + hooks + MCP servers** থাকতে পারে। তাই আলাদা GitHub repo clone করে সব install করার দরকার নেই। citeturn7search0turn7search1
+
+### তোমার 25টার mapping
+
+| # | Tool | Unified install method |
+|---|---|---|
+| 1 | Superpowers | Official Claude plugin |
+| 2 | Frontend Design | Official Claude plugin |
+| 3 | Code Review | Official Claude plugin |
+| 4 | Context7 | Official Claude plugin |
+| 5 | Skill Creator | Official Claude plugin |
+| 6 | Playwright | Official Claude plugin |
+| 7 | Notion | Official Claude plugin |
+| 8 | Canva | Official Claude plugin |
+| 9 | Google Drive | Claude Connector |
+| 10 | Slack | Official Claude plugin |
+| 11 | Linear | Official Claude plugin |
+| 12 | GitHub | Official Claude plugin |
+| 13 | Figma | Official Claude plugin |
+| 14 | Zapier | Official Claude plugin |
+| 15 | HubSpot | Claude Connector |
+| 16 | tl;dv | Claude Connector |
+| 17 | Asana | Official Claude plugin |
+| 18 | Stripe | Official Claude plugin |
+| 19 | Vercel | Official Claude plugin |
+| 20 | Claude HUD | Community marketplace |
+| 21 | ToolRouter | MCP |
+| 22 | Obsidian | Obsidian Community Plugin + MCP |
+| 23 | Exa | Official Claude plugin |
+| 24 | Memory / Remember | Official Claude plugin / Claude Code Auto Memory |
+| 25 | Claude Code | Base installation |
+
+এর মধ্যে Frontend Design, Superpowers, Code Review, Context7, Skill Creator, Playwright, GitHub, Vercel, Figma, Slack, Stripe, Linear, Remember, Exa ইত্যাদি বর্তমানে Claude-এর plugin directory-তে আছে। citeturn2view0turn3view0
+
+---
+
+# আমি হলে এভাবে করতাম
+
+তুমি যেহেতু Windows ব্যবহার করছ, **PowerShell-এর একটা master installer** বানিয়ে নিতাম।
+
+### Step 1 — Claude Code install
+
+PowerShell খুলে:
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+এটাই Anthropic-এর বর্তমানে recommended native Windows installer। Native Windows-এ Git for Windows থাকাও recommended। citeturn8search0turn8search1
+
+তারপর:
+
+```powershell
+claude
+```
+
+Login করে বেরিয়ে আসো।
+
+---
+
+# Step 2 — একবারে official 20-ish plugins install
+
+Claude Code বন্ধ করে PowerShell-এ এই পুরো block চালাতে পারো:
+
+```powershell
+$plugins = @(
+    "superpowers",
+    "frontend-design",
+    "code-review",
+    "context7",
+    "skill-creator",
+    "playwright",
+    "notion",
+    "canva",
+    "slack",
+    "linear",
+    "github",
+    "figma",
+    "zapier",
+    "asana",
+    "stripe",
+    "vercel",
+    "remember",
+    "exa"
+)
+
+foreach ($plugin in $plugins) {
+    Write-Host "`n========================================" -ForegroundColor Cyan
+    Write-Host "Installing: $plugin" -ForegroundColor Yellow
+    Write-Host "========================================" -ForegroundColor Cyan
+
+    claude plugin install "$plugin@claude-plugins-official" --scope user
+}
+```
+
+Claude Code officially supports non-interactive `claude plugin install`, so this is exactly the sort of thing its plugin system is designed to automate. citeturn7search0
+
+তারপর:
+
+```powershell
+claude plugin list
+```
+
+এবং Claude Code খুলে:
+
+```text
+/reload-plugins
+```
+
+---
+
+# Step 3 — Claude HUD
+
+HUD-টা official Anthropic plugin নয়; এটা Jarrod Watts-এর community plugin। এর marketplace আলাদা।
+
+```powershell
+claude plugin marketplace add jarrodwatts/claude-hud
+claude plugin install claude-hud --scope user
+```
+
+তারপর Claude Code-এর মধ্যে:
+
+```text
+/reload-plugins
+```
+
+এবং:
+
+```text
+/claude-hud:setup
+```
+
+Claude HUD-এর official repo-তে এই marketplace installation flow-টাই দেওয়া আছে। citeturn0search10
+
+---
+
+# Step 4 — ToolRouter
+
+এখানে সবচেয়ে interesting ব্যাপারটা হলো **ToolRouter নিজেই একটা unified MCP gateway**।
+
+তোমার ছবিতে 165+ tools / 800+ skills লেখা থাকলেও বর্তমান ToolRouter documentation এখন **227+ tools / 1212 skills** দেখাচ্ছে — অর্থাৎ ছবির সংখ্যাগুলো ইতিমধ্যেই outdated। citeturn5search1
+
+Claude Code-এ:
+
+```powershell
+claude mcp add --scope user toolrouter -- npx -y toolrouter-mcp
+```
+
+তারপর:
+
+```powershell
+claude mcp list
+```
+
+ToolRouter-এর current Claude Code guide-ও এই ধরনের `npx -y toolrouter-mcp` setup দেখাচ্ছে। citeturn5search4
+
+**এটা খুব useful**, কারণ ভবিষ্যতে নতুন MCP tool লাগলে প্রতিবার আলাদা MCP install না করেও ToolRouter-এর মাধ্যমে পাওয়া যেতে পারে।
+
+---
+
+# Step 5 — Google Drive + HubSpot + tl;dv
+
+এগুলোকে আমি **CLI দিয়ে manually configure করতাম না**।
+
+Claude-এর:
+
+**Customize → Connectors**
+
+এ গিয়ে search করে:
+
+- Google Drive
+- HubSpot
+- tl;dv
+
+connect করো।
+
+এগুলো authenticate করার পর Claude Code-এও ব্যবহার করা যায়, যদি Claude Code তোমার Claude.ai account দিয়ে authenticated থাকে। Anthropic-এর documentation অনুযায়ী Claude.ai-তে যোগ করা MCP servers/connectors Claude Code-এ automatically available হয়। citeturn11search1
+
+Google Drive এবং HubSpot বর্তমানে Claude Code-compatible connectors হিসেবে listed আছে। citeturn4search0turn4search3
+
+আর **tl;dv-এর ক্ষেত্রে এখন official connector আছে**—tl;dv নিজেই 2026-এ Claude Connector Marketplace থেকে install/connect করার নির্দেশ দিয়েছে। citeturn11search0turn11search3
+
+---
+
+# Step 6 — Obsidian
+
+এটা একটু আলাদা।
+
+Obsidian নিজে Claude plugin marketplace-এর সাধারণ Claude Code plugin নয়। তোমার Obsidian vault-কে Claude-এর knowledge vault হিসেবে ব্যবহার করতে হলে Obsidian-এর মধ্যে একটি MCP/Claude Code plugin লাগবে।
+
+একটা workable option:
+
+**Obsidian → Community Plugins → `Claude Code` / `Claude Code MCP`**
+
+অথবা GitHub-based MCP connector।
+
+উদাহরণ হিসেবে `obsidian-claude-code-mcp` Claude Code-এর সঙ্গে Obsidian vault connect করে এবং MCP-এর মাধ্যমে notes/files access দেয়। citeturn5search5
+
+আর newer options-এর মধ্যে `obsidian-mcp-connector`-এর মতো plugins আছে, যেগুলো Obsidian-এর ভিতরেই MCP server চালায়। citeturn5search3
+
+**আমি তোমার জন্য এর মধ্যে কোনটা best সেটা বেছে দিতে পারি**, কারণ Obsidian-এর ক্ষেত্রে vault structure অনুযায়ী choice করা ভালো।
+
+---
+
+# সবচেয়ে গুরুত্বপূর্ণ ব্যাপার
+
+তোমার 25টা item আসলে এই architecture-এ দাঁড়াচ্ছে:
+
+```text
+                         CLAUDE CODE
+                             │
+             ┌───────────────┼────────────────┐
+             │               │                │
+       PLUGIN SYSTEM       MCP            CONNECTORS
+             │               │                │
+     ┌───────┼───────┐       │        ┌───────┼────────┐
+     │       │       │       │        │       │        │
+ Superpowers  Figma  GitHub  ToolRouter Drive  HubSpot tl;dv
+ Context7     Canva  Linear    │
+ Playwright   Slack  Asana     ├── Exa
+ Code Review  Stripe Vercel    └── Other MCP tools
+ Frontend
+ Skill Creator
+ Remember
+```
+
+এটাই আসলে **একটা unified installation architecture**।
+
+Anthropic নিজেও এখন plugins-কে MCP + skills + agents-এর bundled package হিসেবে position করছে। citeturn0search2turn6search9
+
+---
+
+## আর একটা correction: #24 "Memory"
+
+তোমার ছবিতে `MEMORY` আছে। এখানে দুটো জিনিস আলাদা:
+
+### Claude Code-এর built-in Auto Memory
+
+এটা এখন Claude Code-এর মধ্যেই আছে এবং **v2.1.59+ থেকে available**, default-এ enabled। `/memory` দিয়ে manage করা যায়। citeturn6search6
+
+অর্থাৎ **শুধু persistent project memory-এর জন্য আলাদা plugin লাগবেই এমন নয়।**
+
+### `Remember` plugin
+
+ছবির item-টি সম্ভবত এই plugin-কে বোঝাচ্ছে। এটা আরও aggressive continuous-memory system—session logs, summaries, daily consolidation ইত্যাদি করে। citeturn6search0
+
+আমি দুটো একসঙ্গে blindly চালু করার আগে একটু সাবধান হব।
+
+---
+
+# তাই আমার recommended "one installer"
+
+শেষে তোমার machine-এ মোটামুটি এই অবস্থাটা থাকবে:
+
+```text
+Claude Code
+│
+├── Official Plugins
+│   ├── Superpowers
+│   ├── Frontend Design
+│   ├── Code Review
+│   ├── Context7
+│   ├── Skill Creator
+│   ├── Playwright
+│   ├── Notion
+│   ├── Canva
+│   ├── Slack
+│   ├── Linear
+│   ├── GitHub
+│   ├── Figma
+│   ├── Zapier
+│   ├── Asana
+│   ├── Stripe
+│   ├── Vercel
+│   ├── Exa
+│   └── Remember
+│
+├── Community
+│   └── Claude HUD
+│
+├── MCP
+│   └── ToolRouter
+│
+├── Connectors
+│   ├── Google Drive
+│   ├── HubSpot
+│   └── tl;dv
+│
+└── Obsidian
+    └── Obsidian MCP / Claude Code plugin
+```
+
+**অর্থাৎ হ্যাঁ — তোমার জন্য একটা single PowerShell bootstrap script বানানো সম্ভব**, যেটা Claude Code install → official plugins → HUD → ToolRouter → verification সব একসঙ্গে করবে। শুধু account OAuth/connector authorization-এর জায়গাগুলোতে browser-এ তোমার approval লাগবে।
+
+আর একটা গুরুত্বপূর্ণ বিষয়: ২৫টা একসঙ্গে enable করলে Claude-এর প্রতিটি session-এ অনেক tools/skills available থাকবে; সবকিছু simultaneously active রাখা token/context এবং permission complexity বাড়াতে পারে। তাই **install all ≠ সবসময় enable/use all**। Plugins-এর token footprint-ও Claude Code এখন দেখাতে পারে। citeturn7search0
+
+urlClaude Plugins Directoryhttps://claude.com/plugins/  
+urlClaude Code MCP Documentationhttps://code.claude.com/docs/en/mcp  
+urlClaude Code Plugin Documentationhttps://code.claude.com/docs/en/discover-plugins
+
+genui{"suggest_automation":{"label":"Keep my Claude Code stack updated"}}
+
+## [USER]
+Create a scheduled task: Keep my Claude Code stack updated
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [ASSISTANT]
+Done. **“Keep Claude Code Updated”** is scheduled to run **every Sunday at 10:00 AM**.
+
+It will check Claude Code, your plugins, MCP tools (including ToolRouter), and relevant connectors, then report updates, breaking/security changes, and the commands needed to update them. It **won’t make changes automatically**.
+
+## [USER]
+please help koro ektai amar to poisa nei tai ami antigravity te kaj kori.. ami ei 25 ta antigravity te ki kore korbo?
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [TOOL]
+The output of this plugin was redacted.
+
+## [ASSISTANT]
+হ্যাঁ, অবশ্যই সাহায্য করব। ❤️ **তোমার Claude-এর জন্য টাকা না থাকলে Antigravity দিয়েই এই setup-এর বেশিরভাগটা করা যায়।** আর ভালো খবর হলো—Antigravity এখন নিজেই **MCP + Skills + Plugins** support করে। তাই Claude Code-এর ২৫টা জিনিসকে হুবহু Claude-এ install করার দরকার নেই; আমরা **Antigravity-native equivalent** বানাব। citeturn0search0turn0search1
+
+তোমার জন্য আমি আসলে **একটা "Antigravity Super Setup"** বানানোর পথ নেব।
+
+### ২৫টা → Antigravity-তে ৩টা স্তর
+
+```text
+                 ANTIGRAVITY
+                      │
+        ┌─────────────┼─────────────┐
+        │             │             │
+      SKILLS         MCP          PLUGINS
+        │             │             │
+   Coding skills   External      Bundled
+   Design skills   services      workflows
+   Review          GitHub        skills
+   Memory          Notion        rules
+   etc.            Drive         hooks
+                   Figma
+                   Slack
+                   etc.
+```
+
+Antigravity-এর official documentation অনুযায়ী:
+
+- **Skills** = `SKILL.md`-ভিত্তিক reusable instructions
+- **MCP** = external services/tools connect করা
+- **Plugins** = skills + rules + MCP + hooks একসঙ্গে bundle করা যায়। citeturn0search2turn0search9
+
+---
+
+# তোমার ২৫টা আমি এভাবে convert করব
+
+| ছবির # | Claude-এর জিনিস | Antigravity equivalent |
+|---|---|---|
+| 01 | Superpowers | ⭐ Skill bundle |
+| 02 | Frontend Design | ⭐ Custom Skill |
+| 03 | Code Review | ⭐ Custom Skill |
+| 04 | Context7 | MCP |
+| 05 | Skill Creator | ⭐ Skill |
+| 06 | Playwright | MCP + Skill |
+| 07 | Notion | MCP |
+| 08 | Canva | MCP/API বা workflow |
+| 09 | Google Drive | MCP |
+| 10 | Slack | MCP |
+| 11 | Linear | MCP |
+| 12 | GitHub | MCP |
+| 13 | Figma | MCP |
+| 14 | Zapier | MCP |
+| 15 | HubSpot | MCP |
+| 16 | tl;dv | MCP |
+| 17 | Asana | MCP |
+| 18 | Stripe | MCP |
+| 19 | Vercel | MCP |
+| 20 | Claude HUD | Antigravity Artifact/agent UI equivalent |
+| 21 | ToolRouter | MCP gateway / multiple MCPs |
+| 22 | Obsidian | MCP + Skill |
+| 23 | Exa | MCP |
+| 24 | Memory | **Antigravity Skills + memory files** |
+| 25 | Claude Code | **Antigravity itself** |
+
+এখানে সবচেয়ে গুরুত্বপূর্ণ হলো **#25-এর জন্য Claude Code লাগবে না**। Antigravity নিজেই editor, terminal, browser agent এবং MCP/skills ecosystem দেয়। citeturn0search0
+
+---
+
+# কিন্তু একটা জিনিস পরিষ্কার করি
+
+তুমি হয়তো ভাবছ:
+
+> "একটা GitHub repo clone করে ২৫টা install করে দেব?"
+
+**না।**
+
+বরং আমরা একটা folder বানাব:
+
+```text
+MY-ANTIGRAVITY-POWERHOUSE/
+│
+├── .agents/
+│   │
+│   ├── skills/
+│   │   ├── superpowers/
+│   │   ├── frontend-design/
+│   │   ├── code-review/
+│   │   ├── context7/
+│   │   ├── skill-creator/
+│   │   ├── playwright/
+│   │   ├── notion/
+│   │   ├── github/
+│   │   ├── figma/
+│   │   ├── linear/
+│   │   ├── stripe/
+│   │   ├── vercel/
+│   │   ├── obsidian/
+│   │   └── memory/
+│   │
+│   ├── plugins/
+│   │
+│   └── mcp_config.json
+│
+└── README.md
+```
+
+Antigravity workspace-এর `.agents/skills/` directory-তে skills রাখলে সেগুলো ওই project-এ available হয়; globalভাবে ব্যবহার করতে চাইলে `~/.gemini/antigravity/skills/` ব্যবহার করা যায়। citeturn0search2
+
+---
+
+# MCP-এর জন্য আরও সহজ
+
+Antigravity IDE-তে:
+
+**Agent panel → `…` → MCP Servers**
+
+তারপর **MCP Store** থেকে server install করা যায়। Custom MCP হলে `mcp_config.json` edit করা যায়। citeturn0search7
+
+Config:
+
+```text
+~/.gemini/config/mcp_config.json
+```
+
+অথবা project-specific:
+
+```text
+.agents/mcp_config.json
+```
+
+citeturn0search7
+
+তাই GitHub, Notion, Figma, Linear, Playwright, Exa ইত্যাদি যেগুলোর compatible MCP server আছে, সেগুলো আমরা এক জায়গা থেকে configure করতে পারব।
+
+---
+
+# আর সবচেয়ে ভালো ব্যাপার
+
+**তোমাকে ১৪টা আলাদা GitHub repo ঘাঁটতে হবে না।**
+
+আমরা আগে দেখব:
+
+```text
+MCP Store
+     ↓
+Already available?
+     ↓
+YES ──────────→ Install
+     │
+     NO
+     ↓
+Official MCP?
+     ↓
+YES ──────────→ Add to mcp_config.json
+     │
+     NO
+     ↓
+Create Skill / wrapper
+```
+
+এতে অনেক ঝামেলা কমবে।
+
+---
+
+# তোমার জন্য আমি যেটা করতে চাই
+
+আমি তোমাকে **একটা ready-to-use Antigravity Powerhouse Pack** বানিয়ে দিতে পারি।
+
+মানে তুমি শুধু:
+
+```text
+1. Folder download
+2. Antigravity-তে open
+3. One setup command
+4. Google/GitHub/etc. account authorization
+5. Done
+```
+
+এরপর তোমার Antigravity agent-কে বলতে পারবে:
+
+```text
+Review this code.
+```
+
+সে Code Review skill ব্যবহার করবে।
+
+```text
+Build a modern landing page.
+```
+
+সে Frontend Design skill ব্যবহার করবে।
+
+```text
+Search the latest official React documentation.
+```
+
+Context7/Exa-type MCP ব্যবহার করবে।
+
+```text
+Check my GitHub issue #123.
+```
+
+GitHub MCP ব্যবহার করবে।
+
+```text
+Find this project document in Drive.
+```
+
+Drive MCP ব্যবহার করবে।
+
+```text
+Search my Notion knowledge base.
+```
+
+Notion MCP ব্যবহার করবে।
+
+```text
+Test this website in Chrome.
+```
+
+Playwright/browser tooling ব্যবহার করবে।
+
+এবং এগুলো **Claude-এর subscription ছাড়াই Antigravity environment-এর মধ্যে** করা যাবে—যদিও কোনো external service-এর API/OAuth বা paid quota লাগলে সেটা আলাদা বিষয়।
+
+---
+
+## একটা গুরুত্বপূর্ণ সতর্কতা
+
+ছবিতে লেখা:
+
+> **"25 Things to Install in Claude"**
+
+এটা দেখে ২৫টা জিনিসকে ২৫টা software ধরে নিও না।
+
+বাস্তবে:
+
+**Skill ≠ MCP ≠ Plugin ≠ Connector ≠ Application**
+
+এটাই পুরো ব্যাপারটা।
+
+Antigravity এই পাঁচ ধরনের extensibility-কে অনেকটা এক জায়গায় আনছে। citeturn0search9turn0search1
+
+### তাই তোমার টাকা না থাকার situation-এ আমার recommendation:
+
+**Claude Code কিনতে যেও না।**
+
+আমরা বরং:
+
+> **Antigravity + Free/official MCPs + open-source Skills + তোমার existing GitHub/Google accounts**
+
+দিয়ে যতটা সম্ভব **Claude Code-এর equivalent development environment** বানাব।
+
+এবং আমি চাইলে তোমার জন্য **এই ২৫টার একটা একটা করে current 2026-compatible Antigravity version verify করে, তারপর একটাই master `setup.ps1` + `.agents` folder + `mcp_config.json` তৈরি করে দিতে পারি**—যাতে তুমি শুধু Antigravity-তে খুলে setup করো।
+

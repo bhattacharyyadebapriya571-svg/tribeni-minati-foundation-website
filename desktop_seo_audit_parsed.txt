@@ -1,0 +1,451 @@
+SEO Audit for tribeni-minati-foundation-website.vercel.app
+This report grades your website based on the strength of various SEO factors such as On Page Optimization, Off Page Links, Social and more. The overall Grade is on a A+ to F- scale, with most major, industry leading websites in the A range. Improving your grade will generally make your website perform better for users and rank better in search engines. There are recommendations for improving your website at the bottom of the report. Feel free to reach out to us if you’d like us to help with improving your website’s SEO!
+Audit Results
+Your page could be better
+On-Page SEO
+GEO
+Links
+Usability
+Performance
+Report Generated: 30 August 12:17AM UTC
+Improve Your Site With Our DIY SEO Tool
+Review unlimited pages. Crawl your whole site for problems and get clear, easy to follow recommendations with guides for your CMS. Monitor your keyword rankings and get regular updates on your site's performance.
+Helping Business Owners promote their websites the affordable way.
+Recommendations
+Execute a Link Building Strategy
+Links
+High Priority
+Reduce your total Page File Size
+Performance
+Medium Priority
+Reduce length of Title Tag
+On-Page SEO
+Medium Priority
+Use your main keywords across the important HTML Tags
+On-Page SEO
+Medium Priority
+Reduce Rendered Content
+GEO
+Low Priority
+Optimize for Mobile PageSpeed Insights
+Usability
+Low Priority
+Optimize for Desktop PageSpeed Insights
+Usability
+Low Priority
+Create and link your X Profile
+Other
+Low Priority
+Create and link an associated YouTube Channel
+Other
+Low Priority
+Create and link an associated LinkedIn Profile
+Other
+Low Priority
+Add a DMARC Mail Record
+Other
+Low Priority
+Add an SPF Mail Record
+Other
+Low Priority
+Reduce length of Meta Description
+On-Page SEO
+Low Priority
+Implement an Analytics Tracking Tool
+On-Page SEO
+Low Priority
+Add Business Address and Phone Number to site
+Other
+Low Priority
+Add Local Business Schema
+Other
+Low Priority
+Install a Facebook Pixel
+Other
+Low Priority
+On-Page SEO Results
+Your On-Page SEO is good
+Your page is mostly optimized for On-Page SEO performance. On-Page SEO is important to ensure Search Engines can understand your content appropriately and help it rank for relevant keywords. You can continue to improve your page by ensuring HTML Tag Content is completed correctly and text content is well aligned with chosen keywords.
+Title Tag
+You have a Title Tag, but ideally it should be shortened to between 50 and 60 characters (including spaces).
+Tribeni Minati Foundation | Minati NGO Tribeni | Official Non-Profit Portal
+Length : 75
+Title Tags are very important for search engines to correctly understand and categorize your content.
+Meta Description Tag
+Your page has a Meta Description Tag however, your Meta Description should ideally be between 120 and 160 characters (including spaces).
+Tribeni Minati Foundation (ত্রিবেনী মিনতি ফাউন্ডেশন) — Registered NGO (Reg: SO212276, NITI Aayog DARPAN: WB/2026/0939703, Est. 2013). Devoted to Minorities, Illiterate, Needy, Abused, Tribal, and Indians (M-I-N-A-T-I) in Tribeni, Hooghly, West Bengal. 100% Tax Exemption (80G) available.
+Length : 287
+A Meta Description is important for search engines to understand the content of your page, and is often shown as the description text blurb in search results.
+SERP Snippet Preview
+This illustrates how your page may appear in Search Results. Note, this is intended as a guide and Search Engines are more frequently generating this content dynamically.
+Tribeni Minati Foundationhttps://tribeni-minati-foundation-website.vercel.a...
+Tribeni Minati Foundation
+Tribeni Minati Foundation (ত্রিবেনী মিনতি ফাউন্ডেশন) — Registered NGO (Reg: SO212276, NITI Aayog DARPAN: WB/2026/0939703, Est. 2013). Devoted to ...
+Hreflang Usage
+Your page is making use of Hreflang attributes.
+Language
+Your page is using the Lang Attribute.
+Declared: English
+H1 Header Tag Usage
+Your page has a H1 Tag.
+H2-H6 Header Tag Usage
+Your page is making use multiple levels of Header Tags.
+Header Tag
+Frequency
+H2
+8
+H3
+15
+H4
+2
+H5
+3
+H6
+0
+Keyword Consistency
+Your page's main keywords are not distributed well across the important HTML Tags.
+Your page content should be focused around particular keywords you would like to rank for. Ideally these keywords should also be distributed across tags such as the title, meta and header tags.
+Individual Keywords
+Keyword
+Title
+Meta Description Tag
+Headings Tags
+Page Frequency
+minati
+29
+tax
+29
+free
+25
+80g
+24
+verified
+23
+tribeni
+22
+foundation
+21
+rural
+19
+Phrases
+Phrase
+Title
+Meta Description Tag
+Headings Tags
+Page Frequency
+minati foundation
+20
+tribeni minati
+17
+tribeni minati foundation
+16
+80g tax
+12
+niti aayog
+11
+central bank
+11
+west bengal
+11
+income tax
+10
+Amount of Content
+Your page has a good level of textual content, which will assist in it's ranking potential.
+Word Count: 2494
+Image Alt Attributes
+You do not have any images missing Alt Attributes on your page.
+Canonical Tag
+Your page is using the Canonical Tag.
+https://tribeni-minati-foundation-website.vercel.app/
+Noindex Tag Test
+Your page is not using the Noindex Tag which prevents indexing.
+Noindex Header Test
+Your page is not using the Noindex Header which prevents indexing.
+SSL Enabled
+Your website has SSL enabled.
+HTTPS Redirect
+Your page successfully redirects to a HTTPS (SSL secure) version.
+Robots.txt
+Your website appears to have a robots.txt file.
+http://tribeni-minati-foundation-website.vercel.app/robots.txt
+Search Engines Blocked by Robots.txt
+Your page is crawlable by the major search engines.
+No major search engines are blocked in your robots.txt.
+XML Sitemaps
+Your website appears to have an XML Sitemap.
+https://tribeni-minati-foundation-website.vercel.app/sitemap.xml
+Analytics
+We could not detect an analytics tool installed on your page.
+Website analytics tools like Google Analytics assist you in measuring, analyzing and ultimately improving traffic to your page.
+Schema.org Structured Data
+You are using JSON-LD Schema on your page.
+Generative Engine Optimization (GEO)
+Your Generative Engine Optimization could be better
+Your page has some level positioning for Generative Engine Optimization (GEO). GEO is important to ensure LLMs and AI Search Engines can effectively crawl your content and understand the underlying entity structure. Consider additional enhancements to improve visibility in LLMs as this is becoming a rapidly growing traffic source.
+Rendered Content (LLM Readability)
+Your page has a high level of rendering (changes to the HTML).
+Rendering Percentage: 1642%
+Dynamically rendering a lot of page content risks some important information being missed by LLMs that generally do not read this content.
+Llms.txt
+Your website appears to have a llms.txt file.
+Llms.txt is a proposed standard for websites to guide large language models (LLMs) to better understand your site's content.
+http://tribeni-minati-foundation-website.vercel.app/llms.txt
+AI Crawlers Blocked by Robots.txt
+New
+Your robots.txt allows the major AI crawlers to access your site.
+No major AI crawlers are blocked in your robots.txt.
+Identity Schema
+New
+Organization or Person Schema identified on the page.
+NGO
+Person
+LLM Content Analysis
+Our AI-powered GEO Content Analysis reviews how well your page is positioned for AI Search Engines and LLMs. Sign up to one of our premium plans to unlock the full analysis.
+Rankings
+Top Organic Keyword Rankings
+You can see the live Keyword Rankings for your page within the report by signing up to one of our premium plans.
+Links
+Backlink Summary
+You have a reasonably weak level of backlink activity to this page.
+Search Engines use backlinks as a strong indicator of a page's authority, relevance and ranking potential. There are various strategies available to gain links to a page to improve this factor
+DomainStrength
+PageStrength
+0
+Total Backlinks
+0
+Referring Domains
+0
+Nofollow Backlinks
+0
+Dofollow Backlinks
+0
+Edu Backlinks
+0
+Gov Backlinks
+0
+IPs
+0
+Subnets
+Top Backlinks
+We haven't found any backlinks to report for this site.
+Top Pages by Backlinks
+We haven't found any Top Pages data for this site.
+Top Anchors by Backlinks
+We haven't found any Anchor Text data for this site.
+Top Referring Domain Geographies
+We haven't found any Geographic Data for this site.
+On-Page Link Structure
+We found 2 total links. 100% of your links are external links and are sending authority to other sites. % of your links are nofollow links, meaning authority is not being passed to those destination pages.
+On-Page Links
+2Total
+Internal Links
+0
+External Links: Follow
+2
+External Links: Nofollow
+0
+Friendly Links
+Your link URLs appear friendly (easily human or search engine readable).
+Create White Label PDFs
+Upload your own logo and company's contact details. Generate unlimited PDFs under our White Label plans. See an example PDF Report
+Embed the Audit Tool into your website. Get notified of leads straight from your website.
+Usability
+Your usability could be better
+Your page is OK but could be more usable across devices. Usability is important to maximize your available audience and minimize user bounce rates (which can indirectly affect your search engine rankings).
+Device Rendering
+This check visually demonstrates how your page renders on different devices. It is important that your page is optimized for mobile and tablet experiences as today the majority of web traffic comes from these sources.
+Google's Core Web Vitals
+Google is indicating that they do not have 'sufficient real-world speed data for this page' in order to make a Core Web Vitals assessment. This can occur for smaller websites or those that are not crawl-able by Google.
+Use of Mobile Viewports
+Your page specifies a Viewport matching the device's size, allowing it to render appropriately across devices.
+Google's PageSpeed Insights - Mobile
+Google is indicating that your page is scoring poorly on their Mobile PageSpeed Insights evaluation.Note that this evaluation is being performed from US servers and the results may differ slightly from an evaluation carried out from Google's PageSpeed Web Interface as that reporting localizes to the region in which you are running the report.
+Google has indicated that the performance of a webpage is becoming more important from a user and subsequently ranking perspective.
+Lab Data
+Value
+First Contentful Paint
+6.5 s
+Speed Index
+6.6 s
+Largest Contentful Paint
+35.3 s
+Time to Interactive
+36 s
+Total Blocking Time
+0.02 s
+Cumulative Layout Shift
+0
+Opportunities
+Estimated Savings
+Reduce unused JavaScript
+1.97 s
+Avoid multiple page redirects
+0.63 s
+Reduce unused CSS
+0.15 s
+Google's PageSpeed Insights - Desktop
+Google is indicating that your page is scoring poorly on their Desktop PageSpeed Insights evaluation.
+Google has indicated that the performance of a webpage is becoming more important from a user and subsequently ranking perspective.
+Lab Data
+Value
+First Contentful Paint
+1.1 s
+Speed Index
+1.5 s
+Largest Contentful Paint
+5.3 s
+Time to Interactive
+5.4 s
+Total Blocking Time
+0.13 s
+Cumulative Layout Shift
+0
+Opportunities
+Estimated Savings
+Reduce unused JavaScript
+0.2 s
+Avoid multiple page redirects
+0.19 s
+Flash Used?
+No Flash content has been identified on your page.
+iFrames Used?
+There are no iFrames detected on your page.
+Favicon
+Your page has specified a Favicon.
+Email Privacy
+No email addresses have been found in plain text on your page.
+Legible Font Sizes
+The text on your page appears to be legible across devices.
+Tap Target Sizing
+The links and buttons on your page appear to be appropriately sized for a user to easily tap on a touchscreen.
+Performance Results
+Your performance could be better
+Your page's performance has some issues and room for improvement. Performance is important to ensure a good user experience, and reduced bounce rates (which can also indirectly affect your search engine rankings). We recommend addressing the highlighted factors below.
+Website Load Speed
+Your page loads in a reasonable amount of time.
+Server Response
+0.025s
+All Page Content Loaded
+1.4s
+All Page Scripts Complete
+1.5s
+Website Download Size
+Your page's file size is quite large which, regardless of other optimizations, can reduce load speed and impact user experience.
+A general rule is to keep your page under 5MB in total file size.
+Download Page Size
+9.35MB
+Download Page Size Breakdown
+9.35MBTotal
+HTML
+0MB
+CSS
+0.02MB
+JS
+0.47MB
+Images
+8.67MB
+Other
+0.19MB
+Compression Usage (Gzip, Deflate, Brotli)
+Your website appears to be using a reasonable level of compression.
+Compression Rate
+11%
+Compression Rates
+HTML
+68% compressed of 0.01MB
+CSS
+87% compressed of 0.13MB
+JS
+68% compressed of 1.47MB
+Images
+0% compressed of 8.67MB
+Other
+0% compressed of 0.19MB
+Total
+11% compressed of 10.48MB
+Resources Breakdown
+This check displays the total number of files that need to be retrieved from web servers to load your page.
+33
+Total Objects
+1
+Number of HTML Pages
+5
+Number of JS Resources
+2
+Number of CSS Resources
+15
+Number of Images
+10
+Other Resources
+Google Accelerated Mobile Pages (AMP)
+This page does not appear to have AMP Enabled.
+JavaScript Errors
+Your page is not reporting any JavaScript errors.
+HTTP2 Usage
+Your website is using the recommended HTTP/2+ Protocol.
+Optimize Images
+All of the images on your page appear to be optimized.
+Minification
+All your JavaScript and CSS files appear to be minified.
+Deprecated HTML
+No deprecated HTML tags have been found within your page.
+Inline Styles
+No Inline Styles have been found within your page's HTML tags.
+Social Results
+Facebook Page Linked
+Your page has a link to a Facebook Page.
+https://facebook.com/tribeniminatifoundation
+Facebook Open Graph Tags
+Your page is using Facebook Open Graph Tags.
+Facebook Pixel
+We have not detected a Facebook Pixel on your page.
+Facebook's Pixel is a useful piece of analytics code that allows you to retarget visitors if you decide to run Facebook Ads in future.
+X (formerly Twitter) Account Linked
+No associated X Profile found as a link on your page.
+X Cards
+Your page is using X Cards.
+Instagram Linked
+Your page has a link to an Instagram Profile.
+https://instagram.com/MINATIFOUNDATION
+LinkedIn Page Linked
+No associated LinkedIn Profile found linked on your page.
+YouTube Channel Linked
+No associated YouTube Channel found linked on your page.
+YouTube Channel Activity
+No associated YouTube Channel found linked on your page.
+Want to grow your YouTube Channel? Try our  YouTube SEO Tool
+Local SEO
+Address & Phone Shown on Website
+We can't identify one or both of these components on the page. Missing: Address
+Phone
++91 98322 74345
+Local Business Schema
+No Local Business Schema identified on the page.
+Google Business Profile Identified
+You can see information about your page's Google Business Profile within this report by signing up to one of our premium plans.
+Want to improve your Local Search Presence? Try our  Local SEO Tool
+Technology Results
+Technology List
+These software or coding libraries have been identified on your page.
+Technology
+Version
+HSTS
+Razorpay
+Vercel
+Vercel Analytics
+Server IP Address
+216.198.79.195
+DNS Servers
+ns-tld5.charlestonroadregistry.comns-tld4.charlestonroadregistry.comns-tld3.charlestonroadregistry.comns-tld1.charlestonroadregistry.comns-tld2.charlestonroadregistry.com
+Web Server
+Vercel
+Charset
+text/html; charset=utf-8
+DMARC Record
+This site does not appear to have a DMARC record in place.
+DMARC records are important to improve email deliverability and combat spoofing.
+SPF Record
+This site does not appear to have an SPF record.
+SPF records are important to improve email deliverability and combat spoofing.
+Review Child Pages
+No Sub-Pages Found

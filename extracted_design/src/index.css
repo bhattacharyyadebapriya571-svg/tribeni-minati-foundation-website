@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme inline {
+  --color-background: #FAFAFA;
+  --color-foreground: #111111;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #111111;
+  --color-primary: #1C3D2F;
+  --color-primary-foreground: #F0F5F2;
+  --color-secondary: #EEF2EF;
+  --color-secondary-foreground: #1C3D2F;
+  --color-muted: #F4F4F4;
+  --color-muted-foreground: #6B7280;
+  --color-accent: #4E8B65;
+  --color-accent-foreground: #FFFFFF;
+  --color-dark-bg: #0C1A11;
+  --color-dark-surface: #142D1C;
+  --color-dark-foreground: #E8F0EB;
+  --color-border: rgba(0, 0, 0, 0.07);
+  --color-ring: #4E8B65;
+  --radius: 12px;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'DM Serif Display', ui-serif, Georgia, serif;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FAFAFA;
+  color: #111111;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}

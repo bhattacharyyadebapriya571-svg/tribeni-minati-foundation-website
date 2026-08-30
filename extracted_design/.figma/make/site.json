@@ -1,0 +1,10 @@
+{
+  "description": "This premium landing page connects philanthropic and corporate initiatives, showcasing impactful projects and encouraging donations and partnerships.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
