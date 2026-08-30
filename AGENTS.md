@@ -1,4 +1,4 @@
-﻿# PROJECT RULES: OPENCODE CLI & NEMOTRON 550B
+# PROJECT RULES: OPENCODE CLI & NEMOTRON 550B
 
 Whenever this project workspace is opened, the following mandatory environment rules and model configurations apply:
 
@@ -18,3 +18,10 @@ Whenever this project workspace is opened, the following mandatory environment r
   - `temperature`: 0.2 (coding / deterministic), 1.0 (creative)
   - `top_p`: 0.95
   - `max_tokens`: 16384
+
+## 4. UI Specification & Production Quality Contract (HorizonX)
+- Read `my-app/ui-spec.yaml` before changing interface code.
+- Treat its tokens, component states, responsive rules, accessibility requirements, and acceptance criteria as implementation constraints.
+- Do not invent new colors, spacing, radii, shadows, typography styles, or motion curves without updating `ui-spec.yaml`.
+- All motion components must use HorizonX patterns from `src/components/motion/` (`MotionColumn`, `ParallaxTotem`, `GridSweep`, `MotionFocus`) and support `prefers-reduced-motion`.
+

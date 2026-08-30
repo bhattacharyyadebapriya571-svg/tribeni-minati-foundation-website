@@ -1,0 +1,203 @@
+spec:
+  name: Tribeni Minati Foundation
+  version: 1.0.0
+  owner: Tribeni Minati Foundation (Hooghly, West Bengal)
+  last_updated: 2026-08-31
+
+product:
+  audience:
+    primary: Indian donors, CSR managers, rural beneficiaries, government stakeholders
+    context: Desktop and mobile browsers in India with variable network quality
+  primary_job: Inspire trust and facilitate 80G tax-exempt donations to a verified non-profit
+  primary_action: Donate Now (80G Tax Saved)
+  secondary_actions:
+    - View Transparency Documents
+    - Apply as Volunteer
+    - Contact Secretariat
+    - Explore Programs
+
+visual_direction:
+  attributes: [institutional-trust, warm-editorial, clean-spatial]
+  avoid: [generic-template, overly-corporate, dark-moody]
+  references:
+    - url: https://horizonx.so/explore/atrium
+      use_for: layout
+      do_not_copy: brand colors
+    - url: https://horizonx.so/explore/kreivo
+      use_for: motion
+      do_not_copy: music-led canvas
+
+tokens:
+  color:
+    background: "#f7f9fb"
+    surface: "#FFFFFF"
+    surface_elevated: "#FFFFFF"
+    surface_bezel: "#f2f4f6"
+    text: "#191c1e"
+    text_muted: "#45464d"
+    text_subtle: "#64748B"
+    border: "rgba(0,0,0,0.06)"
+    border_subtle: "#e2e8f0"
+    accent: "#4b41e1"
+    accent_hover: "#645efb"
+    accent_foreground: "#FFFFFF"
+    cta: "#F59E0B"
+    cta_foreground: "#111827"
+    ink: "#111827"
+    success: "#059669"
+    warning: "#D97706"
+    danger: "#DC2626"
+    focus: "#4b41e1"
+  typography:
+    family_ui: "'Plus Jakarta Sans', sans-serif"
+    family_display: "'Plus Jakarta Sans', sans-serif"
+    family_mono: "'JetBrains Mono', 'SF Mono', monospace"
+    base_size_px: 16
+    scale: [10, 11, 12, 14, 16, 20, 24, 32, 48]
+    line_heights: [1.1, 1.2, 1.4, 1.6]
+    weights: [400, 500, 600, 700, 800]
+  spacing:
+    base_px: 4
+    scale: [0, 2, 4, 6, 8, 12, 16, 20, 24, 32, 48, 64, 96]
+  radius:
+    xs: 4
+    sm: 6
+    md: 10
+    lg: 16
+    xl: 22
+    pill: 999
+  shadow:
+    xs: "0 1px 2px rgba(0,0,0,0.04)"
+    sm: "0 2px 8px rgba(0,0,0,0.06)"
+    md: "0 8px 24px rgba(0,0,0,0.08)"
+    lg: "0 16px 48px rgba(0,0,0,0.12)"
+    overlay: "0 24px 64px rgba(0,0,0,0.18)"
+  layout:
+    content_max_width_px: 1280
+    reading_max_width_ch: 72
+    page_gutter_px:
+      mobile: 16
+      tablet: 32
+      desktop: 32
+
+breakpoints:
+  mobile: 0
+  tablet: 768
+  desktop: 1024
+  wide: 1440
+
+responsive_rules:
+  navigation:
+    mobile: hamburger-drawer-with-all-pages
+    desktop: horizontal-links-with-explore-more-dropdown
+  grids:
+    mobile_columns: 1
+    tablet_columns: 2
+    desktop_columns: 3
+  typography_behavior: stepped
+  overflow_policy: wrap
+  minimum_touch_target_px: 44
+
+components:
+  button:
+    variants: [primary-amber, secondary-ink, ghost, destructive]
+    sizes: [sm, md, lg]
+    states: [default, hover, focus-visible, active, disabled, loading]
+  input:
+    states: [empty, populated, focus, disabled, readonly, error, success]
+    requirements: [persistent-label, helper-text, error-association]
+  card:
+    variants: [double-bezel, flat, interactive, static]
+    states: [default, hover, focus-visible, loading, empty]
+  dialog:
+    states: [closed, opening, open, closing]
+    requirements: [focus-trap, escape-close, labelled-title, focus-return]
+  table:
+    states: [loading, populated, empty, error]
+    mobile_strategy: card-stack
+
+page_states:
+  required: [loading, empty, partial, error, success, offline]
+  destructive_confirmation: true
+  optimistic_update_policy: show-pending-then-confirm
+
+accessibility:
+  target: WCAG-2.2-AA
+  keyboard_complete: true
+  focus_visible: true
+  semantic_html: true
+  form_errors_programmatic: true
+  color_not_only_signal: true
+  contrast:
+    normal_text: 4.5
+    large_text: 3.0
+    ui_components: 3.0
+
+motion:
+  durations_ms:
+    instant: 0
+    fast: 120
+    standard: 200
+    deliberate: 320
+    scroll_reveal: 500
+  easing:
+    enter: "cubic-bezier(0.0, 0.0, 0.2, 1)"
+    exit: "cubic-bezier(0.4, 0.0, 1, 1)"
+    move: "cubic-bezier(0.4, 0.0, 0.2, 1)"
+    spring: "spring(1, 80, 10)"
+  animate: [opacity, transform, filter]
+  avoid: [layout-thrashing-properties, width, height, top, left]
+  reduced_motion: remove-nonessential-and-preserve-state-feedback
+  patterns:
+    motion_column:
+      description: Parallax vertical columns with differential scroll velocities
+      use_for: leadership-spotlight, hero-depth
+    parallax_totem:
+      description: Stacked vertical reveal with alternating slide directions
+      use_for: about-page-timeline, history-milestones
+    grid_sweep:
+      description: Staggered diagonal grid entrance with whileInView trigger
+      stagger_ms: 80
+      use_for: facebook-gallery, sdg-section, bento-matrix
+    motion_focus:
+      description: Attention-directing blur and scale on hover or viewport entry
+      blur_radius: 2px
+      scale_active: 1.02
+      use_for: partner-marquee, testimonials, program-explorer
+
+content:
+  voice: warm-institutional-bengali-english-bilingual
+  reading_level: grade-8
+  button_style: verb-first
+  error_style: explain-problem-and-next-action
+  placeholder_is_not_label: true
+
+implementation:
+  framework: React 19 + TypeScript 6
+  styling: Tailwind CSS 4 + CSS custom properties
+  component_location: src/components/
+  motion_component_location: src/components/motion/
+  token_location: ui-spec.yaml + src/index.css
+  icon_source: Material Symbols Outlined + Lucide React
+  allowed_dependencies:
+    - framer-motion
+    - lucide-react
+    - @supabase/supabase-js
+    - pdf-lib
+  prohibited_dependencies:
+    - jQuery
+    - Bootstrap
+    - Material UI
+
+quality_gates:
+  viewports: [360x800, 768x1024, 1280x800, 1440x900]
+  browsers: [chromium, firefox, webkit]
+  tests:
+    - keyboard-navigation
+    - accessible-name-and-role
+    - focus-order
+    - contrast
+    - responsive-overflow
+    - loading-empty-error-success
+    - reduced-motion
+    - visual-regression

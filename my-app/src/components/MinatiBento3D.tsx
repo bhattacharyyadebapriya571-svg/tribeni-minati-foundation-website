@@ -1,5 +1,6 @@
 import React from 'react';
 import { MINATI_ACRONYM } from '../data/tmfVerifiedData';
+import { GridSweepContainer, GridSweepItem } from './motion/GridSweep';
 
 export const MinatiBento3D: React.FC = () => {
   const icons = ['groups', 'menu_book', 'volunteer_activism', 'health_and_safety', 'nature_people', 'public'];
@@ -18,50 +19,51 @@ export const MinatiBento3D: React.FC = () => {
           </p>
         </div>
 
-        {/* 6 Bento Pillar Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* 6 Bento Pillar Cards — HorizonX GridSweep */}
+        <GridSweepContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" stagger={0.09}>
           {MINATI_ACRONYM.map((item, index) => (
-            <div
-              key={item.letter + item.word}
-              className={`bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-sm border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group reveal stagger-${index + 1} active flex flex-col justify-between`}
-            >
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-14 h-14 rounded-xl bg-indigo-50 flex items-center justify-center text-[#4b41e1] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                    <span className="material-symbols-outlined text-[28px]">
-                      {icons[index % icons.length]}
+            <GridSweepItem key={item.letter + item.word}>
+              <div
+                className="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-sm border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group flex flex-col justify-between h-full"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="w-14 h-14 rounded-xl bg-indigo-50 flex items-center justify-center text-[#4b41e1] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                      <span className="material-symbols-outlined text-[28px]">
+                        {icons[index % icons.length]}
+                      </span>
+                    </div>
+                    
+                    {/* Official Cropped Emblem Badge */}
+                    <div className="w-12 h-12 rounded-xl bg-white p-1.5 border border-border-subtle shadow-xs">
+                      <img
+                        src={item.badgeImg}
+                        alt={`${item.word} Badge`}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  </div>
+
+                  <h3 className="font-headline-md text-2xl font-bold text-[#191c1e] mb-2 flex items-center gap-2">
+                    <span>{item.word}</span>
+                    <span className="text-xs font-mono text-[#4b41e1] bg-indigo-50 px-2 py-0.5 rounded-full font-bold">
+                      {item.letter}
                     </span>
-                  </div>
-                  
-                  {/* Official Cropped Emblem Badge */}
-                  <div className="w-12 h-12 rounded-xl bg-white p-1.5 border border-border-subtle shadow-xs">
-                    <img
-                      src={item.badgeImg}
-                      alt={`${item.word} Badge`}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
+                  </h3>
+
+                  <p className="font-body-base text-sm text-[#45464d] leading-relaxed">
+                    {item.desc}
+                  </p>
                 </div>
 
-                <h3 className="font-headline-md text-2xl font-bold text-[#191c1e] mb-2 flex items-center gap-2">
-                  <span>{item.word}</span>
-                  <span className="text-xs font-mono text-[#4b41e1] bg-indigo-50 px-2 py-0.5 rounded-full font-bold">
-                    {item.letter}
-                  </span>
-                </h3>
-
-                <p className="font-body-base text-sm text-[#45464d] leading-relaxed">
-                  {item.desc}
-                </p>
+                <div className="pt-4 mt-6 border-t border-slate-100 flex items-center justify-between font-mono text-xs text-[#64748B]">
+                  <span className="font-bold text-[#4b41e1]">{item.stat}</span>
+                  <span>Verified Metric</span>
+                </div>
               </div>
-
-              <div className="pt-4 mt-6 border-t border-slate-100 flex items-center justify-between font-mono text-xs text-[#64748B]">
-                <span className="font-bold text-[#4b41e1]">{item.stat}</span>
-                <span>Verified Metric</span>
-              </div>
-            </div>
+            </GridSweepItem>
           ))}
-        </div>
+        </GridSweepContainer>
 
       </div>
     </section>

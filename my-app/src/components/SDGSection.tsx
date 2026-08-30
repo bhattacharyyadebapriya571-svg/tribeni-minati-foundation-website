@@ -1,5 +1,6 @@
 import React from 'react';
 import { SDG_DATA } from '../data/foundationData';
+import { GridSweepContainer, GridSweepItem } from './motion/GridSweep';
 import type { PageId } from '../types';
 
 interface SDGSectionProps {
@@ -38,10 +39,10 @@ export const SDGSection: React.FC<SDGSectionProps> = ({ onNavigate }) => {
           )}
         </div>
 
-        {/* SDG Double-Bezel Bento Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* SDG Double-Bezel Bento Grid — HorizonX GridSweep */}
+        <GridSweepContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" stagger={0.12}>
           {SDG_DATA.map((sdg) => (
-            <div
+            <GridSweepItem
               key={sdg.number}
               className="bg-[#f2f4f6] p-2 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
             >
@@ -80,9 +81,9 @@ export const SDGSection: React.FC<SDGSectionProps> = ({ onNavigate }) => {
                 </div>
 
               </div>
-            </div>
+            </GridSweepItem>
           ))}
-        </div>
+        </GridSweepContainer>
 
       </div>
     </section>

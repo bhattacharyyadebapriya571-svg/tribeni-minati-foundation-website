@@ -1,5 +1,7 @@
 import React from 'react';
 import { GOVERNING_BODY, TMF_META } from '../data/tmfVerifiedData';
+import { ParallaxTotem } from '../components/motion/ParallaxTotem';
+import { GridSweepContainer, GridSweepItem } from '../components/motion/GridSweep';
 import type { PageId } from '../types';
 
 interface AboutUsPageProps {
@@ -74,61 +76,65 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate, onOpenDona
       {/* 2. Mission & Vision Bento Strip */}
       <section className="w-full py-16 bg-white border-y border-slate-200/60">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
             
-            {/* Mission Card */}
-            <div className="bg-[#f2f4f6] p-2 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300">
-              <div className="bg-white rounded-[22px] p-8 sm:p-10 flex flex-col justify-between h-full space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-indigo-50 text-[#4b41e1] flex items-center justify-center">
-                    <span className="material-symbols-outlined text-3xl">target</span>
+            {/* Mission Card — HorizonX ParallaxTotem #1 */}
+            <ParallaxTotem index={0} maxOffset={40} className="h-full">
+              <div className="bg-[#f2f4f6] p-2 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 h-full">
+                <div className="bg-white rounded-[22px] p-8 sm:p-10 flex flex-col justify-between h-full space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 rounded-2xl bg-indigo-50 text-[#4b41e1] flex items-center justify-center">
+                      <span className="material-symbols-outlined text-3xl">target</span>
+                    </div>
+                    <div>
+                      <span className="font-label-caps text-xs uppercase text-[#64748B] font-bold tracking-widest">
+                        Our Objective
+                      </span>
+                      <h2 className="font-headline-lg text-2xl font-bold text-[#191c1e]">
+                        The TMF Mission
+                      </h2>
+                    </div>
                   </div>
-                  <div>
-                    <span className="font-label-caps text-xs uppercase text-[#64748B] font-bold tracking-widest">
-                      Our Objective
-                    </span>
-                    <h2 className="font-headline-lg text-2xl font-bold text-[#191c1e]">
-                      The TMF Mission
-                    </h2>
+
+                  <p className="font-body-base text-base text-[#45464d] leading-relaxed">
+                    To eliminate generational poverty, illiteracy, and healthcare vulnerabilities across rural and semi-urban Bengal through data-backed remedial coaching centers, infant winter protection kits, mobile doctor clinics, and women micro-livelihood self-reliance programs.
+                  </p>
+
+                  <div className="p-4 bg-[#f7f9fb] rounded-2xl border border-border-subtle font-headline-md text-sm italic font-semibold text-[#191c1e]">
+                    "...your smile, our reward... lets go, do something!!"
                   </div>
-                </div>
-
-                <p className="font-body-base text-base text-[#45464d] leading-relaxed">
-                  To eliminate generational poverty, illiteracy, and healthcare vulnerabilities across rural and semi-urban Bengal through data-backed remedial coaching centers, infant winter protection kits, mobile doctor clinics, and women micro-livelihood self-reliance programs.
-                </p>
-
-                <div className="p-4 bg-[#f7f9fb] rounded-2xl border border-border-subtle font-headline-md text-sm italic font-semibold text-[#191c1e]">
-                  "...your smile, our reward... lets go, do something!!"
                 </div>
               </div>
-            </div>
+            </ParallaxTotem>
 
-            {/* Vision Card */}
-            <div className="bg-[#f2f4f6] p-2 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300">
-              <div className="bg-white rounded-[22px] p-8 sm:p-10 flex flex-col justify-between h-full space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-[#FFEDD5] text-[#EA580C] flex items-center justify-center">
-                    <span className="material-symbols-outlined text-3xl">visibility</span>
+            {/* Vision Card — HorizonX ParallaxTotem #2 */}
+            <ParallaxTotem index={1} maxOffset={40} className="h-full">
+              <div className="bg-[#f2f4f6] p-2 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 h-full">
+                <div className="bg-white rounded-[22px] p-8 sm:p-10 flex flex-col justify-between h-full space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 rounded-2xl bg-[#FFEDD5] text-[#EA580C] flex items-center justify-center">
+                      <span className="material-symbols-outlined text-3xl">visibility</span>
+                    </div>
+                    <div>
+                      <span className="font-label-caps text-xs uppercase text-[#64748B] font-bold tracking-widest">
+                        Future Trajectory
+                      </span>
+                      <h2 className="font-headline-lg text-2xl font-bold text-[#191c1e]">
+                        The TMF Vision
+                      </h2>
+                    </div>
                   </div>
-                  <div>
-                    <span className="font-label-caps text-xs uppercase text-[#64748B] font-bold tracking-widest">
-                      Future Trajectory
-                    </span>
-                    <h2 className="font-headline-lg text-2xl font-bold text-[#191c1e]">
-                      The TMF Vision
-                    </h2>
+
+                  <p className="font-body-base text-base text-[#45464d] leading-relaxed">
+                    To foster an equitable, self-reliant Indian society where every child from a marginalized background enjoys access to foundational learning, every mother achieves dignified economic security, and statutory transparency governs 100% of institutional philanthropy.
+                  </p>
+
+                  <div className="p-4 bg-[#f7f9fb] rounded-2xl border border-border-subtle font-mono text-xs text-[#64748B]">
+                    Certified under Section 80G · NITI Aayog DARPAN: <strong>{TMF_META.ngoDarpanId}</strong>
                   </div>
-                </div>
-
-                <p className="font-body-base text-base text-[#45464d] leading-relaxed">
-                  To foster an equitable, self-reliant Indian society where every child from a marginalized background enjoys access to foundational learning, every mother achieves dignified economic security, and statutory transparency governs 100% of institutional philanthropy.
-                </p>
-
-                <div className="p-4 bg-[#f7f9fb] rounded-2xl border border-border-subtle font-mono text-xs text-[#64748B]">
-                  Certified under Section 80G · NITI Aayog DARPAN: <strong>{TMF_META.ngoDarpanId}</strong>
                 </div>
               </div>
-            </div>
+            </ParallaxTotem>
 
           </div>
         </div>
@@ -245,60 +251,61 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate, onOpenDona
             </button>
           </div>
 
-          {/* Governing Body Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Governing Body Cards Grid — HorizonX GridSweep */}
+          <GridSweepContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" stagger={0.08}>
             {GOVERNING_BODY.map((member, index) => (
-              <div
-                key={member.name + member.designation}
-                className="bg-[#f2f4f6] p-2 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div className="bg-white rounded-[22px] p-6 sm:p-8 flex flex-col h-full justify-between space-y-6">
-                  
-                  <div>
-                    {/* Designation Badge */}
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="px-3 py-1 bg-indigo-50 text-[#4b41e1] rounded-full text-xs font-mono font-bold">
-                        {member.designation}
-                      </span>
-                      <span className="font-mono text-xs text-[#64748B]">
-                        0{index + 1}
-                      </span>
-                    </div>
-
-                    <h3 className="font-headline-md text-xl font-bold text-[#191c1e] mb-1 group-hover:text-[#4b41e1] transition-colors">
-                      {member.name}
-                    </h3>
-
-                    <div className="text-xs font-semibold text-[#64748B] mb-3">
-                      Occupation: {member.occupation}
-                    </div>
-
-                    <p className="font-body-base text-xs text-[#45464d] leading-relaxed">
-                      {member.note || 'Executive member overseeing foundation activities and community interventions.'}
-                    </p>
-                  </div>
-
-                  <div className="pt-4 border-t border-slate-100 font-mono text-[11px] text-[#64748B] space-y-1.5">
-                    <div className="flex justify-between">
-                      <span>Jurisdiction:</span>
-                      <span className="font-bold text-[#191c1e] truncate max-w-[160px]">{member.address.split(',')[0]}</span>
-                    </div>
-                    {member.contact && (
-                      <div className="flex justify-between">
-                        <span>Direct Phone:</span>
-                        <span className="font-bold text-[#4b41e1]">{member.contact}</span>
+              <GridSweepItem key={member.name + member.designation}>
+                <div
+                  className="bg-[#f2f4f6] p-2 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group h-full"
+                >
+                  <div className="bg-white rounded-[22px] p-6 sm:p-8 flex flex-col h-full justify-between space-y-6">
+                    
+                    <div>
+                      {/* Designation Badge */}
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="px-3 py-1 bg-indigo-50 text-[#4b41e1] rounded-full text-xs font-mono font-bold">
+                          {member.designation}
+                        </span>
+                        <span className="font-mono text-xs text-[#64748B]">
+                          0{index + 1}
+                        </span>
                       </div>
-                    )}
-                    <div className="flex justify-between text-emerald-700">
-                      <span>DPDP Masked UIN:</span>
-                      <span className="font-bold">{member.uinMasked}</span>
-                    </div>
-                  </div>
 
+                      <h3 className="font-headline-md text-xl font-bold text-[#191c1e] mb-1 group-hover:text-[#4b41e1] transition-colors">
+                        {member.name}
+                      </h3>
+
+                      <div className="text-xs font-semibold text-[#64748B] mb-3">
+                        Occupation: {member.occupation}
+                      </div>
+
+                      <p className="font-body-base text-xs text-[#45464d] leading-relaxed">
+                        {member.note || 'Executive member overseeing foundation activities and community interventions.'}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 border-t border-slate-100 font-mono text-[11px] text-[#64748B] space-y-1.5">
+                      <div className="flex justify-between">
+                        <span>Jurisdiction:</span>
+                        <span className="font-bold text-[#191c1e] truncate max-w-[160px]">{member.address.split(',')[0]}</span>
+                      </div>
+                      {member.contact && (
+                        <div className="flex justify-between">
+                          <span>Direct Phone:</span>
+                          <span className="font-bold text-[#4b41e1]">{member.contact}</span>
+                        </div>
+                      )}
+                      <div className="flex justify-between text-emerald-700">
+                        <span>DPDP Masked UIN:</span>
+                        <span className="font-bold">{member.uinMasked}</span>
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
-              </div>
+              </GridSweepItem>
             ))}
-          </div>
+          </GridSweepContainer>
 
         </div>
       </section>

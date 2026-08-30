@@ -1,5 +1,6 @@
 import React from 'react';
 import { TMF_META } from '../data/tmfVerifiedData';
+import { MotionColumn } from './motion/MotionColumn';
 import type { PageId } from '../types';
 
 interface LeadershipSpotlightProps {
@@ -37,11 +38,11 @@ export const LeadershipSpotlight: React.FC<LeadershipSpotlightProps> = ({ onNavi
           </button>
         </div>
 
-        {/* Secretary & President Dual Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* Secretary & President Dual Cards — HorizonX MotionColumn Parallax */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* General Secretary Rudra Adhya Featured Card */}
-          <div className="lg:col-span-7 bg-[#131b2e] text-white p-2 rounded-[32px] shadow-2xl relative overflow-hidden flex flex-col justify-between">
+          <MotionColumn speed={0.08} className="lg:col-span-7 bg-[#131b2e] text-white p-2 rounded-[32px] shadow-2xl relative overflow-hidden flex flex-col justify-between">
             <div className="bg-[#111827] rounded-[24px] p-8 sm:p-10 flex flex-col justify-between h-full space-y-6">
               
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
@@ -90,12 +91,11 @@ export const LeadershipSpotlight: React.FC<LeadershipSpotlightProps> = ({ onNavi
                   Direct Contact
                 </button>
               </div>
-
             </div>
-          </div>
+          </MotionColumn>
 
           {/* Founding President Swagata Adhya Card */}
-          <div className="lg:col-span-5 bg-white p-2 rounded-[32px] border border-border-subtle shadow-md flex flex-col justify-between">
+          <MotionColumn speed={-0.05} className="lg:col-span-5 bg-white p-2 rounded-[32px] border border-border-subtle shadow-md flex flex-col justify-between">
             <div className="bg-[#f7f9fb] rounded-[24px] p-8 sm:p-10 flex flex-col justify-between h-full space-y-6">
               
               <div className="flex items-center gap-6">
@@ -134,7 +134,7 @@ export const LeadershipSpotlight: React.FC<LeadershipSpotlightProps> = ({ onNavi
               </div>
 
             </div>
-          </div>
+          </MotionColumn>
 
         </div>
 

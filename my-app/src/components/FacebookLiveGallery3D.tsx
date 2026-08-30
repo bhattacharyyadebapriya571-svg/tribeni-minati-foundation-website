@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { GridSweepContainer, GridSweepItem } from './motion/GridSweep';
 
 interface FacebookPostItem {
   id: string;
@@ -172,10 +173,10 @@ export const FacebookLiveGallery3D: React.FC<FacebookLiveGallery3DProps> = ({ on
           ))}
         </div>
 
-        {/* 3D Double-Bezel Facebook Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* 3D Double-Bezel Facebook Posts Grid — HorizonX GridSweep */}
+        <GridSweepContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" stagger={0.1}>
           {filteredPosts.map((post) => (
-            <div
+            <GridSweepItem
               key={post.id}
               className="bg-[#f2f4f6] p-2 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
             >
@@ -261,9 +262,9 @@ export const FacebookLiveGallery3D: React.FC<FacebookLiveGallery3DProps> = ({ on
                 </div>
 
               </div>
-            </div>
+            </GridSweepItem>
           ))}
-        </div>
+        </GridSweepContainer>
 
       </div>
 
