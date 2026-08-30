@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ParallaxTotem } from '../components/motion/ParallaxTotem';
+import { GOVERNING_BODY } from '../data/tmfVerifiedData';
 
 export const ContactPage: React.FC = () => {
   const [sent, setSent] = useState(false);
@@ -238,6 +239,64 @@ export const ContactPage: React.FC = () => {
 
           </div>
         </div>
+
+        {/* 7-Member Executive Direct Helpline Directory (Nemotron 550B Verified) */}
+        <div className="mt-20 pt-16 border-t border-slate-200/80">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="font-label-caps text-xs uppercase text-[#4b41e1] font-bold tracking-widest bg-indigo-50 px-4 py-1.5 rounded-full">
+              Direct Governance Helplines
+            </span>
+            <h2 className="font-headline-lg text-2xl sm:text-3xl font-bold text-[#191c1e] mt-3">
+              Official Executive Direct Line Directory
+            </h2>
+            <p className="font-body-base text-sm text-[#45464d] mt-2">
+              Reach out directly to any member of our governing board for inquiries regarding CSR partnerships, project audits, student enrollments, or relief dispatches.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {GOVERNING_BODY.map((member) => (
+              <div
+                key={member.name}
+                className="bg-[#f2f4f6] p-2 rounded-3xl shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+              >
+                <div className="bg-white rounded-[22px] p-6 flex flex-col justify-between h-full space-y-4">
+                  <div>
+                    <span className="px-3 py-1 bg-indigo-50 text-[#4b41e1] rounded-full text-xs font-mono font-bold">
+                      {member.designation}
+                    </span>
+                    <h3 className="font-headline-md text-lg font-bold text-[#191c1e] mt-2">
+                      {member.name}
+                    </h3>
+                    <p className="text-xs text-[#64748B] font-mono mt-0.5">
+                      📍 {member.address.split(',')[0]}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                    <a
+                      href={`tel:${member.contact?.split('/')[0].trim()}`}
+                      className="flex-1 px-3 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-[16px]">call</span>
+                      <span className="truncate">{member.contact}</span>
+                    </a>
+                    <a
+                      href={`https://wa.me/${member.contact?.replace(/[^0-9]/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-xl flex items-center justify-center transition-colors shadow-xs"
+                      title="Direct WhatsApp"
+                    >
+                      <span className="material-symbols-outlined text-[18px]">chat</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   );
