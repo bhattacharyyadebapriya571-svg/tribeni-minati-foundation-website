@@ -6,6 +6,7 @@ import { Hero } from './components/Hero';
 import { ProgramExplorer } from './components/ProgramExplorer';
 import { MinatiBento3D } from './components/MinatiBento3D';
 import { InitiativesGrid } from './components/InitiativesGrid';
+import { LeadershipSpotlight } from './components/LeadershipSpotlight';
 import { DocumentGallerySection } from './components/DocumentGallerySection';
 import { BankingGateway } from './components/BankingGateway';
 import { TaxCalculatorWidget } from './components/TaxCalculatorWidget';
@@ -212,7 +213,13 @@ function App() {
             {/* 3. Core Initiatives Showcase */}
             <InitiativesGrid onNavigate={handleNavigate} />
 
-            {/* 4. Live Section 80G Tax Exemption & Impact Calculator */}
+            {/* 4. Leadership & Executive Secretariat Spotlight */}
+            <LeadershipSpotlight
+              onNavigate={handleNavigate}
+              onOpenDonate={() => handleOpenDonate()}
+            />
+
+            {/* 5. Live Section 80G Tax Exemption & Impact Calculator */}
             <TaxCalculatorWidget onDonateWithAmount={(amt, cause) => handleOpenDonate(amt, cause)} />
 
             {/* 5. Statutory PDF & Legal Compliance File Vault */}
