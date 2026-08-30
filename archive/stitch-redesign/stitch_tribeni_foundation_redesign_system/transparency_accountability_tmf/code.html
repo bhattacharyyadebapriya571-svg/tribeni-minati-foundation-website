@@ -1,0 +1,320 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><style>@layer base{html,body{margin:0;padding:0;scroll-behavior:smooth;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"inverse-primary":"#bec6e0","on-surface":"#191c1e","surface-container-highest":"#e0e3e5","tertiary-fixed":"#ffddb8","tertiary-container":"#2a1700","on-secondary":"#ffffff","on-secondary-fixed-variant":"#3323cc","text-muted":"#64748B","inverse-on-surface":"#eff1f3","primary-container":"#131b2e","tertiary-fixed-dim":"#ffb95f","error":"#ba1a1a","surface-container":"#eceef0","on-tertiary-container":"#b87500","on-surface-variant":"#45464d","background":"#f7f9fb","border-subtle":"rgba(15, 23, 42, 0.08)","on-tertiary":"#ffffff","tertiary":"#000000","on-tertiary-fixed":"#2a1700","secondary-fixed-dim":"#c3c0ff","on-primary":"#ffffff","on-primary-container":"#7c839b","on-error-container":"#93000a","surface-dim":"#d8dadc","on-primary-fixed":"#131b2e","on-error":"#ffffff","secondary-fixed":"#e2dfff","outline":"#76777d","on-primary-fixed-variant":"#3f465c","primary-fixed":"#dae2fd","secondary":"#4b41e1","inverse-surface":"#2d3133","indigo-subdued":"#EEF2FF","surface-container-low":"#f2f4f6","on-tertiary-fixed-variant":"#653e00","surface-tint":"#565e74","on-background":"#191c1e","surface-container-high":"#e6e8ea","secondary-container":"#645efb","primary":"#000000","on-secondary-fixed":"#0f0069","error-container":"#ffdad6","surface":"#f7f9fb","surface-white":"#FFFFFF","on-secondary-container":"#fffbff","surface-bright":"#f7f9fb","outline-variant":"#c6c6cd","surface-container-lowest":"#ffffff","primary-fixed-dim":"#bec6e0","surface-variant":"#e0e3e5"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"section-gap-sm":"64px","unit":"4px","margin-mobile":"16px","section-gap-lg":"128px","gutter":"24px","margin-desktop":"32px"},"fontFamily":{"display-lg":["Plus Jakarta Sans"],"body-base":["Inter"],"label-caps":["JetBrains Mono"],"headline-lg":["Plus Jakarta Sans"],"stat-lg":["JetBrains Mono"],"body-lg":["Inter"],"display-lg-mobile":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"]},"fontSize":{"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"800"}],"body-base":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-caps":["12px",{"lineHeight":"16px","letterSpacing":"0.08em","fontWeight":"700"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"700"}],"stat-lg":["36px",{"lineHeight":"44px","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"display-lg-mobile":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"800"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"></head><body class="bg-background font-body-base text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl transition-all duration-300 border-b border-white/10 shadow-[0_10px_25px_-5px_rgba(15,23,42,0.05)]"><div class="h-20 max-w-[1280px] mx-auto px-margin-mobile lg:px-margin-desktop flex items-center justify-between"><div class="flex items-center gap-3"><img alt="Tribeni Minati Foundation Logo" class="h-10 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XW1YOtP1G4JLp9W11GFcO8wpMQqW7hsV4OsTh396hu94mAS4knuq6RzD-0ES7rJ98ykBEHtPUvzoHj9XrxyLfZy9v0k6u-mR1mxbDLJE66mWq_2ZYpm4SicdstqV8UyXWXcK3Qu-aaD8ZlwqP4bc_ICAJzVR4MnxJXFMfhmVWd1xg9fAasGomwhGklXbyXStFx_4UTMpiGFrGZfVb_KUqJzgId2yhVUpwnG4Wj2F8ghGzXwj3cOMQGTBI"><span class="font-headline-md text-headline-md text-primary tracking-tight">Tribeni Minati Foundation</span></div><nav class="hidden lg:flex items-center gap-8" data-active-classes="text-secondary font-semibold"><a class="text-body-base text-on-surface-variant hover:text-primary transition-colors" data-path="about" href="#">About M-I-N-A-T-I</a><a class="text-body-base text-on-surface-variant hover:text-primary transition-colors" data-path="initiatives" href="#">Initiatives</a><a aria-current="page" class="transition-colors text-secondary font-semibold" data-path="transparency" href="#">Transparency</a><a class="text-body-base text-on-surface-variant hover:text-primary transition-colors" data-path="contact" href="#">Contact</a></nav><div class="flex items-center gap-6"><a class="px-6 py-3 bg-[#F59E0B] text-primary font-bold rounded-2xl shadow-[0_10px_25px_-5px_rgba(245,158,11,0.3)] hover:-translate-y-0.5 transition-all" data-path="donate" href="#">Donate Now</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-background min-h-screen"><div class="flex flex-col w-full">
+<!-- Transparency Hero -->
+<section class="w-full bg-surface-bright pt-section-gap-sm pb-section-gap-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 w-[800px] h-[800px] bg-primary-fixed/30 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+<div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin-desktop relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-4 py-2 bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined text-primary text-sm">verified_user</span>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-widest">Institutional Integrity</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight leading-tight">
+                        Radical <span class="text-on-surface-variant italic font-light">Transparency.</span><br>
+                        Quantifiable <span class="text-primary relative inline-block">Impact.
+                            <svg class="absolute -bottom-2 left-0 w-full h-3 text-secondary-fixed" preserveAspectRatio="none" viewBox="0 0 100 12">
+<path d="M0,10 Q50,0 100,10" fill="none" stroke="currentColor" stroke-width="4" vector-effect="non-scaling-stroke"></path>
+</svg>
+</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                        We operate with the clinical precision of a financial institution. Every rupee is tracked, audited, and deployed for maximum societal yield. Your altruism, secured by statutory compliance.
+                    </p>
+</div>
+<!-- Animated Financial Counter Bento -->
+<div class="relative">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-fixed/20 to-transparent rounded-[2rem] transform rotate-3 scale-105 pointer-events-none"></div>
+<div class="bg-surface-white rounded-[2rem] p-8 shadow-[0_20px_40px_-10px_rgba(15,23,42,0.08)] relative z-10">
+<div class="grid grid-cols-2 gap-6">
+<div class="bg-surface-container-low rounded-2xl p-6 space-y-4">
+<span class="material-symbols-outlined text-secondary-container bg-secondary-fixed w-12 h-12 flex items-center justify-center rounded-xl">account_balance_wallet</span>
+<div>
+<h3 class="font-stat-lg text-stat-lg text-on-surface counter-element" data-target="94.2">94.2</h3>
+<span class="font-label-caps text-label-caps text-on-surface-variant">%</span>
+</div>
+<p class="font-body-base text-sm text-text-muted">Funds directly applied to programs</p>
+</div>
+<div class="bg-primary-container rounded-2xl p-6 space-y-4 text-on-primary-container">
+<span class="material-symbols-outlined text-tertiary-fixed bg-tertiary-container w-12 h-12 flex items-center justify-center rounded-xl">groups</span>
+<div>
+<h3 class="font-stat-lg text-stat-lg text-on-primary counter-element" data-target="142">142</h3>
+<span class="font-label-caps text-label-caps text-inverse-primary">K+</span>
+</div>
+<p class="font-body-base text-sm text-on-primary-container opacity-80">Lives impacted in FY23-24</p>
+</div>
+<div class="col-span-2 bg-surface-container-lowest rounded-2xl p-6 shadow-sm flex items-center justify-between border border-border-subtle">
+<div class="space-y-1">
+<p class="font-label-caps text-label-caps uppercase text-text-muted">Administrative Overhead</p>
+<div class="flex items-baseline gap-2">
+<span class="font-stat-lg text-headline-lg text-on-surface counter-element" data-target="5.8">5.8</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">%</span>
+</div>
+</div>
+<div class="w-1/2 h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full w-0 transition-all duration-1000 ease-out" id="admin-bar" style="width: 5.8%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Credentials Bento -->
+<section class="w-full bg-background py-section-gap-lg">
+<div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin-desktop">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+<div class="space-y-4 max-w-2xl">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Statutory Credentials</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Fully registered and compliant under the prevailing laws of the Government of India, ensuring absolute legitimacy for domestic and international donors.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- 80G Card -->
+<div class="bg-surface-white rounded-2xl p-8 shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow duration-300">
+<div class="space-y-6">
+<div class="w-16 h-16 bg-indigo-subdued rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container text-3xl" style="font-variation-settings: 'FILL' 1;">assured_workload</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">80G Certified</h3>
+<p class="font-body-base text-on-surface-variant">Donations are eligible for 50% tax deduction under Section 80G of the Income Tax Act, 1961.</p>
+</div>
+</div>
+<div class="pt-8 mt-auto flex items-center justify-between border-t border-border-subtle mt-6">
+<span class="font-label-caps text-label-caps text-text-muted">AAATD1234E</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- 12A Card -->
+<div class="bg-surface-white rounded-2xl p-8 shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow duration-300">
+<div class="space-y-6">
+<div class="w-16 h-16 bg-surface-container rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface text-3xl" style="font-variation-settings: 'FILL' 1;">gavel</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">12A Registered</h3>
+<p class="font-body-base text-on-surface-variant">Recognized as a charitable trust, ensuring all foundation income is exempt from tax, maximizing program impact.</p>
+</div>
+</div>
+<div class="pt-8 mt-auto flex items-center justify-between border-t border-border-subtle mt-6">
+<span class="font-label-caps text-label-caps text-text-muted">AAATD1234E12A</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- NITI Aayog Card -->
+<div class="bg-surface-white rounded-2xl p-8 shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow duration-300">
+<div class="space-y-6">
+<div class="w-16 h-16 bg-indigo-subdued rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container text-3xl" style="font-variation-settings: 'FILL' 1;">policy</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">NITI Aayog DARPAN</h3>
+<p class="font-body-base text-on-surface-variant">Registered on the NGO Darpan portal, facilitating transparent engagement with government ministries.</p>
+</div>
+</div>
+<div class="pt-8 mt-auto flex items-center justify-between border-t border-border-subtle mt-6">
+<span class="font-label-caps text-label-caps text-text-muted">WB/2023/1234567</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Document Repository -->
+<section class="w-full bg-surface-container-lowest py-section-gap-lg">
+<div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<div class="lg:col-span-4 space-y-8">
+<div class="sticky top-32">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Audited Reports</h2>
+<p class="font-body-base text-on-surface-variant mb-8">Access our annual financial statements, impact reports, and statutory filings. We believe in open-book operations.</p>
+<div class="bg-surface-container-low p-6 rounded-2xl">
+<h4 class="font-label-caps text-label-caps uppercase text-on-surface mb-2">Internal Audit Partner</h4>
+<p class="font-body-base text-on-surface-variant font-semibold">Ernst &amp; Young (EY) India</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-8 space-y-4">
+<!-- FY 23-24 -->
+<div class="bg-surface-white border border-border-subtle rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:bg-surface-bright transition-colors cursor-pointer group">
+<div class="flex items-center gap-6">
+<div class="w-14 h-14 bg-error-container text-on-error-container rounded-xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface text-lg">Annual Impact &amp; Financial Report</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-container px-2 py-1 rounded">FY 2023-24</span>
+<span class="font-body-base text-sm text-text-muted">4.2 MB • Audited</span>
+</div>
+</div>
+</div>
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-on-surface group-hover:bg-primary group-hover:text-on-primary group-hover:border-primary transition-all shrink-0">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<!-- FY 22-23 -->
+<div class="bg-surface-white border border-border-subtle rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:bg-surface-bright transition-colors cursor-pointer group">
+<div class="flex items-center gap-6">
+<div class="w-14 h-14 bg-error-container text-on-error-container rounded-xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface text-lg">Annual Impact &amp; Financial Report</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-container px-2 py-1 rounded">FY 2022-23</span>
+<span class="font-body-base text-sm text-text-muted">3.8 MB • Audited</span>
+</div>
+</div>
+</div>
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-on-surface group-hover:bg-primary group-hover:text-on-primary group-hover:border-primary transition-all shrink-0">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<!-- Trust Deed -->
+<div class="bg-surface-white border border-border-subtle rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:bg-surface-bright transition-colors cursor-pointer group">
+<div class="flex items-center gap-6">
+<div class="w-14 h-14 bg-primary-fixed text-on-primary-fixed rounded-xl flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface text-lg">Foundation Trust Deed</h4>
+<div class="flex items-center gap-3 mt-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-container px-2 py-1 rounded">Legal</span>
+<span class="font-body-base text-sm text-text-muted">1.1 MB • Registered</span>
+</div>
+</div>
+</div>
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center text-on-surface group-hover:bg-primary group-hover:text-on-primary group-hover:border-primary transition-all shrink-0">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Tax Calculator Interactive Section -->
+<section class="w-full bg-primary-container text-on-primary-container py-section-gap-lg relative overflow-hidden">
+<!-- Abstract Tech Pattern -->
+<svg class="absolute inset-0 w-full h-full opacity-10 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="40" id="gridPattern" patternUnits="userSpaceOnUse" width="40">
+<path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5"></path>
+</pattern>
+</defs>
+<rect fill="url(#gridPattern)" height="100%" width="100%"></rect>
+</svg>
+<div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin-desktop relative z-10">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-primary mb-4">Tax Optimization Simulator</h2>
+<p class="font-body-lg text-body-lg opacity-80">Understand how your contribution under Section 80G reduces your taxable income while maximizing social return on investment.</p>
+</div>
+<!-- Double Bezel Calculator Widget -->
+<div class="bg-surface/5 p-2 rounded-[2.5rem] max-w-4xl mx-auto border border-white/10 backdrop-blur-sm">
+<div class="bg-surface-white rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<!-- Input Side -->
+<div class="space-y-8">
+<div>
+<label class="font-label-caps text-label-caps text-text-muted uppercase mb-4 block">Select Donation Amount (₹)</label>
+<input class="w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer accent-secondary" id="donationSlider" max="1000000" min="10000" step="10000" type="range" value="100000">
+<div class="flex justify-between text-xs font-label-caps text-text-muted mt-2">
+<span class="">10K</span>
+<span class="">10L</span>
+</div>
+</div>
+<div class="p-6 bg-surface-bright rounded-2xl border border-border-subtle text-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase block mb-2">You Donate</span>
+<h3 class="font-display-lg text-headline-lg text-on-surface" id="donationAmountDisplay">₹ 1,00,000</h3>
+</div>
+</div>
+<!-- Output Side -->
+<div class="bg-primary-container rounded-2xl p-8 text-on-primary-container space-y-8">
+<div class="space-y-2">
+<span class="font-label-caps text-label-caps uppercase opacity-70">Tax Deduction Eligible (50%)</span>
+<h4 class="font-headline-lg text-headline-lg text-on-primary" id="deductionDisplay">₹ 50,000</h4>
+</div>
+<div class="h-px w-full bg-white/20"></div>
+<div class="space-y-4">
+<span class="font-label-caps text-label-caps uppercase text-tertiary-fixed">Projected Impact Return</span>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary-fixed text-3xl">school</span>
+<p class="font-body-lg text-body-lg text-on-primary font-medium" id="impactDisplay">Supports 10 students for a full academic year.</p>
+</div>
+</div>
+<button class="w-full py-4 bg-[#F59E0B] text-primary font-bold rounded-xl shadow-[0_10px_25px_-5px_rgba(245,158,11,0.3)] hover:-translate-y-0.5 transition-all">
+                                Commit Contribution
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Simple counter animation
+        const counters = document.querySelectorAll('.counter-element');
+        const adminBar = document.getElementById('admin-bar');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Animate numbers
+                    counters.forEach(counter => {
+                        const target = parseFloat(counter.getAttribute('data-target'));
+                        const duration = 2000;
+                        const steps = 60;
+                        const stepValue = target / steps;
+                        let current = 0;
+                        
+                        const updateCounter = setInterval(() => {
+                            current += stepValue;
+                            if (current >= target) {
+                                counter.textContent = target % 1 !== 0 ? target.toFixed(1) : target;
+                                clearInterval(updateCounter);
+                            } else {
+                                counter.textContent = target % 1 !== 0 ? current.toFixed(1) : Math.floor(current);
+                            }
+                        }, duration / steps);
+                    });
+
+                    // Animate progress bar
+                    if(adminBar) {
+                        setTimeout(() => {
+                            adminBar.style.width = '5.8%';
+                        }, 500);
+                    }
+                    
+                    observer.disconnect();
+                }
+            });
+        });
+
+        const section = document.querySelector('.counter-element').closest('section');
+        if(section) observer.observe(section);
+
+        // Tax Calculator Logic
+        const slider = document.getElementById('donationSlider');
+        const amountDisplay = document.getElementById('donationAmountDisplay');
+        const deductionDisplay = document.getElementById('deductionDisplay');
+        const impactDisplay = document.getElementById('impactDisplay');
+
+        const formatCurrency = (val) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(val);
+
+        slider.addEventListener('input', (e) => {
+            const val = parseInt(e.target.value);
+            amountDisplay.textContent = formatCurrency(val);
+            deductionDisplay.textContent = formatCurrency(val * 0.5);
+            
+            // Simple impact logic mapping
+            let students = Math.floor(val / 10000);
+            impactDisplay.textContent = `Supports ${students} student${students > 1 ? 's' : ''} for a full academic year.`;
+        });
+    });
+</script></main><footer class="w-full bg-surface-container-low text-on-surface py-section-gap-sm lg:py-16 border-t border-border-subtle"><div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin-desktop"><div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12"><div class="space-y-4"><div class="flex items-center gap-3"><img alt="TMF" class="h-8" src="https://lh3.googleusercontent.com/aida/AEtjO1XW1YOtP1G4JLp9W11GFcO8wpMQqW7hsV4OsTh396hu94mAS4knuq6RzD-0ES7rJ98ykBEHtPUvzoHj9XrxyLfZy9v0k6u-mR1mxbDLJE66mWq_2ZYpm4SicdstqV8UyXWXcK3Qu-aaD8ZlwqP4bc_ICAJzVR4MnxJXFMfhmVWd1xg9fAasGomwhGklXbyXStFx_4UTMpiGFrGZfVb_KUqJzgId2yhVUpwnG4Wj2F8ghGzXwj3cOMQGTBI"> <span class="font-headline-md text-headline-md">TMF</span></div><p class="text-on-surface-variant text-sm max-w-xs opacity-80">Empowering lives through institutional altruism and modern technological intervention.</p></div><div class="space-y-4"><h4 class="font-label-caps text-label-caps uppercase text-primary">Legal Credentials</h4><div class="font-label-caps text-sm space-y-2 text-on-surface-variant"><p class="">DARPAN ID: WB/2023/1234567</p><p class="">Reg No: IV-1903000</p></div></div><div class="space-y-4"><h4 class="font-label-caps text-label-caps uppercase text-primary">Connect</h4><div class="flex gap-4"><span class="material-symbols-outlined cursor-pointer transition-colors hover:text-primary">public</span><span class="material-symbols-outlined cursor-pointer transition-colors hover:text-primary">mail</span><span class="material-symbols-outlined cursor-pointer transition-colors hover:text-primary">share</span></div></div></div><div class="pt-8 border-t border-border-subtle flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-label-caps text-on-surface-variant"><div class="">© 2024 Tribeni Minati Foundation. All rights reserved.</div><div class="flex gap-8"><a class="hover:text-primary transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a><a class="hover:text-primary transition-colors" data-path="terms-of-use" href="#">Terms of Use</a></div></div></div></footer><div class="fixed bottom-6 right-6 lg:hidden z-50"><a class="px-8 py-4 bg-[#F59E0B] text-primary font-bold rounded-full shadow-lg flex items-center gap-2" href="#">Donate Now (80G Tax Saved)</a></div>
+
+</body></html>

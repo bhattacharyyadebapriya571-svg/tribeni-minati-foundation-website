@@ -106,7 +106,7 @@ export const Nav: React.FC<NavProps> = ({
             onClick={() => onNavigate('home')}
             className="flex items-center gap-3.5 group text-left cursor-pointer py-1"
           >
-            <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white border-2 border-amber-900/15 p-1.5 flex items-center justify-center shadow-md group-hover:scale-105 group-hover:border-[#1B3B2B] transition-all duration-300">
+            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white border border-border-subtle p-1 flex items-center justify-center shadow-md group-hover:scale-105 group-hover:border-[#4b41e1] transition-all duration-300">
               <img
                 src="/tmf-assets/minati-badges/tmf-circular-emblem.png"
                 alt="Tribeni Minati Foundation Seal"
@@ -114,13 +114,13 @@ export const Nav: React.FC<NavProps> = ({
               />
             </div>
             <div className="flex flex-col justify-center">
-              <div className="font-['DM_Serif_Display'] text-xl sm:text-2xl font-bold leading-none text-[#151C18] group-hover:text-[#1B3B2B] transition-colors tracking-tight">
-                Tribeni Minati Foundation
+              <div className="font-['Plus_Jakarta_Sans'] text-xl sm:text-2xl font-extrabold leading-none text-[#191c1e] group-hover:text-[#4b41e1] transition-colors tracking-tight">
+                Tribeni Minati
               </div>
-              <div className="text-xs sm:text-sm text-amber-900 font-['Hind_Siliguri'] font-bold tracking-wide flex items-center gap-2 mt-1">
+              <div className="text-xs sm:text-sm text-[#4b41e1] font-['Hind_Siliguri'] font-bold tracking-wide flex items-center gap-2 mt-1">
                 <span>ত্রিবেনী মিনতি ফাউন্ডেশন</span>
                 <span className="text-slate-400 font-mono">·</span>
-                <span className="font-mono text-[10px] text-emerald-800 bg-emerald-50 px-1.5 py-0.2 rounded-sm border border-emerald-200">Reg: SO212276</span>
+                <span className="font-mono text-[10px] text-indigo-900 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-100 font-bold">Reg: SO212276</span>
               </div>
             </div>
           </button>
@@ -346,21 +346,14 @@ export const Nav: React.FC<NavProps> = ({
             )}
 
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.03, y: -1 }}
               whileTap={{ scale: 0.97 }}
               transition={SPRING}
               onClick={onOpenDonate}
-              className="inline-flex items-center gap-2.5 pl-4 pr-1.5 py-1.5 rounded-full bg-[#1B3B2B] hover:bg-[#26533D] text-white text-xs font-bold uppercase tracking-wider shadow-md shadow-[#1B3B2B]/20 transition-all cursor-pointer group"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#F59E0B] hover:bg-[#D97706] text-[#111827] text-xs font-bold uppercase tracking-wider shadow-[0_10px_25px_-5px_rgba(245,158,11,0.35)] transition-all cursor-pointer group"
             >
-              <div className="text-left">
-                <div>Support Us</div>
-                <div className="text-[9px] text-amber-300 font-normal lowercase tracking-normal">
-                  80G tax benefit
-                </div>
-              </div>
-              <div className="btn-nested-icon">
-                <Heart className="w-3.5 h-3.5 fill-white text-white" />
-              </div>
+              <Heart className="w-3.5 h-3.5 fill-[#111827] text-[#111827] group-hover:scale-110 transition-transform" />
+              <span>Donate Now (80G)</span>
             </motion.button>
 
             {/* Mobile Hamburger Toggle */}

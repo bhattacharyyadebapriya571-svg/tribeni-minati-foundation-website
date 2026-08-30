@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}@font-face{font-family:'Plus Jakarta Sans';src:url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');}@font-face{font-family:'Inter';src:url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');}@font-face{font-family:'JetBrains Mono';src:url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap');}
+.reveal { opacity: 0; transform: translateY(30px) scale(0.98); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.active { opacity: 1; transform: translateY(0) scale(1); }
+.stagger-1 { transition-delay: 100ms; }
+.stagger-2 { transition-delay: 200ms; }
+.stagger-3 { transition-delay: 300ms; }
+.stagger-4 { transition-delay: 400ms; }
+.stagger-5 { transition-delay: 500ms; }
+.stagger-6 { transition-delay: 600ms; }
+</style><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={theme:{extend:{"colors":{"on-primary-container":"#7c839b","tertiary-container":"#2a1700","secondary-fixed-dim":"#c3c0ff","on-secondary-container":"#fffbff","background":"#f7f9fb","on-background":"#191c1e","surface-container-low":"#f2f4f6","on-primary":"#ffffff","on-tertiary-fixed":"#2a1700","on-primary-fixed-variant":"#3f465c","inverse-surface":"#2d3133","on-secondary-fixed":"#0f0069","error":"#ba1a1a","primary":"#000000","secondary-container":"#645efb","on-error-container":"#93000a","on-tertiary-container":"#b87500","surface-container":"#eceef0","surface-dim":"#d8dadc","primary-fixed":"#dae2fd","error-container":"#ffdad6","inverse-primary":"#bec6e0","surface-white":"#FFFFFF","secondary":"#4b41e1","text-muted":"#64748B","primary-fixed-dim":"#bec6e0","tertiary-fixed-dim":"#ffb95f","inverse-on-surface":"#eff1f3","secondary-fixed":"#e2dfff","surface-tint":"#565e74","on-primary-fixed":"#131b2e","on-secondary-fixed-variant":"#3323cc","on-tertiary":"#ffffff","indigo-subdued":"#EEF2FF","tertiary":"#000000","surface-container-lowest":"#ffffff","on-surface":"#191c1e","outline-variant":"#c6c6cd","on-surface-variant":"#45464d","on-secondary":"#ffffff","border-subtle":"rgba(15, 23, 42, 0.08)","outline":"#76777d","surface-container-highest":"#e0e3e5","tertiary-fixed":"#ffddb8","surface":"#f7f9fb","surface-container-high":"#e6e8ea","on-error":"#ffffff","primary-container":"#131b2e","on-tertiary-fixed-variant":"#653e00","surface-variant":"#e0e3e5","surface-bright":"#f7f9fb"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"section-gap-sm":"64px","unit":"4px","margin-mobile":"16px","margin-desktop":"32px","gutter":"24px","section-gap-lg":"128px"},"fontFamily":{"label-caps":["JetBrains Mono"],"display-lg-mobile":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"body-base":["Inter"],"body-lg":["Inter"],"stat-lg":["JetBrains Mono"],"display-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"]},"fontSize":{"label-caps":["12px",{"lineHeight":"16px","letterSpacing":"0.08em","fontWeight":"700"}],"display-lg-mobile":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"800"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"700"}],"body-base":["16px",{"lineHeight":"24px","fontWeight":"400"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"stat-lg":["36px",{"lineHeight":"44px","fontWeight":"700"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"800"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}]}}}}</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach((el) => {
+        observer.observe(el);
+    });
+});
+</script>
+</head><body class="bg-background font-body-base text-on-background relative">
+<div class="fixed inset-0 z-[-1] pointer-events-none opacity-20 bg-gradient-to-br from-indigo-100 via-transparent to-blue-50">
+<!-- WebGL Shader Background would go here if available. Fallback gradient applied. -->
+</div>
+<header class="fixed top-0 w-full z-50 bg-surface-white/70 backdrop-blur-2xl shadow-[0_1px_8px_rgba(15,23,42,0.04)] border-b border-white/20 transition-all duration-300">
+<div class="h-20 max-w-[1280px] mx-auto px-margin-desktop flex items-center justify-between"><div class="flex items-center gap-4"><img alt="Tribeni Minati Foundation" class="h-8 w-auto object-contain hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida/AEtjO1XW1YOtP1G4JLp9W11GFcO8wpMQqW7hsV4OsTh396hu94mAS4knuq6RzD-0ES7rJ98ykBEHtPUvzoHj9XrxyLfZy9v0k6u-mR1mxbDLJE66mWq_2ZYpm4SicdstqV8UyXWXcK3Qu-aaD8ZlwqP4bc_ICAJzVR4MnxJXFMfhmVWd1xg9fAasGomwhGklXbyXStFx_4UTMpiGFrGZfVb_KUqJzgId2yhVUpwnG4Wj2F8ghGzXwj3cOMQGTBI"><span class="font-headline-md text-headline-md text-primary tracking-tight">Tribeni Minati</span></div><nav class="hidden lg:flex items-center gap-10" data-active-classes="text-secondary font-semibold"><a class="text-body-base text-on-surface-variant hover:text-primary hover:-translate-y-0.5 transition-all" data-path="about-minati" href="#">About M-I-N-A-T-I</a><a class="text-body-base text-on-surface-variant hover:text-primary hover:-translate-y-0.5 transition-all" data-path="initiatives" href="#">Initiatives</a><a class="text-body-base text-on-surface-variant hover:text-primary hover:-translate-y-0.5 transition-all" data-path="transparency" href="#">Transparency</a><a class="text-body-base text-on-surface-variant hover:text-primary hover:-translate-y-0.5 transition-all" data-path="contact" href="#">Contact</a></nav><div class="flex items-center gap-6"><button class="hidden md:flex items-center px-6 py-3 bg-[#F59E0B] text-primary-container font-bold rounded-2xl shadow-[0_10px_25px_-5px_rgba(245,158,11,0.3)] hover:-translate-y-1 hover:shadow-[0_15px_30px_-5px_rgba(245,158,11,0.4)] hover:scale-105 transition-all duration-300 active:scale-95">Donate Now (80G Tax Exemption)</button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center hover:scale-110 transition-transform cursor-pointer shadow-lg hover:shadow-xl"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 relative bg-transparent"><div class="flex flex-col w-full">
+<!-- Hero Section -->
+<section class="relative w-full overflow-hidden pb-section-gap-sm lg:pb-section-gap-lg pt-16 lg:pt-24 reveal active">
+<div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-gutter items-center">
+<!-- Left Content -->
+<div class="lg:col-span-6 flex flex-col gap-6 reveal stagger-1 active">
+<div class="inline-flex items-center gap-2 px-4 py-2 bg-surface-white/80 backdrop-blur-md rounded-full border border-border-subtle shadow-sm w-max hover:shadow-md transition-shadow">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Govt. Reg: IV-1903000 | 80G Certified</span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface tracking-tight leading-tight">
+            Empowering Lives with <span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-container bg-300% animate-gradient">Dignity, Education &amp; Care.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mt-2 text-balance">
+            Institutional altruism driven by statutory transparency and emotional commitment. Join us in creating sustainable impact across rural India.
+          </p>
+<div class="flex flex-col sm:flex-row items-center gap-4 mt-6">
+<button class="w-full sm:w-auto px-8 py-4 bg-[#F59E0B] text-primary-container font-bold rounded-2xl shadow-[0_10px_25px_-5px_rgba(245,158,11,0.3)] hover:-translate-y-1 hover:shadow-[0_20px_35px_-5px_rgba(245,158,11,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 group">
+              Support Our Cause
+              <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-300">arrow_forward</span>
+</button>
+<button class="w-full sm:w-auto px-8 py-4 bg-surface-white/50 backdrop-blur-md border border-outline-variant/50 text-on-surface font-semibold rounded-2xl hover:bg-surface-white hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              Explore Work
+            </button>
+</div>
+</div>
+<!-- Right Image -->
+<div class="lg:col-span-6 relative reveal stagger-2 active">
+<div class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] bg-surface-container-low p-2 group hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.15)] transition-all duration-500 transform hover:-translate-y-2">
+<img alt="Free Child Remedial Education Center" class="w-full h-full object-cover rounded-[1.5rem] mix-blend-multiply group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AEtjO1XqbeQOHxdwSwdzveIr2nvAjJojtGjlpBSQjjZQk44CHGA0FEahoQJFbtatgjntviJV85_yIIPi004c4XlW0IDKvgpfxyc22SCToTiTYQdYZjtfYABQjjhksGvJkPZzrqHeQfg8kxEwGURTbUsXQILtA0IKR-72louBkhLc4pXwtlVMvUPPCx1ZYSFL1VAevd5YtxcJFkSPWpM-GgcdGEXN2eV_VkK4swoMW8-37e1q2yIBxyXm1I6Peg">
+<div class="absolute inset-0 rounded-[1.5rem] ring-1 ring-inset ring-black/10 pointer-events-none"></div>
+<!-- Decorative badge -->
+<div class="absolute bottom-8 -left-8 bg-surface-white/80 backdrop-blur-xl p-4 rounded-2xl shadow-2xl border border-white/50 flex items-center gap-4 transform hover:scale-110 hover:-translate-y-2 transition-all duration-300 cursor-default">
+<div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary animate-bounce">school</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Focus Area</p>
+<p class="font-headline-md text-body-base font-bold text-on-surface">Child Education</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Impact Metrics (Floating Card) -->
+<section class="relative w-full z-20 -mt-12 lg:-mt-24 mb-section-gap-sm lg:mb-section-gap-lg reveal stagger-3 active">
+<div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="bg-surface-white/60 backdrop-blur-2xl rounded-3xl shadow-[0_20px_40px_-15px_rgba(15,23,42,0.1)] border border-white/50 p-8 md:p-12 hover:shadow-[0_30px_60px_-15px_rgba(15,23,42,0.15)] transition-shadow duration-500">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 divide-y md:divide-y-0 md:divide-x divide-surface-container-highest/50">
+<div class="flex flex-col gap-2 pt-4 md:pt-0 px-4 group">
+<h3 class="font-stat-lg text-stat-lg text-primary group-hover:scale-110 origin-left transition-transform duration-300">500+</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Children Coached</p>
+</div>
+<div class="flex flex-col gap-2 pt-4 md:pt-0 px-4 group">
+<h3 class="font-stat-lg text-stat-lg text-primary group-hover:scale-110 origin-left transition-transform duration-300">1,200+</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Relief Kits Distributed</p>
+</div>
+<div class="flex flex-col gap-2 pt-4 md:pt-0 px-4 group">
+<h3 class="font-stat-lg text-stat-lg text-secondary group-hover:scale-110 origin-left transition-transform duration-300">100%</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Tax Exempt (80G)</p>
+</div>
+<div class="flex flex-col gap-2 pt-4 md:pt-0 px-4 group">
+<h3 class="font-stat-lg text-stat-lg text-primary group-hover:scale-110 origin-left transition-transform duration-300">10+</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Years Ground Service</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- M-I-N-A-T-I Framework -->
+<section class="w-full py-section-gap-sm lg:py-section-gap-lg bg-surface-container-low/50 backdrop-blur-sm reveal active">
+<div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="mb-16 md:w-2/3 reveal active">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Our Guiding Pillars</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant text-balance">The M-I-N-A-T-I framework dictates our operational focus, ensuring resources are directed where they create the most profound impact.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Minorities -->
+<div class="bg-surface-white/80 backdrop-blur-md p-8 rounded-2xl shadow-sm border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group reveal stagger-1 active">
+<div class="w-14 h-14 rounded-xl bg-indigo-subdued flex items-center justify-center mb-6 text-secondary group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Minorities</h3>
+<p class="font-body-base text-body-base text-on-surface-variant">Empowering marginalized communities through dedicated resource allocation.</p>
+</div>
+<!-- Illiterate -->
+<div class="bg-surface-white/80 backdrop-blur-md p-8 rounded-2xl shadow-sm border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group reveal stagger-2 active">
+<div class="w-14 h-14 rounded-xl bg-indigo-subdued flex items-center justify-center mb-6 text-secondary group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Illiterate</h3>
+<p class="font-body-base text-body-base text-on-surface-variant">Bridging the educational divide with remedial learning centers.</p>
+</div>
+<!-- Needy -->
+<div class="bg-surface-white/80 backdrop-blur-md p-8 rounded-2xl shadow-sm border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group reveal stagger-3 active">
+<div class="w-14 h-14 rounded-xl bg-indigo-subdued flex items-center justify-center mb-6 text-secondary group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Needy</h3>
+<p class="font-body-base text-body-base text-on-surface-variant">Providing essential relief kits and nutritional support to those in crisis.</p>
+</div>
+<!-- Abused -->
+<div class="bg-surface-white/80 backdrop-blur-md p-8 rounded-2xl shadow-sm border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group reveal stagger-4 active">
+<div class="w-14 h-14 rounded-xl bg-indigo-subdued flex items-center justify-center mb-6 text-secondary group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Abused</h3>
+<p class="font-body-base text-body-base text-on-surface-variant">Creating safe spaces and offering rehabilitation and legal guidance.</p>
+</div>
+<!-- Tribal -->
+<div class="bg-surface-white/80 backdrop-blur-md p-8 rounded-2xl shadow-sm border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group reveal stagger-5 active">
+<div class="w-14 h-14 rounded-xl bg-indigo-subdued flex items-center justify-center mb-6 text-secondary group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">nature_people</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Tribal</h3>
+<p class="font-body-base text-body-base text-on-surface-variant">Supporting indigenous populations with healthcare and livelihood programs.</p>
+</div>
+<!-- Indians -->
+<div class="bg-surface-white/80 backdrop-blur-md p-8 rounded-2xl shadow-sm border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group reveal stagger-6 active">
+<div class="w-14 h-14 rounded-xl bg-indigo-subdued flex items-center justify-center mb-6 text-secondary group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">public</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Indians</h3>
+<p class="font-body-base text-body-base text-on-surface-variant">Fostering a sense of national unity and collective progress across regions.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Core Initiatives -->
+<section class="w-full py-section-gap-sm lg:py-section-gap-lg bg-transparent reveal active">
+<div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 reveal active">
+<div class="max-w-2xl">
+<span class="font-label-caps text-label-caps text-secondary tracking-widest uppercase mb-4 block">Action on the ground</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Core Initiatives</h2>
+</div>
+<button class="flex items-center gap-2 text-secondary font-semibold hover:text-secondary-container transition-colors group px-4 py-2 rounded-xl hover:bg-secondary/5">
+          View all reports <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Initiative 1 -->
+<div class="group flex flex-col gap-6 cursor-pointer reveal stagger-1 active">
+<div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-surface-container shadow-md group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2">
+<img alt="Classroom with children" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AEtjO1XqbeQOHxdwSwdzveIr2nvAjJojtGjlpBSQjjZQk44CHGA0FEahoQJFbtatgjntviJV85_yIIPi004c4XlW0IDKvgpfxyc22SCToTiTYQdYZjtfYABQjjhksGvJkPZzrqHeQfg8kxEwGURTbUsXQILtA0IKR-72louBkhLc4pXwtlVMvUPPCx1ZYSFL1VAevd5YtxcJFkSPWpM-GgcdGEXN2eV_VkK4swoMW8-37e1q2yIBxyXm1I6Peg">
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+</div>
+<div>
+<h3 class="font-headline-md text-body-lg font-bold text-on-surface mb-2 group-hover:text-secondary transition-colors duration-300">Free Child Remedial Education Center</h3>
+<p class="font-body-base text-body-base text-on-surface-variant line-clamp-2">Providing supplemental education to underprivileged children to ensure they stay on track with their academic goals.</p>
+</div>
+</div>
+<!-- Initiative 2 -->
+<div class="group flex flex-col gap-6 cursor-pointer reveal stagger-2 active">
+<div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-surface-container shadow-md group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2">
+<img alt="Distributing winter essentials" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AEtjO1UnYs9ZEXp7qK_C7LDxZgxV6LFpWYxZk8STOqoXcyCcyn2bL9YhBJjk9N1CkHh_o9YyerY7lxjOFA3PrSPqQloDGNPIK2R9KNh2emQaabg4QA3cW1O7ynf9Yh1T5JLhyBAWMAIARYDY9ex8G9vSlCj3N3vakPj5moVgH__d7kTyPrEByAQXl54RFTGo2b9JoaIAFYn5i2jiE2p60qglxWsUrLAQD9ah8UVoqx6BIKwuMJ2wyTi7GXt_DxY">
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+</div>
+<div>
+<h3 class="font-headline-md text-body-lg font-bold text-on-surface mb-2 group-hover:text-secondary transition-colors duration-300">Infant Winter Bedding &amp; Essentials Drive</h3>
+<p class="font-body-base text-body-base text-on-surface-variant line-clamp-2">Protecting vulnerable infants from harsh winters by distributing specialized bedding and warm clothing.</p>
+</div>
+</div>
+<!-- Initiative 3 -->
+<div class="group flex flex-col gap-6 cursor-pointer reveal stagger-3 active">
+<div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-surface-container shadow-md group-hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2">
+<img alt="Rural healthcare camp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AEtjO1Wl0J0nt_IMplBDid2JYTe4iRRXvURNXjOUPRx6SSuMYcEJKheZaRiGUHTk55DpbIalfuzTroWX49qrf-IGDIaeYlEhKSBTB9xDlw7GfJDInx2HkEBoXmcnTGGpQHYNC3utVLWoICR1Ab-SHhbY7tcQpXGxeHt7bnFinRUJvJBhAJlYhjvB9kw9fHa4UOdrqi6lUnb44WKIhy7MjsrAqKOT4QNBK21rCfB8NRZ_BnexplX9GeORv6aPNZk">
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+</div>
+<div>
+<h3 class="font-headline-md text-body-lg font-bold text-on-surface mb-2 group-hover:text-secondary transition-colors duration-300">Rural Healthcare &amp; Nutrition Support</h3>
+<p class="font-body-base text-body-base text-on-surface-variant line-clamp-2">Organizing medical camps and providing nutritional supplements to communities lacking basic healthcare access.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full py-16 border-t border-border-subtle relative z-10 bg-surface-white text-primary"><div class="max-w-[1280px] mx-auto px-margin-desktop"><div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12"><div class="md:col-span-4 reveal active"><img alt="Logo" class="h-10 w-auto object-contain mb-6 hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida/AEtjO1XW1YOtP1G4JLp9W11GFcO8wpMQqW7hsV4OsTh396hu94mAS4knuq6RzD-0ES7rJ98ykBEHtPUvzoHj9XrxyLfZy9v0k6u-mR1mxbDLJE66mWq_2ZYpm4SicdstqV8UyXWXcK3Qu-aaD8ZlwqP4bc_ICAJzVR4MnxJXFMfhmVWd1xg9fAasGomwhGklXbyXStFx_4UTMpiGFrGZfVb_KUqJzgId2yhVUpwnG4Wj2F8ghGzXwj3cOMQGTBI"><p class="text-body-base mb-6 text-balance text-primary">Institutional altruism driven by statutory transparency and emotional commitment.</p><div class="flex gap-4"><span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary hover:-translate-y-1 transition-all duration-300">qr_code_2</span><span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary hover:-translate-y-1 transition-all duration-300">language</span><span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary hover:-translate-y-1 transition-all duration-300">mail</span></div></div><div class="md:col-span-8 flex flex-col md:flex-row justify-end gap-16 md:gap-32 text-right reveal stagger-2 active"><div class="flex flex-col gap-4"><span class="font-label-caps text-label-caps text-on-surface font-bold">Statutory Info</span><p class="font-label-caps text-label-caps text-primary">DARPAN ID: WB/2023/1234567</p><p class="font-label-caps text-label-caps text-primary">Reg No: IV-1903000</p></div><div class="flex flex-col gap-4"><span class="font-label-caps text-label-caps text-on-surface font-bold">Legal</span><a class="text-body-base text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a><a class="text-body-base text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Use</a></div></div></div><div class="border-t border-border-subtle pt-8 text-center text-label-caps reveal stagger-3 active text-primary">© 2024 Tribeni Minati Foundation. All donations are 80G tax-exempt in India.</div></div></footer>
+
+
+
+</body></html>
