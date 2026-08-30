@@ -1,19 +1,5 @@
 import React from 'react';
 import { PILLARS_DATA } from '../data/foundationData';
-import {
-  Activity,
-  GraduationCap,
-  Users,
-  Sprout,
-  Truck,
-  ShieldAlert,
-  ArrowLeft,
-  CheckCircle2,
-  Heart,
-  Building2,
-} from 'lucide-react';
-import { Pillars } from '../components/Pillars';
-import { SDGSection } from '../components/SDGSection';
 import type { PageId } from '../types';
 
 interface ProgramDetailPageProps {
@@ -24,12 +10,13 @@ interface ProgramDetailPageProps {
 }
 
 const PROGRAM_PHOTOS: Record<string, string> = {
-  education: '/tmf-assets/5.jpg',
-  'women-empowerment': '/tmf-assets/3.jpg',
-  healthcare: '/tmf-assets/WhatsApp Image 2026-08-26 at 1.00.50 PM.jpeg',
-  'livelihood-farming': '/tmf-assets/4.jpg',
-  'green-transit': '/tmf-assets/WhatsApp Image 2026-08-26 at 12.43.19 PM.jpeg',
-  'disaster-relief': '/tmf-assets/WhatsApp Image 2026-08-26 at 1.00.48 PM (1).jpeg',
+  education: '/tmf-assets/real-field-photos/tmf-field-1.jpeg',
+  'women-empowerment': '/tmf-assets/real-field-photos/tmf-field-18.jpeg',
+  healthcare: '/tmf-assets/real-field-photos/tmf-field-22.jpeg',
+  'winter-relief': '/tmf-assets/real-field-photos/tmf-field-14.jpeg',
+  'livelihood-farming': '/tmf-assets/real-field-photos/tmf-field-19.jpeg',
+  'green-transit': '/tmf-assets/real-field-photos/tmf-field-10.jpeg',
+  'disaster-relief': '/tmf-assets/real-field-photos/tmf-field-15.jpeg',
 };
 
 export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({
@@ -39,135 +26,121 @@ export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({
   onOpenPartner,
 }) => {
   const program = PILLARS_DATA.find((p) => p.id === programId) || PILLARS_DATA[0];
-
-  const getIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Activity':
-        return <Activity className="w-8 h-8 text-rose-600" />;
-      case 'GraduationCap':
-        return <GraduationCap className="w-8 h-8 text-blue-600" />;
-      case 'Users':
-        return <Users className="w-8 h-8 text-amber-600" />;
-      case 'Sprout':
-        return <Sprout className="w-8 h-8 text-emerald-600" />;
-      case 'Truck':
-        return <Truck className="w-8 h-8 text-cyan-600" />;
-      case 'ShieldAlert':
-        return <ShieldAlert className="w-8 h-8 text-indigo-600" />;
-      default:
-        return <Activity className="w-8 h-8 text-blue-600" />;
-    }
-  };
-
-  const photo = PROGRAM_PHOTOS[program.id] || '/tmf-assets/5.jpg';
+  const photo = PROGRAM_PHOTOS[program.id] || '/tmf-assets/real-field-photos/tmf-field-1.jpeg';
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 pt-24 pb-24">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-        {/* Breadcrumb Back */}
+    <div className="w-full pt-20 bg-[#f7f9fb] min-h-screen text-[#191c1e]">
+      
+      {/* Hero Header with Double-Bezel Image */}
+      <section className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pt-16 pb-12">
         <button
           onClick={() => onNavigate('programs')}
-          className="inline-flex items-center gap-2 text-xs font-bold text-blue-700 hover:underline cursor-pointer mb-6"
+          className="inline-flex items-center gap-2 text-xs font-bold text-[#4b41e1] hover:underline cursor-pointer mb-8"
         >
-          <ArrowLeft className="w-4 h-4" />
-          Back to All 6 Programmes
+          <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+          <span>Back to All Core Initiatives</span>
         </button>
 
-        {/* Hero Program Card with Light Theme */}
-        <div className="rounded-[2.5rem] bg-white border border-slate-200 shadow-xl overflow-hidden mb-16">
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-center p-8 sm:p-12">
-            <div className="space-y-6">
-              <div className="flex items-center gap-3">
-                <div className="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center shadow-xs">
-                  {getIcon(program.iconName)}
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
-                    {program.tag}
-                  </span>
-                  <div className="text-xs font-semibold text-amber-700 mt-1">
-                    {program.subtitle}
-                  </div>
-                </div>
-              </div>
-
-              <h1 className="font-['DM_Serif_Display'] text-3xl sm:text-5xl text-slate-900 leading-tight">
-                {program.title}
-              </h1>
-
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                {program.body}
-              </p>
-
-              {/* Highlights */}
-              <div className="space-y-2 pt-2">
-                <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                  Key Deliverables & Objectives:
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  {program.highlights.map((item: string, idx: number) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100"
-                    >
-                      <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-100">
-                <button
-                  onClick={() => onOpenDonate(5000, `Pillar: ${program.title}`)}
-                  className="px-6 py-3.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-blue-500/25 flex items-center gap-2 cursor-pointer transition-all"
-                >
-                  <Heart className="w-4 h-4 fill-white/20" />
-                  <span>Sponsor This Pillar</span>
-                </button>
-
-                <button
-                  onClick={onOpenPartner}
-                  className="px-6 py-3.5 rounded-full bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 font-bold text-xs uppercase tracking-wider flex items-center gap-2 cursor-pointer transition-colors"
-                >
-                  <Building2 className="w-4 h-4" />
-                  <span>CSR Partnership</span>
-                </button>
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div className="lg:col-span-6 space-y-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 text-[#4b41e1] rounded-full text-xs font-bold font-label-caps uppercase tracking-wider">
+              <span className="material-symbols-outlined text-[16px]">verified</span>
+              <span>{program.tag || 'Verified Grassroots Initiative'}</span>
             </div>
 
-            {/* Right Photo */}
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-slate-900 shadow-lg">
-              <img
-                src={photo}
-                alt={program.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <div className="font-['DM_Serif_Display'] text-3xl">
-                  {program.metrics[0]?.value || '10,000+'}
-                </div>
-                <div className="text-xs text-slate-300 mt-0.5">
-                  {program.metrics[0]?.label || 'Impact Deliverable'}
+            <h1 className="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-[#191c1e] tracking-tight leading-tight">
+              {program.title}
+            </h1>
+
+            <p className="font-body-lg text-base sm:text-lg text-[#45464d] leading-relaxed">
+              {program.longDescription || program.body}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <button
+                onClick={() => onOpenDonate(5000, `Support Programme: ${program.title}`)}
+                className="px-8 py-4 bg-[#F59E0B] text-[#111827] font-extrabold rounded-2xl shadow-[0_10px_25px_-5px_rgba(245,158,11,0.3)] hover:-translate-y-1 transition-all cursor-pointer text-xs uppercase tracking-wider"
+              >
+                Sponsor This Cause (80G)
+              </button>
+              <button
+                onClick={onOpenPartner}
+                className="px-6 py-4 bg-white border border-border-subtle rounded-2xl font-bold text-xs uppercase tracking-wider text-[#191c1e] hover:bg-slate-50 transition-all shadow-xs cursor-pointer"
+              >
+                Corporate CSR RFP
+              </button>
+            </div>
+          </div>
+
+          <div className="lg:col-span-6">
+            <div className="bg-[#f2f4f6] p-2 rounded-[32px] shadow-lg">
+              <div className="relative aspect-[4/3] rounded-[24px] overflow-hidden bg-slate-100">
+                <img
+                  src={photo}
+                  alt={program.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-mono font-bold text-[#191c1e]">
+                  Hooghly, West Bengal Ground Deployment
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* All 6 Pillars Grid for Direct Switching */}
-        <Pillars
-          onSelectPillar={(p) => onNavigate('program', p.id)}
-          onOpenDonate={(amt) => onOpenDonate(amt, 'Selected Pillar')}
-        />
-
-        {/* UN SDG Goals Alignment */}
-        <div className="mt-16">
-          <SDGSection />
         </div>
-      </div>
+      </section>
+
+      {/* Program Deliverables & Highlights */}
+      <section className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pb-24">
+        <div className="bg-white rounded-[32px] p-8 sm:p-12 border border-border-subtle shadow-sm space-y-12">
+          
+          {/* Key Milestones / Highlights */}
+          {program.highlights && program.highlights.length > 0 && (
+            <div>
+              <h2 className="font-headline-lg text-2xl sm:text-3xl font-bold text-[#191c1e] mb-6">
+                Program Deliverables &amp; Methodology
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {program.highlights.map((pt, i) => (
+                  <div key={i} className="flex items-start gap-4 p-4 rounded-2xl bg-[#f7f9fb] border border-border-subtle">
+                    <div className="w-8 h-8 rounded-full bg-indigo-50 text-[#4b41e1] flex items-center justify-center shrink-0 mt-0.5">
+                      <span className="material-symbols-outlined text-[18px]">check</span>
+                    </div>
+                    <span className="font-body-base text-sm text-[#191c1e] leading-relaxed">
+                      {pt}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Action Callout */}
+          <div className="p-8 rounded-3xl bg-[#131b2e] text-white flex flex-col lg:flex-row justify-between items-center gap-8">
+            <div className="space-y-2 text-center lg:text-left">
+              <span className="font-label-caps text-xs text-amber-300 uppercase font-bold tracking-wider">
+                100% Tax Exemption
+              </span>
+              <h3 className="font-headline-lg text-2xl font-bold text-white">
+                Support {program.title}
+              </h3>
+              <p className="text-slate-300 text-sm max-w-xl">
+                Every rupee is directly applied to field logistics, verified books, medical equipment, and beneficiary welfare under 80G statutory monitoring.
+              </p>
+            </div>
+
+            <button
+              onClick={() => onOpenDonate(5000, `Support Programme: ${program.title}`)}
+              className="px-8 py-4 bg-[#F59E0B] text-[#111827] font-extrabold rounded-2xl shadow-xl hover:-translate-y-1 transition-all cursor-pointer text-xs uppercase tracking-wider shrink-0"
+            >
+              Donate Now
+            </button>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   );
 };

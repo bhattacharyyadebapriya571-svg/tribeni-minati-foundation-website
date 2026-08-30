@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { STORIES_OF_CHANGE } from '../data/foundationData';
-import { ArrowLeft, X, Sparkles, MapPin, Quote, Heart, Eye } from 'lucide-react';
 import type { PageId, StoryItem } from '../types';
 
 interface ImpactStoriesPageProps {
-  onNavigate: (page: PageId) => void;
+  onNavigate?: (page: PageId) => void;
   onOpenDonate: (presetAmount?: number, cause?: string) => void;
 }
 
-export const ImpactStoriesPage: React.FC<ImpactStoriesPageProps> = ({ onNavigate, onOpenDonate }) => {
+export const ImpactStoriesPage: React.FC<ImpactStoriesPageProps> = ({ onOpenDonate }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activeStory, setActiveStory] = useState<StoryItem | null>(null);
 
@@ -20,163 +19,195 @@ export const ImpactStoriesPage: React.FC<ImpactStoriesPageProps> = ({ onNavigate
       : STORIES_OF_CHANGE.filter((s) => s.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 pt-24 pb-24">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-        {/* Breadcrumb Back */}
-        <button
-          onClick={() => onNavigate('home')}
-          className="inline-flex items-center gap-2 text-xs font-bold text-blue-700 hover:underline cursor-pointer mb-6"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Flagship Overview
-        </button>
+    <div className="w-full pt-20 bg-[#f7f9fb] min-h-screen text-[#191c1e]">
+      
+      {/* Hero Header */}
+      <section className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pt-16 pb-12">
+        <div className="flex flex-col lg:flex-row justify-between items-end gap-8 mb-12">
+          <div className="space-y-4 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 text-[#4b41e1] rounded-full text-xs font-bold font-label-caps uppercase tracking-wider">
+              <span className="material-symbols-outlined text-[16px]">record_voice_over</span>
+              <span>Voices of Grassroots Transformation</span>
+            </div>
 
-        {/* Page Hero */}
-        <div className="mb-12 max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-blue-700 bg-blue-50 border border-blue-200 mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-            Voices of Grassroots Transformation
+            <h1 className="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-[#191c1e] tracking-tight leading-tight">
+              Real Work. Real Change. <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4b41e1] to-[#645efb]">
+                Human Stories of Hope.
+              </span>
+            </h1>
+
+            <p className="font-body-lg text-base sm:text-lg text-[#45464d] leading-relaxed">
+              Documentary accounts of individuals and community collectives whose lives were transformed by Minati free education coaching, neonatal winter infant bedding, and mobile clinical care.
+            </p>
           </div>
-          <h1 className="font-['DM_Serif_Display'] text-4xl sm:text-5xl text-slate-900 leading-tight mb-4">
-            Real Work. Real Change. Stories of Hope Across Bengal.
-          </h1>
-          <p className="text-base text-slate-600 leading-relaxed">
-            Documentary accounts of individuals and community collectives whose lives were transformed by Minati free education coaching, neonatal winter infant bedding, and mobile clinical care.
-          </p>
+
+          <button
+            onClick={() => onOpenDonate(5000, 'Support Grassroots Stories of Change')}
+            className="px-8 py-4 bg-[#F59E0B] text-[#111827] font-extrabold rounded-2xl shadow-[0_10px_25px_-5px_rgba(245,158,11,0.3)] hover:-translate-y-1 transition-all cursor-pointer text-xs uppercase tracking-wider shrink-0"
+          >
+            Sponsor a Life Story
+          </button>
         </div>
 
-        {/* Filter Chips */}
-        <div className="flex flex-wrap gap-2 mb-10">
+        {/* Filter Tabs */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+              className={`px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
                 selectedCategory === cat
-                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25 border border-blue-600'
-                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                  ? 'bg-[#111827] text-white shadow-md'
+                  : 'bg-white text-[#45464d] border border-border-subtle hover:bg-slate-50'
               }`}
             >
-              {cat}
+              {cat === 'All' ? 'All Stories' : cat}
             </button>
           ))}
         </div>
+      </section>
 
-        {/* Stories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredStories.map((story) => (
-            <div
-              key={story.id}
-              className="p-1 rounded-3xl bg-white border border-slate-200/90 hover:border-blue-500/50 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer"
-              onClick={() => setActiveStory(story)}
-            >
-              <div className="rounded-[calc(1.5rem-0.25rem)] overflow-hidden flex flex-col justify-between h-full bg-white">
-                {/* Photo Header */}
-                <div className="relative aspect-[16/10] bg-slate-900 overflow-hidden">
-                  <img
-                    src={story.imageUrl || '/tmf-assets/5.jpg'}
-                    alt={story.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-95"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/90 text-slate-900 backdrop-blur-md shadow-sm">
-                      {story.category}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-6 space-y-3 flex-1 flex flex-col justify-between">
+      {/* Stories Bento Grid */}
+      <section className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredStories.map((story) => {
+            const photo = story.imageUrl || '/tmf-assets/real-field-photos/tmf-field-1.jpeg';
+            return (
+              <div
+                key={story.id}
+                onClick={() => setActiveStory(story)}
+                className="bg-[#f2f4f6] p-2 sm:p-3 rounded-[32px] shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer group flex flex-col justify-between"
+              >
+                <div className="bg-white rounded-[24px] overflow-hidden p-6 flex flex-col h-full justify-between">
                   <div>
-                    <div className="flex items-center gap-1.5 text-xs text-blue-700 font-semibold mb-1">
-                      <MapPin className="w-3.5 h-3.5" />
+                    {/* Photo with double-bezel style */}
+                    <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-slate-100">
+                      <img
+                        src={photo}
+                        alt={story.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute top-3 left-3">
+                        <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full font-label-caps text-[10px] text-[#4b41e1] font-bold">
+                          {story.category}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 text-xs font-mono text-[#64748B] mb-2">
+                      <span className="material-symbols-outlined text-[16px] text-[#4b41e1]">location_on</span>
                       <span>{story.location}</span>
                     </div>
 
-                    <h3 className="font-['DM_Serif_Display'] text-xl text-slate-900 group-hover:text-blue-600 transition-colors">
+                    <h3 className="font-headline-md text-xl font-bold text-[#191c1e] mb-2 group-hover:text-[#4b41e1] transition-colors leading-snug">
                       {story.title}
                     </h3>
 
-                    <p className="text-xs text-slate-600 mt-2 leading-relaxed line-clamp-3">
-                      {story.beforeSituation} {story.afterTransformation}
+                    <p className="font-body-base text-xs font-semibold text-[#64748B] mb-3">
+                      {story.beneficiaryName} {story.age ? `(${story.age} yrs)` : ''}
+                    </p>
+
+                    <p className="font-body-base text-sm text-[#45464d] line-clamp-3 leading-relaxed">
+                      {story.afterTransformation}
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs text-blue-600 font-bold flex items-center gap-1">
-                      <Eye className="w-3.5 h-3.5" />
-                      Read Full Story
+                  <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                    <span className="font-mono text-xs font-bold text-[#4b41e1]">
+                      Read Documentary Proof
                     </span>
-                    <Quote className="w-4 h-4 text-slate-300" />
+                    <span className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[#191c1e] group-hover:bg-[#111827] group-hover:text-white transition-colors">
+                      <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </span>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
+      </section>
 
-        {/* Story Modal Lightbox */}
-        {activeStory && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
-            <div className="relative w-full max-w-3xl bg-white rounded-3xl overflow-hidden shadow-2xl text-slate-900 max-h-[90vh] flex flex-col">
-              <div className="p-4 bg-slate-100 border-b border-slate-200 flex items-center justify-between">
-                <span className="text-xs font-bold uppercase px-3 py-1 rounded-full bg-blue-50 text-blue-700">
-                  {activeStory.category} · {activeStory.location}
-                </span>
-                <button
-                  onClick={() => setActiveStory(null)}
-                  className="p-1.5 text-slate-400 hover:text-slate-900 rounded-xl hover:bg-slate-200 transition-colors cursor-pointer"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+      {/* Story Full Modal */}
+      {activeStory && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl p-8 max-w-2xl w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button
+              onClick={() => setActiveStory(null)}
+              className="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-[#191c1e] hover:bg-slate-200 cursor-pointer z-10"
+            >
+              ✕
+            </button>
+
+            <div className="space-y-6">
+              <div className="w-full aspect-[16/9] rounded-2xl overflow-hidden bg-slate-100 relative">
+                <img
+                  src={activeStory.imageUrl || '/tmf-assets/real-field-photos/tmf-field-1.jpeg'}
+                  alt={activeStory.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full font-label-caps text-xs text-[#4b41e1] font-bold">
+                    {activeStory.category}
+                  </span>
+                </div>
               </div>
 
-              <div className="p-6 sm:p-8 overflow-y-auto space-y-6">
-                <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-slate-900">
-                  <img
-                    src={activeStory.imageUrl || '/tmf-assets/5.jpg'}
-                    alt={activeStory.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+              <div className="space-y-2">
+                <span className="font-mono text-xs text-[#4b41e1] font-bold">
+                  {activeStory.location}
+                </span>
+                <h2 className="font-headline-lg text-2xl sm:text-3xl font-bold text-[#191c1e]">
+                  {activeStory.title}
+                </h2>
+                <p className="font-mono text-xs text-[#64748B]">
+                  Beneficiary: {activeStory.beneficiaryName} {activeStory.age ? `(${activeStory.age} yrs)` : ''}
+                </p>
+              </div>
 
-                <div>
-                  <h3 className="font-['DM_Serif_Display'] text-2xl sm:text-3xl text-slate-900">
-                    {activeStory.title}
-                  </h3>
-                  <div className="mt-3 space-y-2 text-sm text-slate-700 leading-relaxed">
-                    <p><strong>Before Intervention:</strong> {activeStory.beforeSituation}</p>
-                    <p><strong>Impact & Transformation:</strong> {activeStory.afterTransformation}</p>
-                  </div>
-                </div>
-
-                <div className="p-5 rounded-2xl bg-amber-50 border border-amber-200/80">
-                  <Quote className="w-6 h-6 text-amber-600 mb-2" />
-                  <p className="text-sm text-amber-900 italic font-serif">
+              {/* Bengali Quote Callout */}
+              {activeStory.quote && (
+                <div className="p-6 rounded-2xl bg-indigo-50/60 border border-indigo-100 text-[#191c1e] space-y-2">
+                  <span className="material-symbols-outlined text-[#4b41e1] text-3xl">format_quote</span>
+                  <p className="font-headline-md text-base italic font-semibold text-[#191c1e]">
                     "{activeStory.quote}"
                   </p>
-                  <div className="text-xs text-amber-800 font-bold mt-2">
-                    — {activeStory.beneficiaryName}
-                  </div>
                 </div>
+              )}
 
-                <div className="pt-4 border-t border-slate-200 flex items-center justify-between">
-                  <button
-                    onClick={() => {
-                      onOpenDonate(2500, `Story: ${activeStory.title}`);
-                      setActiveStory(null);
-                    }}
-                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-xs shadow-md shadow-blue-500/25 flex items-center gap-2 cursor-pointer"
-                  >
-                    <Heart className="w-4 h-4" />
-                    <span>Support More Lives Like {activeStory.beneficiaryName.split(' ')[0]}</span>
-                  </button>
+              <div className="space-y-4 text-[#45464d] font-body-base text-sm sm:text-base leading-relaxed">
+                <div>
+                  <strong className="text-[#191c1e] block mb-1">Challenge:</strong>
+                  <p>{activeStory.beforeSituation}</p>
                 </div>
+                <div>
+                  <strong className="text-[#191c1e] block mb-1">Intervention &amp; Outcome:</strong>
+                  <p>{activeStory.afterTransformation}</p>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={() => {
+                    onOpenDonate(5000, `Support: ${activeStory.title}`);
+                    setActiveStory(null);
+                  }}
+                  className="flex-1 py-4 bg-[#F59E0B] text-[#111827] font-extrabold rounded-2xl text-xs uppercase tracking-wider hover:shadow-lg transition-all cursor-pointer"
+                >
+                  Sponsor Similar Initiative
+                </button>
+                <button
+                  onClick={() => setActiveStory(null)}
+                  className="px-6 py-4 bg-slate-100 hover:bg-slate-200 text-[#191c1e] font-bold rounded-2xl text-xs uppercase tracking-wider cursor-pointer"
+                >
+                  Close
+                </button>
               </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+
     </div>
   );
 };

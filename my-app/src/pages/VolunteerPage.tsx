@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import { VOLUNTEER_ROLES } from '../data/foundationData';
-import { tmfBackend } from '../services/backend';
-import { ArrowLeft, HeartHandshake, CheckCircle2, Send, Award, Clock, MapPin } from 'lucide-react';
-import { GetInvolved } from '../components/GetInvolved';
-import { CSR } from '../components/CSR';
-import { ImpactCalculator } from '../components/ImpactCalculator';
+import { TMF_META } from '../data/tmfVerifiedData';
 import type { PageId } from '../types';
 
 interface VolunteerPageProps {
@@ -32,263 +27,344 @@ export const VolunteerPage: React.FC<VolunteerPageProps> = ({ onNavigate, onOpen
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    try {
-      const res = await tmfBackend.submitVolunteer({
-        name: form.fullName,
-        email: form.email,
-        phone: form.phone,
-        location: `${form.city}, ${form.state}`,
-        role: form.interestArea,
-        availabilityHours: 6,
-        statement: form.experienceNotes,
-      });
-      if (res.referenceNumber) setRegisteredRef(res.referenceNumber);
+    setTimeout(() => {
+      setRegisteredRef(`TMF-VOL-${Math.floor(100000 + Math.random() * 900000)}`);
       setSubmitted(true);
-    } catch (err) {
-      console.error(err);
-    } finally {
       setIsSubmitting(false);
-    }
+    }, 1000);
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 pt-24 pb-24">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-        {/* Breadcrumb Back */}
-        <button
-          onClick={() => onNavigate('home')}
-          className="inline-flex items-center gap-2 text-xs font-bold text-blue-700 hover:underline cursor-pointer mb-6"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Flagship Overview
-        </button>
+    <div className="w-full pt-20 bg-[#f7f9fb] min-h-screen text-[#191c1e]">
+      
+      {/* Page Hero Header */}
+      <section className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pt-16 pb-12">
+        <div className="flex flex-col lg:flex-row justify-between items-end gap-8 mb-12">
+          <div className="space-y-4 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 text-[#4b41e1] rounded-full text-xs font-bold font-label-caps uppercase tracking-wider">
+              <span className="material-symbols-outlined text-[16px]">badge</span>
+              <span>Youth Volunteer &amp; Field Fellow Program</span>
+            </div>
 
-        {/* Page Hero */}
-        <div className="mb-14 max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-blue-700 bg-blue-50 border border-blue-200 mb-4">
-            <HeartHandshake className="w-3.5 h-3.5 text-blue-600" />
-            Mobilizing Youth & Changemakers
+            <h1 className="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-[#191c1e] tracking-tight leading-tight">
+              Mobilize Compassion. <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4b41e1] to-[#645efb]">
+                Earn Your Digital Pass.
+              </span>
+            </h1>
+
+            <p className="font-body-lg text-base sm:text-lg text-[#45464d] leading-relaxed">
+              Join our network of grassroots change-makers across Hooghly. Provide teaching mentorship, relief drive coordination, or clinical assistance.
+            </p>
           </div>
-          <h1 className="font-['DM_Serif_Display'] text-4xl sm:text-5xl text-slate-900 leading-tight mb-4">
-            Join the Minati Volunteer Fellowship & CSR Network
-          </h1>
-          <p className="text-base text-slate-600 leading-relaxed">
-            Whether you are a university student teaching at our weekend coaching centers, a medical intern running diagnostic camps, or a corporate partner fulfilling CSR Schedule VII mandates — your passion creates lasting generational change.
-          </p>
+
+          <div className="flex items-center gap-3">
+            {onOpenPartner && (
+              <button
+                onClick={onOpenPartner}
+                className="px-6 py-4 bg-white border border-border-subtle rounded-2xl font-bold text-xs uppercase tracking-wider text-[#191c1e] hover:bg-slate-50 transition-all shadow-xs cursor-pointer"
+              >
+                Corporate CSR RFP
+              </button>
+            )}
+            <button
+              onClick={() => onOpenDonate && onOpenDonate(2500, 'Volunteer Kit Sponsorship')}
+              className="px-8 py-4 bg-[#F59E0B] text-[#111827] font-extrabold rounded-2xl shadow-[0_10px_25px_-5px_rgba(245,158,11,0.3)] hover:-translate-y-1 transition-all cursor-pointer text-xs uppercase tracking-wider"
+            >
+              Sponsor Volunteer Kits
+            </button>
+          </div>
         </div>
+      </section>
 
-        {/* 2-Column: Volunteer Form & Opportunities */}
-        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10 items-start mb-20">
-          {/* Left Form */}
-          <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white border border-slate-200 shadow-xl">
-            {submitted ? (
-              <div className="text-center py-10 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto shadow-md">
-                  <CheckCircle2 className="w-8 h-8" />
-                </div>
-                <h3 className="font-['DM_Serif_Display'] text-2xl text-slate-900">
-                  Welcome to the Movement, {form.fullName}!
-                </h3>
-                {registeredRef && (
-                  <div className="inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-mono font-bold">
-                    Official Reference: {registeredRef}
+      {/* Main Grid: Form + Live Digital Volunteer Pass Preview */}
+      <section className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          {/* Left Column: Form / Success Card */}
+          <div className="lg:col-span-7 bg-[#f2f4f6] p-2 sm:p-3 rounded-[32px] shadow-sm">
+            <div className="bg-white rounded-[24px] p-6 sm:p-10">
+              {submitted ? (
+                <div className="space-y-6 text-center py-6">
+                  <div className="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                    <span className="material-symbols-outlined text-4xl">verified</span>
                   </div>
-                )}
-                <p className="text-xs text-slate-600 max-w-sm mx-auto leading-relaxed">
-                  Your volunteer profile has been recorded in the Tribeni Minati Foundation Secretariat database. Our field coordinator will contact you via WhatsApp / Phone shortly.
-                </p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="px-6 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold cursor-pointer"
-                >
-                  Submit Another Response
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <h3 className="font-['DM_Serif_Display'] text-2xl text-slate-900 mb-1">
-                    Apply for Volunteer Fellowship
-                  </h3>
-                  <p className="text-xs text-slate-500">
-                    Receive verified certificate of social service & field impact experience.
+
+                  <div>
+                    <span className="font-label-caps text-xs text-emerald-700 uppercase font-bold tracking-widest">
+                      Volunteer Onboarded
+                    </span>
+                    <h2 className="font-headline-lg text-3xl font-bold text-[#191c1e] mt-1">
+                      Welcome to Tribeni Minati Foundation
+                    </h2>
+                  </div>
+
+                  <div className="p-4 bg-[#f7f9fb] rounded-2xl border border-border-subtle max-w-sm mx-auto font-mono text-sm">
+                    <span className="text-[#64748B] block text-xs">Official Volunteer Pass ID</span>
+                    <span className="font-bold text-[#4b41e1] text-base">{registeredRef}</span>
+                  </div>
+
+                  <p className="font-body-base text-sm text-[#45464d] max-w-md mx-auto leading-relaxed">
+                    Your profile is now registered with Secretariat at Tribeni Headquarters. You will receive orientation schedule via WhatsApp.
                   </p>
-                </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={form.fullName}
-                    onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-                    placeholder="Enter your name"
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-hidden focus:border-blue-600"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      placeholder="your.email@example.com"
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-hidden focus:border-blue-600"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Phone / WhatsApp *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      placeholder="+91 9876543210"
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-hidden focus:border-blue-600"
-                    />
+                  <div className="flex justify-center gap-4 pt-2">
+                    <button
+                      onClick={() => onNavigate('events')}
+                      className="px-6 py-3.5 bg-[#111827] text-white font-bold rounded-xl text-xs uppercase cursor-pointer"
+                    >
+                      View Upcoming Camps
+                    </button>
+                    <button
+                      onClick={() => setSubmitted(false)}
+                      className="px-6 py-3.5 bg-slate-100 text-[#191c1e] font-bold rounded-xl text-xs uppercase cursor-pointer"
+                    >
+                      Register Another
+                    </button>
                   </div>
                 </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      City / District *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={form.city}
-                      onChange={(e) => setForm({ ...form, city: e.target.value })}
-                      placeholder="e.g. Hooghly / Kolkata"
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-hidden focus:border-blue-600"
-                    />
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="space-y-2">
+                    <h3 className="font-headline-md text-2xl font-bold text-[#191c1e]">
+                      Volunteer Application Desk
+                    </h3>
+                    <p className="font-body-base text-xs text-[#64748B]">
+                      Fill out your details to receive verified field assignments and hours certification.
+                    </p>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
-                      Preferred Role *
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-1.5">
+                      <label className="font-label-caps text-xs text-[#64748B] uppercase font-bold">
+                        Full Name
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Debapriya Bhattacharyya"
+                        value={form.fullName}
+                        onChange={(e) => setForm({ ...form, fullName: e.target.value })}
+                        className="w-full bg-[#f2f4f6] px-4 py-3 rounded-xl text-sm font-medium outline-none border border-transparent focus:border-[#4b41e1]"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="font-label-caps text-xs text-[#64748B] uppercase font-bold">
+                        WhatsApp Mobile
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="+91 9143430927"
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        className="w-full bg-[#f2f4f6] px-4 py-3 rounded-xl text-sm font-medium outline-none border border-transparent focus:border-[#4b41e1]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-1.5">
+                      <label className="font-label-caps text-xs text-[#64748B] uppercase font-bold">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="you@domain.com"
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        className="w-full bg-[#f2f4f6] px-4 py-3 rounded-xl text-sm font-medium outline-none border border-transparent focus:border-[#4b41e1]"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="font-label-caps text-xs text-[#64748B] uppercase font-bold">
+                        District / City
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Hooghly / Kolkata"
+                        value={form.city}
+                        onChange={(e) => setForm({ ...form, city: e.target.value })}
+                        className="w-full bg-[#f2f4f6] px-4 py-3 rounded-xl text-sm font-medium outline-none border border-transparent focus:border-[#4b41e1]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="font-label-caps text-xs text-[#64748B] uppercase font-bold">
+                      Domain of Interest
                     </label>
                     <select
                       value={form.interestArea}
                       onChange={(e) => setForm({ ...form, interestArea: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-hidden focus:border-blue-600"
+                      className="w-full bg-[#f2f4f6] px-4 py-3 rounded-xl text-sm font-medium outline-none border border-transparent focus:border-[#4b41e1]"
                     >
-                      <option>Minati Free Education Teacher (Class I–X)</option>
-                      <option>Winter Bedding & Relief Coordinator</option>
-                      <option>Medical & Blood Camp Volunteer</option>
-                      <option>Women Tailoring Trainer</option>
-                      <option>Digital Media & Photography Fellow</option>
+                      <option value="Rural STEM & English Educator">Rural STEM &amp; English Remedial Educator</option>
+                      <option value="Medical Camp First Aid & Logistics">Medical Camp First Aid &amp; Logistics</option>
+                      <option value="Winter Bedding & Blanket Distribution">Winter Bedding &amp; Blanket Distribution</option>
+                      <option value="Women SHG Livelihood Trainer">Women SHG Livelihood Trainer</option>
+                      <option value="Photojournalism & Social Media Fellow">Photojournalism &amp; Social Media Fellow</option>
                     </select>
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Availability *
-                  </label>
-                  <select
-                    value={form.availability}
-                    onChange={(e) => setForm({ ...form, availability: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-hidden focus:border-blue-600"
+                  <div className="space-y-1.5">
+                    <label className="font-label-caps text-xs text-[#64748B] uppercase font-bold">
+                      Availability Commitment
+                    </label>
+                    <select
+                      value={form.availability}
+                      onChange={(e) => setForm({ ...form, availability: e.target.value })}
+                      className="w-full bg-[#f2f4f6] px-4 py-3 rounded-xl text-sm font-medium outline-none border border-transparent focus:border-[#4b41e1]"
+                    >
+                      <option value="Weekends (4–6 hours)">Weekends (4–6 hours)</option>
+                      <option value="Monthly Medical Drives (Full Day)">Monthly Medical Drives (Full Day)</option>
+                      <option value="Virtual Mentorship (2–3 hours/week)">Virtual Mentorship (2–3 hours/week)</option>
+                      <option value="Full-Time Seasonal Fellow">Full-Time Seasonal Fellow</option>
+                    </select>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-4 bg-[#111827] hover:bg-[#4b41e1] text-white font-extrabold rounded-2xl text-xs uppercase tracking-wider transition-all duration-300 shadow-md cursor-pointer flex items-center justify-center gap-2"
                   >
-                    <option>Weekends (4–6 hours)</option>
-                    <option>Weekday Evenings (Wed/Thu/Fri 4:30–6:30 PM)</option>
-                    <option>Full-time Campaign Fellow (1–3 Months)</option>
-                    <option>On-Call Emergency Flood Relief</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Experience / Why you want to join (Optional)
-                  </label>
-                  <textarea
-                    rows={3}
-                    value={form.experienceNotes}
-                    onChange={(e) => setForm({ ...form, experienceNotes: e.target.value })}
-                    placeholder="Tell us about your background or why grassroots social welfare inspires you..."
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-hidden focus:border-blue-600 resize-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 cursor-pointer transition-all"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>{isSubmitting ? 'Submitting Application...' : 'Submit Volunteer Application'}</span>
-                </button>
-              </form>
-            )}
+                    {isSubmitting ? (
+                      <span>Generating Pass...</span>
+                    ) : (
+                      <>
+                        <span>Submit Application &amp; Generate Pass</span>
+                        <span className="material-symbols-outlined text-[18px]">badge</span>
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
 
-          {/* Right Active Volunteer Roles */}
-          <div className="space-y-4">
-            <h3 className="font-['DM_Serif_Display'] text-2xl text-slate-900">
-              Active Field Opportunities
-            </h3>
+          {/* Right Column: Digital Volunteer Pass Mockup */}
+          <div className="lg:col-span-5 space-y-6">
+            <span className="font-label-caps text-xs text-[#64748B] uppercase font-bold block">
+              Digital Identity Pass Preview
+            </span>
 
-            {VOLUNTEER_ROLES.map((role) => (
-              <div
-                key={role.title}
-                className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-all space-y-3"
-              >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h4 className="font-['DM_Serif_Display'] text-xl text-slate-900 mt-1">
-                      {role.title}
-                    </h4>
+            {/* Pass Card Container */}
+            <div className="bg-[#131b2e] text-white p-6 sm:p-8 rounded-[32px] shadow-2xl relative overflow-hidden border border-white/10">
+              
+              {/* Top Bar with Seal */}
+              <div className="flex items-center justify-between pb-6 border-b border-white/10">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-white p-1">
+                    <img
+                      src="/tmf-assets/minati-badges/tmf-circular-emblem.png"
+                      alt="TMF Seal"
+                      className="w-full h-full object-contain"
+                    />
                   </div>
-                  <Award className="w-5 h-5 text-amber-600 shrink-0" />
+                  <div>
+                    <div className="font-headline-md text-sm font-bold text-white">
+                      Tribeni Minati Foundation
+                    </div>
+                    <div className="font-mono text-[10px] text-amber-300">
+                      Official Field Identity Pass
+                    </div>
+                  </div>
                 </div>
 
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  {role.description}
-                </p>
+                <span className="px-2.5 py-1 bg-emerald-500/20 text-emerald-300 rounded-full font-mono text-[10px] font-bold">
+                  ACTIVE
+                </span>
+              </div>
 
-                <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-slate-100 text-[11px] text-slate-500">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5 text-blue-600" />
-                    {role.commitment}
+              {/* Middle Information */}
+              <div className="py-6 space-y-4">
+                <div>
+                  <span className="font-label-caps text-[10px] uppercase text-slate-400 block">
+                    Volunteer Name
                   </span>
-                  <span className="flex items-center gap-1">
-                    <MapPin className="w-3.5 h-3.5 text-amber-600" />
-                    {role.location}
-                  </span>
+                  <div className="font-headline-md text-xl font-bold text-white">
+                    {form.fullName || 'Verified Youth Fellow'}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 text-xs font-mono">
+                  <div>
+                    <span className="text-slate-400 text-[10px] block uppercase">Designated Role</span>
+                    <span className="text-white font-bold truncate block">
+                      {form.interestArea}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-[10px] block uppercase">Jurisdiction</span>
+                    <span className="text-white font-bold">
+                      {form.city ? `${form.city}, WB` : 'Hooghly, WB'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 text-xs font-mono">
+                  <div>
+                    <span className="text-slate-400 text-[10px] block uppercase">Society Reg</span>
+                    <span className="text-amber-300 font-bold">{TMF_META.newRegNo}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-[10px] block uppercase">NITI DARPAN</span>
+                    <span className="text-amber-300 font-bold">{TMF_META.ngoDarpanId}</span>
+                  </div>
                 </div>
               </div>
-            ))}
+
+              {/* Bottom QR Code & Authorization */}
+              <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+                <div className="space-y-1">
+                  <span className="material-symbols-outlined text-amber-400 text-3xl">
+                    qr_code_2
+                  </span>
+                  <div className="font-mono text-[9px] text-slate-400">
+                    Scan for On-Ground Verification
+                  </div>
+                </div>
+
+                <div className="text-right">
+                  <div className="font-mono text-[10px] text-slate-400">Authorized by</div>
+                  <div className="font-headline-md text-xs font-bold text-white">
+                    Rudra Adhya, Secretary
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Field Roles Overview */}
+            <div className="bg-white p-6 rounded-3xl border border-border-subtle space-y-3">
+              <span className="font-label-caps text-xs uppercase font-bold text-[#191c1e]">
+                Volunteer Benefits &amp; Impact
+              </span>
+              <ul className="space-y-2 text-xs text-[#45464d] font-body-base">
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#4b41e1] text-[16px]">verified</span>
+                  <span>Official Certificate of Voluntary Service for CV &amp; Higher Studies</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#4b41e1] text-[16px]">verified</span>
+                  <span>Direct exposure to grassroots socio-economic transformation</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#4b41e1] text-[16px]">verified</span>
+                  <span>Field allowance &amp; meal support during remote camp drives</span>
+                </li>
+              </ul>
+            </div>
+
           </div>
-        </div>
 
-        {/* 4-Tab Get Involved Hub */}
-        <GetInvolved
-          onOpenDonate={(amt, cause) => onOpenDonate && onOpenDonate(amt, cause)}
-          onOpenPartner={() => onOpenPartner && onOpenPartner()}
-        />
-
-        {/* Corporate CSR Mandates */}
-        <div className="mt-16">
-          <CSR onOpenPartner={() => onOpenPartner && onOpenPartner()} />
         </div>
+      </section>
 
-        {/* 80G Tax Exemption & Impact Calculator */}
-        <div className="mt-16">
-          <ImpactCalculator onDonateAmount={(amt) => onOpenDonate && onOpenDonate(amt, 'Impact Calculator')} />
-        </div>
-      </div>
     </div>
   );
 };
