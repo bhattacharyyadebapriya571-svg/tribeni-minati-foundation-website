@@ -1,200 +1,260 @@
-﻿import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Activity,
-  GraduationCap,
-  Sprout,
-  Users,
-  ShieldAlert,
-  HeartHandshake,
-  ArrowRight,
-  CheckCircle2,
-  Heart,
-  Sparkles,
-} from 'lucide-react';
-import { PILLARS_DATA } from '../data/foundationData';
+import React, { useState, useEffect } from 'react';
+import type { PageId } from '../types';
 
 interface ProgramExplorerProps {
-  onSelectProgram?: (id: string) => void;
-  onOpenDonate?: (amount?: number, cause?: string) => void;
+  onNavigate: (page: PageId, programId?: string) => void;
+  onOpenDonate: () => void;
 }
 
-const PROGRAM_ICONS: Record<string, any> = {
-  healthcare: Activity,
-  education: GraduationCap,
-  'women-empowerment': Users,
-  'sustainable-livelihood': Sprout,
-  relief: ShieldAlert,
-  'elderly-care': HeartHandshake,
-};
+export const ProgramExplorer: React.FC<ProgramExplorerProps> = ({ onNavigate }) => {
+  const [scrollPct, setScrollPct] = useState(0);
 
-const PROGRAM_PHOTOS: Record<string, string> = {
-  healthcare: '/tmf-assets/field-photos/field-photo-3.jpg',
-  education: '/tmf-assets/field-photos/field-photo-2.jpg',
-  'women-empowerment': '/tmf-assets/field-photos/field-photo-6.jpg',
-  'sustainable-livelihood': '/tmf-assets/field-photos/field-photo-7.jpg',
-  relief: '/tmf-assets/field-photos/field-photo-1.jpg',
-  'elderly-care': '/tmf-assets/field-photos/field-photo-8.jpg',
-};
-
-export const ProgramExplorer: React.FC<ProgramExplorerProps> = ({
-  onSelectProgram,
-  onOpenDonate,
-}) => {
-  const [activeTab, setActiveTab] = useState<string>('healthcare');
-  const activePillar = PILLARS_DATA.find((p) => p.id === activeTab) || PILLARS_DATA[0];
-  const IconComponent = PROGRAM_ICONS[activePillar.id] || Activity;
+  useEffect(() => {
+    const handleScroll = () => {
+      const container = document.getElementById('timeline-container');
+      if (!container) return;
+      const rect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      let pct = ((windowHeight / 2) - rect.top) / rect.height * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      setScrollPct(pct);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <section className="py-24 sm:py-32 bg-[#FAF8F5] relative overflow-hidden border-t border-black/[0.06]">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 relative z-10">
-        
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-black/[0.08] text-[#1B3B2B] text-xs font-mono font-bold uppercase tracking-widest">
-            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-            <span>Interactive Ground Framework</span>
+    <div className="w-full pt-20 bg-[#f7f9fb] min-h-screen text-[#191c1e]">
+      
+      {/* Header Section */}
+      <section className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pt-16 pb-16 lg:pb-24 flex flex-col lg:flex-row justify-between items-end gap-12">
+        <div className="flex flex-col gap-6 max-w-2xl">
+          <div className="flex items-center gap-4">
+            <span className="w-12 h-1 bg-black rounded-full" />
+            <span className="font-label-caps text-xs tracking-widest uppercase text-[#64748B] font-bold">
+              Core Initiatives
+            </span>
           </div>
-          <h2 className="font-['DM_Serif_Display'] text-3xl sm:text-5xl text-[#151C18] leading-tight font-normal">
-            Six Pillars of Grassroots Transformation
-          </h2>
-          <p className="text-base text-[#5C6760] font-normal leading-relaxed">
-            Our comprehensive, multi-pillar model addresses systemic rural poverty through targeted field interventions in health, child education, women's dignity, farming, disaster relief, and senior care.
-          </p>
+          <h1 className="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-[#191c1e] text-balance leading-tight">
+            Strategic Altruism <br className="hidden lg:block" />in Action
+          </h1>
         </div>
+        <p className="font-body-lg text-base sm:text-lg text-[#45464d] max-w-md pb-2 leading-relaxed">
+          We bridge the gap between institutional resources and grassroots needs, delivering measurable impact across education, healthcare, and essential human needs.
+        </p>
+      </section>
 
-        {/* 6 Pillars Horizontal Selector Tabs */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mb-10">
-          {PILLARS_DATA.map((pillar, idx) => {
-            const Icon = PROGRAM_ICONS[pillar.id] || Activity;
-            const isActive = activeTab === pillar.id;
-
-            return (
-              <button
-                key={pillar.id}
-                onClick={() => setActiveTab(pillar.id)}
-                className={`p-3.5 rounded-2xl text-left transition-all cursor-pointer border ${
-                  isActive
-                    ? 'bg-[#1B3B2B] text-white border-[#1B3B2B] shadow-lg shadow-[#1B3B2B]/15 scale-102'
-                    : 'bg-white text-[#151C18] border-black/[0.08] hover:bg-black/[0.02]'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`text-[10px] font-mono font-bold ${isActive ? 'text-amber-300' : 'text-slate-400'}`}>
-                    0{idx + 1}
+      {/* Projects Bento Showcase */}
+      <section className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          {/* Project 1: Featured (Full Width Double-Bezel) */}
+          <div className="col-span-1 lg:col-span-12 group">
+            <div className="bg-[#f2f4f6] p-2 lg:p-3 rounded-[32px] shadow-[0_10px_25px_-5px_rgba(15,23,42,0.05)] transition-transform duration-500 hover:-translate-y-1">
+              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col lg:flex-row relative">
+                <div className="w-full lg:w-3/5 h-[300px] lg:h-[500px] relative overflow-hidden bg-slate-100">
+                  <img
+                    src="/tmf-assets/real-field-photos/tmf-field-1.jpeg"
+                    alt="Free Child Remedial Education Center"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                  />
+                </div>
+                <div className="w-full lg:w-2/5 p-8 lg:p-12 flex flex-col justify-center relative">
+                  <div className="absolute top-0 right-0 p-8 text-slate-200">
+                    <span className="font-label-caps text-[64px] font-bold leading-none select-none">01</span>
+                  </div>
+                  <span className="inline-block px-4 py-2 bg-indigo-50 text-[#4b41e1] font-label-caps text-xs rounded-full w-max mb-6 font-bold">
+                    Education
                   </span>
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-amber-300' : 'text-[#1B3B2B]'}`} />
+                  <h2 className="font-headline-lg text-2xl sm:text-3xl text-[#191c1e] mb-4">
+                    Free Child Remedial Education Center
+                  </h2>
+                  <p className="font-body-base text-sm sm:text-base text-[#64748B] mb-10 line-clamp-3 leading-relaxed">
+                    Providing comprehensive after-school academic support, nutritious meals, and mentorship to underprivileged rural children, ensuring foundational literacy and numeracy.
+                  </p>
+                  <div className="flex items-center gap-6 mt-auto">
+                    <div className="flex flex-col">
+                      <span className="font-stat-lg text-3xl font-bold text-[#111827]">500+</span>
+                      <span className="font-label-caps text-[10px] uppercase text-[#64748B]">Children Enrolled</span>
+                    </div>
+                    <button
+                      onClick={() => onNavigate('program', 'education')}
+                      className="ml-auto h-14 px-8 bg-[#e6e8ea] hover:bg-[#111827] hover:text-white transition-colors duration-300 rounded-full flex items-center justify-center font-label-caps text-xs cursor-pointer group/btn font-bold"
+                    >
+                      <span>View Details</span>
+                      <span className="material-symbols-outlined ml-2 text-[18px] transition-transform group-hover/btn:translate-x-1">
+                        arrow_forward
+                      </span>
+                    </button>
+                  </div>
                 </div>
-                <div className="text-xs font-bold leading-snug line-clamp-1">
-                  {pillar.title}
+              </div>
+            </div>
+          </div>
+
+          {/* Project 2: Winter Bedding (Half Width) */}
+          <div className="col-span-1 lg:col-span-6 group">
+            <div className="bg-[#f2f4f6] p-2 lg:p-3 rounded-[32px] shadow-[0_10px_25px_-5px_rgba(15,23,42,0.05)] h-full transition-transform duration-500 hover:-translate-y-1">
+              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full relative">
+                <div className="w-full h-[280px] relative overflow-hidden bg-slate-100">
+                  <img
+                    src="/tmf-assets/real-field-photos/tmf-field-14.jpeg"
+                    alt="Infant Winter Bedding Drive"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                  />
                 </div>
-                <div className={`text-[10px] mt-0.5 font-normal truncate ${isActive ? 'text-white/80' : 'text-slate-500'}`}>
-                  {pillar.tag}
+                <div className="p-8 flex flex-col flex-grow relative">
+                  <span className="inline-block px-4 py-2 bg-[#FFEDD5] text-[#EA580C] font-label-caps text-xs rounded-full w-max mb-6 font-bold">
+                    Relief
+                  </span>
+                  <h2 className="font-headline-md text-xl font-bold text-[#191c1e] mb-3">
+                    Infant Winter Bedding Drive
+                  </h2>
+                  <p className="font-body-base text-sm text-[#64748B] mb-8 line-clamp-2 leading-relaxed">
+                    Distributing high-quality, insulated zipped bedding to vulnerable infants in severe winter conditions, preventing hypothermia.
+                  </p>
+                  <div className="mt-auto flex items-center justify-between">
+                    <div className="flex flex-col">
+                      <span className="font-stat-lg text-2xl font-bold text-[#111827]">1,200</span>
+                      <span className="font-label-caps text-[10px] uppercase text-[#64748B]">Kits Distributed</span>
+                    </div>
+                    <button
+                      onClick={() => onNavigate('program', 'winter-relief')}
+                      className="w-12 h-12 rounded-full bg-[#e6e8ea] hover:bg-[#111827] hover:text-white flex items-center justify-center transition-colors duration-300 cursor-pointer"
+                    >
+                      <span className="material-symbols-outlined text-[20px]">arrow_outward</span>
+                    </button>
+                  </div>
                 </div>
-              </button>
-            );
-          })}
+              </div>
+            </div>
+          </div>
+
+          {/* Project 3: Healthcare (Half Width) */}
+          <div className="col-span-1 lg:col-span-6 group">
+            <div className="bg-[#f2f4f6] p-2 lg:p-3 rounded-[32px] shadow-[0_10px_25px_-5px_rgba(15,23,42,0.05)] h-full transition-transform duration-500 hover:-translate-y-1">
+              <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full relative">
+                <div className="w-full h-[280px] relative overflow-hidden bg-slate-100">
+                  <img
+                    src="/tmf-assets/real-field-photos/tmf-field-22.jpeg"
+                    alt="Rural Healthcare Camps"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-8 flex flex-col flex-grow relative">
+                  <span className="inline-block px-4 py-2 bg-[#DCFCE7] text-[#166534] font-label-caps text-xs rounded-full w-max mb-6 font-bold">
+                    Healthcare
+                  </span>
+                  <h2 className="font-headline-md text-xl font-bold text-[#191c1e] mb-3">
+                    Rural Medical Camps
+                  </h2>
+                  <p className="font-body-base text-sm text-[#64748B] mb-8 line-clamp-2 leading-relaxed">
+                    Deploying mobile clinical units and expert pediatricians to remote villages for preventative screenings and essential medical care.
+                  </p>
+                  <div className="mt-auto flex items-center justify-between">
+                    <div className="flex flex-col">
+                      <span className="font-stat-lg text-2xl font-bold text-[#111827]">3,500+</span>
+                      <span className="font-label-caps text-[10px] uppercase text-[#64748B]">Patients Treated</span>
+                    </div>
+                    <button
+                      onClick={() => onNavigate('program', 'healthcare')}
+                      className="w-12 h-12 rounded-full bg-[#e6e8ea] hover:bg-[#111827] hover:text-white flex items-center justify-center transition-colors duration-300 cursor-pointer"
+                    >
+                      <span className="material-symbols-outlined text-[20px]">arrow_outward</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
+      </section>
 
-        {/* Active Pillar Detailed Showcase Card */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activePillar.id}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25 }}
-            className="p-6 sm:p-10 rounded-3xl bg-white border border-black/[0.08] shadow-xl grid lg:grid-cols-12 gap-8 items-center"
-          >
-            {/* Left Pillar Description */}
-            <div className="lg:col-span-7 space-y-6">
-              <div>
-                <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-amber-800 mb-2">
-                  <IconComponent className="w-4 h-4 text-amber-700" />
-                  <span>Pillar {PILLARS_DATA.findIndex((p) => p.id === activePillar.id) + 1} • {activePillar.tag}</span>
-                </div>
-                <h3 className="font-['DM_Serif_Display'] text-2xl sm:text-4xl text-[#151C18] leading-snug">
-                  {activePillar.title}
-                </h3>
-                <div className="text-sm font-semibold text-emerald-800 mt-1">
-                  {activePillar.subtitle}
-                </div>
-              </div>
+      {/* Interactive Timeline Section */}
+      <section id="timeline-container" className="w-full bg-white text-[#191c1e] py-20 relative overflow-hidden border-t border-slate-200/60">
+        <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-[#4b41e1]/10 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none" />
+        
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
+          <div className="text-center mb-20">
+            <h3 className="font-display-lg text-3xl sm:text-4xl lg:text-5xl mb-4 text-[#191c1e]">
+              Trajectory of Impact
+            </h3>
+            <p className="font-body-lg text-base sm:text-lg text-[#45464d] max-w-2xl mx-auto">
+              Milestones achieved through institutional partnerships and community trust.
+            </p>
+          </div>
 
-              <p className="text-sm sm:text-base text-[#5C6760] leading-relaxed">
-                {activePillar.longDescription || activePillar.body}
-              </p>
-
-              {/* Pillar Deliverables / Highlights */}
-              <div className="space-y-2.5 pt-1">
-                {activePillar.highlights?.map((hl, i) => (
-                  <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#151C18]">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span>{hl}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Key Impact Metrics */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                {activePillar.metrics.map((m, i) => (
-                  <div key={i} className="p-3 rounded-xl bg-[#FAF8F5] border border-black/[0.06]">
-                    <div className="font-mono text-lg font-bold text-[#1B3B2B]">
-                      {m.value}
-                    </div>
-                    <div className="text-[10px] text-[#5C6760] font-normal mt-0.5">
-                      {m.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-3">
-                <button
-                  type="button"
-                  onClick={() => onOpenDonate?.(5000, `Pillar: ${activePillar.title}`)}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1B3B2B] hover:bg-[#26533D] text-white text-xs font-bold uppercase tracking-wider shadow-md shadow-[#1B3B2B]/20 transition-all cursor-pointer"
-                >
-                  <Heart className="w-3.5 h-3.5 fill-white text-white" />
-                  <span>Support {activePillar.title}</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => onSelectProgram?.(activePillar.id)}
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white border border-black/[0.1] hover:bg-black/[0.03] text-xs font-bold text-[#151C18] transition-all cursor-pointer"
-                >
-                  <span>Explore In-Depth</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
+          <div className="relative max-w-4xl mx-auto">
+            {/* Timeline Progress Line */}
+            <div className="absolute left-[28px] lg:left-1/2 top-0 bottom-0 w-1 bg-slate-200 -translate-x-1/2 rounded-full">
+              <div
+                className="absolute top-0 left-0 w-full bg-[#4b41e1] rounded-full transition-all duration-300 ease-out"
+                style={{ height: `${scrollPct}%` }}
+              />
             </div>
 
-            {/* Right Real Field Photo Frame */}
-            <div className="lg:col-span-5">
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-black/[0.08]">
-                <img
-                  src={PROGRAM_PHOTOS[activePillar.id] || '/tmf-assets/field-photos/field-photo-1.jpg'}
-                  alt={activePillar.title}
-                  className="w-full h-full object-cover filter contrast-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <div className="text-[10px] font-mono text-amber-300 uppercase tracking-widest font-bold">
-                    Grassroots Field Program
-                  </div>
-                  <div className="font-['DM_Serif_Display'] text-xl">
-                    {activePillar.title}
+            <div className="space-y-16">
+              
+              {/* 2021 */}
+              <div className="flex flex-col lg:flex-row items-start lg:items-center relative gap-8 lg:gap-0 w-full group">
+                <div className="absolute left-[28px] lg:left-1/2 w-4 h-4 bg-white ring-4 ring-[#4b41e1]/30 rounded-full -translate-x-1/2 mt-1 lg:mt-0 transition-colors z-10" />
+                <div className="w-full lg:w-1/2 lg:pr-16 pl-16 lg:pl-0 text-left lg:text-right">
+                  <span className="font-stat-lg text-4xl sm:text-5xl text-[#191c1e] font-bold">2021</span>
+                </div>
+                <div className="w-full lg:w-1/2 lg:pl-16 pl-16 lg:pr-0">
+                  <div className="bg-[#f2f4f6] p-6 rounded-2xl">
+                    <h4 className="font-headline-md text-lg font-bold mb-2 text-[#191c1e]">
+                      Foundation Scaling
+                    </h4>
+                    <p className="font-body-base text-sm text-[#45464d]">
+                      Expanded grassroots outreach programs across Hooghly, registering digital ledgers for systemic rural aid.
+                    </p>
                   </div>
                 </div>
               </div>
+
+              {/* 2022 */}
+              <div className="flex flex-col lg:flex-row-reverse items-start lg:items-center relative gap-8 lg:gap-0 w-full group">
+                <div className="absolute left-[28px] lg:left-1/2 w-4 h-4 bg-white ring-4 ring-[#4b41e1]/30 rounded-full -translate-x-1/2 mt-1 lg:mt-0 transition-colors z-10" />
+                <div className="w-full lg:w-1/2 lg:pl-16 pl-16 lg:pl-0 text-left">
+                  <span className="font-stat-lg text-4xl sm:text-5xl text-[#191c1e] font-bold">2022</span>
+                </div>
+                <div className="w-full lg:w-1/2 lg:pr-16 pl-16 lg:pr-0 text-left lg:text-right">
+                  <div className="bg-[#f2f4f6] p-6 rounded-2xl">
+                    <h4 className="font-headline-md text-lg font-bold mb-2 text-[#191c1e]">
+                      First Medical Drive
+                    </h4>
+                    <p className="font-body-base text-sm text-[#45464d]">
+                      Partnered with medical officers to execute the first 1,000-patient pediatric camp in remote rural hamlets.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 2023 */}
+              <div className="flex flex-col lg:flex-row items-start lg:items-center relative gap-8 lg:gap-0 w-full group">
+                <div className="absolute left-[28px] lg:left-1/2 w-4 h-4 bg-white ring-4 ring-[#4b41e1]/30 rounded-full -translate-x-1/2 mt-1 lg:mt-0 transition-colors z-10" />
+                <div className="w-full lg:w-1/2 lg:pr-16 pl-16 lg:pl-0 text-left lg:text-right">
+                  <span className="font-stat-lg text-4xl sm:text-5xl text-[#191c1e] font-bold">2023</span>
+                </div>
+                <div className="w-full lg:w-1/2 lg:pl-16 pl-16 lg:pr-0">
+                  <div className="bg-[#f2f4f6] p-6 rounded-2xl">
+                    <h4 className="font-headline-md text-lg font-bold mb-2 text-[#191c1e]">
+                      Remedial Centers Launch
+                    </h4>
+                    <p className="font-body-base text-sm text-[#45464d]">
+                      Opened permanent coaching centers serving 500+ daily students with comprehensive learning tools and nutritional support.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
             </div>
+          </div>
+        </div>
+      </section>
 
-          </motion.div>
-        </AnimatePresence>
-
-      </div>
-    </section>
+    </div>
   );
 };

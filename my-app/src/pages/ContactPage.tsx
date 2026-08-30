@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, ArrowRight, Building, CheckCircle2 } from 'lucide-react';
-import { VectorMapContact } from '../components/VectorMapContact';
-import { FAQ } from '../components/FAQ';
-import type { PageId } from '../types';
 
-interface ContactPageProps {
-  onNavigate: (page: PageId) => void;
-  onOpenDonate: () => void;
-}
-
-export const ContactPage: React.FC<ContactPageProps> = () => {
-  const [formSent, setFormSent] = useState(false);
+export const ContactPage: React.FC = () => {
+  const [sent, setSent] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -22,225 +12,227 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSent(true);
+    setSent(true);
     setTimeout(() => {
-      setFormSent(false);
+      setSent(false);
       setFormData({ firstName: '', lastName: '', email: '', inquiryType: '', message: '' });
     }, 4000);
   };
 
   return (
-    <div className="min-h-screen pt-28 sm:pt-36 pb-24 bg-[#f7f9fb] text-[#191c1e]">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        
-        {/* Stitch Initiate Contact Hero */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+    <div className="w-full pt-20 bg-[#f7f9fb] min-h-screen text-[#191c1e]">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 py-16 lg:py-24 w-full relative z-10">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
           
-          {/* Left Column: Stitch Form */}
-          <div className="lg:col-span-7 space-y-8">
+          {/* Left Column: Form */}
+          <div className="flex-1 space-y-12">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full font-mono text-xs font-bold uppercase tracking-widest text-[#4b41e1] bg-indigo-50 border border-indigo-100">
-                <MapPin className="w-3.5 h-3.5" />
-                Secretariat &amp; Direct Channel
-              </div>
-              <h1 className="font-['Plus_Jakarta_Sans'] text-4xl sm:text-5xl font-extrabold text-[#191c1e] tracking-tight">
+              <h1 className="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-[#111827]">
                 Initiate Contact.
               </h1>
-              <p className="font-['Inter'] text-sm sm:text-base text-[#45464d] max-w-lg leading-relaxed">
-                For corporate CSR partnerships, statutory inquiries, or programmatic support, please use the secure channel below.
+              <p className="font-body-lg text-base sm:text-lg text-[#45464d] max-w-lg leading-relaxed">
+                For corporate partnerships, statutory inquiries, or programmatic support, please use the secure channel below.
               </p>
             </div>
 
-            {formSent ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="p-8 rounded-3xl bg-emerald-50 border border-emerald-200 text-emerald-900 space-y-3"
-              >
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-emerald-600" />
-                  <h3 className="font-['Plus_Jakarta_Sans'] font-extrabold text-lg">
-                    Message Transmitted Successfully
-                  </h3>
-                </div>
-                <p className="font-['Inter'] text-sm text-emerald-800 leading-relaxed">
-                  Thank you. General Secretary Rudra Adhya's office will review your inquiry and respond within 24 hours.
-                </p>
-              </motion.div>
+            {sent ? (
+              <div className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 space-y-2">
+                <h3 className="font-headline-md text-xl font-bold">Message Transmitted</h3>
+                <p className="font-body-base text-sm">Thank you. Our Secretariat will respond within 24 hours.</p>
+              </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-1">
-                    <label className="font-mono text-xs font-bold text-[#64748B] uppercase">First Name</label>
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="relative group">
                     <input
+                      id="firstName"
                       type="text"
                       required
+                      placeholder="First Name"
                       value={formData.firstName}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                      placeholder="e.g. Debapriya"
-                      className="w-full bg-white text-[#191c1e] font-['Inter'] text-sm px-5 py-3.5 rounded-xl border border-border-subtle focus:border-[#4b41e1] focus:ring-2 focus:ring-[#4b41e1]/20 outline-none transition-all shadow-xs"
+                      className="w-full bg-[#f2f4f6] text-[#191c1e] font-body-base text-base px-6 py-4 rounded-xl outline-none border-b-2 border-transparent focus:border-[#4b41e1] transition-all peer placeholder-transparent shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]"
                     />
+                    <label
+                      htmlFor="firstName"
+                      className="absolute left-6 top-4 text-[#64748B] font-body-base transition-all peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#4b41e1] peer-focus:bg-[#f7f9fb] px-1 peer-valid:-top-3 peer-valid:text-xs peer-valid:bg-[#f7f9fb]"
+                    >
+                      First Name
+                    </label>
                   </div>
-                  <div className="space-y-1">
-                    <label className="font-mono text-xs font-bold text-[#64748B] uppercase">Last Name</label>
+
+                  <div className="relative group">
                     <input
+                      id="lastName"
                       type="text"
                       required
+                      placeholder="Last Name"
                       value={formData.lastName}
                       onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                      placeholder="e.g. Bhattacharyya"
-                      className="w-full bg-white text-[#191c1e] font-['Inter'] text-sm px-5 py-3.5 rounded-xl border border-border-subtle focus:border-[#4b41e1] focus:ring-2 focus:ring-[#4b41e1]/20 outline-none transition-all shadow-xs"
+                      className="w-full bg-[#f2f4f6] text-[#191c1e] font-body-base text-base px-6 py-4 rounded-xl outline-none border-b-2 border-transparent focus:border-[#4b41e1] transition-all peer placeholder-transparent shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]"
                     />
+                    <label
+                      htmlFor="lastName"
+                      className="absolute left-6 top-4 text-[#64748B] font-body-base transition-all peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#4b41e1] peer-focus:bg-[#f7f9fb] px-1 peer-valid:-top-3 peer-valid:text-xs peer-valid:bg-[#f7f9fb]"
+                    >
+                      Last Name
+                    </label>
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="font-mono text-xs font-bold text-[#64748B] uppercase">Corporate / Personal Email</label>
+                <div className="relative group">
                   <input
+                    id="email"
                     type="email"
                     required
+                    placeholder="Corporate Email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="e.g. contact@corporate.org"
-                    className="w-full bg-white text-[#191c1e] font-['Inter'] text-sm px-5 py-3.5 rounded-xl border border-border-subtle focus:border-[#4b41e1] focus:ring-2 focus:ring-[#4b41e1]/20 outline-none transition-all shadow-xs"
+                    className="w-full bg-[#f2f4f6] text-[#191c1e] font-body-base text-base px-6 py-4 rounded-xl outline-none border-b-2 border-transparent focus:border-[#4b41e1] transition-all peer placeholder-transparent shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]"
                   />
+                  <label
+                    htmlFor="email"
+                    className="absolute left-6 top-4 text-[#64748B] font-body-base transition-all peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#4b41e1] peer-focus:bg-[#f7f9fb] px-1 peer-valid:-top-3 peer-valid:text-xs peer-valid:bg-[#f7f9fb]"
+                  >
+                    Corporate Email
+                  </label>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="font-mono text-xs font-bold text-[#64748B] uppercase">Nature of Inquiry</label>
+                <div className="relative group">
                   <select
+                    id="inquiryType"
                     required
                     value={formData.inquiryType}
                     onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
-                    className="w-full bg-white text-[#191c1e] font-['Inter'] text-sm px-5 py-3.5 rounded-xl border border-border-subtle focus:border-[#4b41e1] focus:ring-2 focus:ring-[#4b41e1]/20 outline-none transition-all shadow-xs cursor-pointer"
+                    className="w-full bg-[#f2f4f6] text-[#191c1e] font-body-base text-base px-6 py-4 rounded-xl outline-none border-b-2 border-transparent focus:border-[#4b41e1] transition-all appearance-none cursor-pointer shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]"
                   >
-                    <option value="" disabled>Select Nature of Inquiry</option>
+                    <option value="" disabled hidden>Nature of Inquiry</option>
                     <option value="csr">CSR Partnership &amp; Grants</option>
-                    <option value="80g">80G Tax Exemption &amp; Receipts</option>
                     <option value="statutory">Statutory &amp; Compliance Audit</option>
-                    <option value="program">Education &amp; Winter Relief Operations</option>
-                    <option value="volunteer">Volunteer Enrollment</option>
+                    <option value="program">Program Operations &amp; Centers</option>
+                    <option value="other">General Inquiries</option>
                   </select>
+                  <span className="material-symbols-outlined absolute right-6 top-4 text-[#64748B] pointer-events-none">
+                    expand_more
+                  </span>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="font-mono text-xs font-bold text-[#64748B] uppercase">Message Details</label>
+                <div className="relative group">
                   <textarea
-                    required
+                    id="message"
                     rows={4}
+                    required
+                    placeholder="Message Details"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Please specify your requirements, grant proposal, or inquiry..."
-                    className="w-full bg-white text-[#191c1e] font-['Inter'] text-sm px-5 py-3.5 rounded-xl border border-border-subtle focus:border-[#4b41e1] focus:ring-2 focus:ring-[#4b41e1]/20 outline-none transition-all resize-none shadow-xs"
+                    className="w-full bg-[#f2f4f6] text-[#191c1e] font-body-base text-base px-6 py-4 rounded-xl outline-none border-b-2 border-transparent focus:border-[#4b41e1] transition-all peer placeholder-transparent resize-none shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]"
                   />
+                  <label
+                    htmlFor="message"
+                    className="absolute left-6 top-4 text-[#64748B] font-body-base transition-all peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#4b41e1] peer-focus:bg-[#f7f9fb] px-1 peer-valid:-top-3 peer-valid:text-xs peer-valid:bg-[#f7f9fb]"
+                  >
+                    Message Details
+                  </label>
                 </div>
 
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                <button
                   type="submit"
-                  className="w-full sm:w-auto px-8 py-4 bg-[#111827] hover:bg-[#1f2937] text-white font-['Plus_Jakarta_Sans'] font-extrabold text-sm rounded-2xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.2)] transition-all flex items-center justify-center gap-3 cursor-pointer group"
+                  className="relative overflow-hidden px-8 py-4 bg-[#111827] text-white font-headline-md text-base rounded-2xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.2)] transition-transform duration-300 ease-out hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-3 group cursor-pointer"
                 >
-                  <span>Transmit Message</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </motion.button>
+                  <span className="relative z-10">Transmit Message</span>
+                  <span className="material-symbols-outlined relative z-10 group-hover:translate-x-1 transition-transform">
+                    arrow_forward
+                  </span>
+                </button>
               </form>
             )}
           </div>
 
-          {/* Right Column: Stitch Location Cards */}
-          <div className="lg:col-span-5 space-y-6">
+          {/* Right Column: Locations */}
+          <div className="flex-1 space-y-8 flex flex-col justify-center">
             
-            {/* Corporate HQ */}
-            <div className="double-bezel-outer group hover:shadow-xl transition-all duration-500">
-              <div className="double-bezel-inner p-6 sm:p-7 bg-white space-y-4">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-[#4b41e1]">
-                    <Building className="w-6 h-6" />
+            {/* Location Card 1 */}
+            <div className="group bg-[#eceef0] rounded-3xl p-2 transition-transform duration-500 hover:-translate-y-2 relative overflow-hidden">
+              <div className="bg-white rounded-[20px] p-8 shadow-[0_10px_25px_-5px_rgba(15,23,42,0.05)] h-full flex flex-col relative z-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-[#4b41e1]">
+                    <span className="material-symbols-outlined">business</span>
                   </div>
                   <div>
-                    <h3 className="font-['Plus_Jakarta_Sans'] text-lg font-extrabold text-[#191c1e]">
+                    <h3 className="font-headline-md text-xl font-bold text-[#191c1e]">
                       Corporate Headquarters
                     </h3>
-                    <p className="font-mono text-[10px] font-bold uppercase text-[#64748B]">
-                      Tribeni, Hooghly
+                    <p className="font-label-caps text-xs text-[#64748B] uppercase">
+                      Tribeni, West Bengal
                     </p>
                   </div>
                 </div>
 
-                <div className="space-y-2 font-['Inter'] text-xs text-[#45464d] leading-relaxed pt-2 border-t border-slate-100">
-                  <p className="flex items-start gap-2">
-                    <MapPin className="w-4 h-4 text-[#4b41e1] shrink-0 mt-0.5" />
-                    <span>Kanthaltala (near water tank), Tribeni-Mogra Road, PO Tribeni, Dist Hooghly - 712503</span>
+                <div className="space-y-3 font-body-base text-sm text-[#45464d] mb-6">
+                  <p className="flex items-start gap-3">
+                    <span className="material-symbols-outlined text-[#4b41e1] text-[20px] mt-0.5">location_on</span>
+                    <span>Kanthaltala (near water tank), Tribeni-Mogra Road, PO Tribeni, Dist Hooghly 712503</span>
                   </p>
-                  <p className="flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span className="font-mono font-bold text-[#191c1e]">+91 9143430927</span>
+                  <p className="flex items-center gap-3">
+                    <span className="material-symbols-outlined text-[#4b41e1] text-[20px]">phone</span>
+                    <span>+91 9143430927</span>
                   </p>
-                  <p className="flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-[#4b41e1] shrink-0" />
-                    <span className="font-mono text-[#4b41e1]">tribeniminatifoundation@gmail.com</span>
+                  <p className="flex items-center gap-3">
+                    <span className="material-symbols-outlined text-[#4b41e1] text-[20px]">mail</span>
+                    <span>tribeniminatifoundation@gmail.com</span>
                   </p>
+                </div>
+
+                <div className="w-full h-40 bg-slate-100 rounded-xl mt-auto overflow-hidden shadow-inner grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
+                  <img
+                    src="/tmf-assets/real-field-photos/tmf-field-10.jpeg"
+                    alt="Tribeni Headquarters"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </div>
 
-            {/* Regional Branch */}
-            <div className="double-bezel-outer group hover:shadow-xl transition-all duration-500">
-              <div className="double-bezel-inner p-6 sm:p-7 bg-white space-y-4">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B]">
-                    <MapPin className="w-6 h-6" />
+            {/* Location Card 2 */}
+            <div className="group bg-[#eceef0] rounded-3xl p-2 transition-transform duration-500 hover:-translate-y-2 relative overflow-hidden">
+              <div className="bg-white rounded-[20px] p-8 shadow-[0_10px_25px_-5px_rgba(15,23,42,0.05)] h-full flex flex-col relative z-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-[#4b41e1]">
+                    <span className="material-symbols-outlined">account_tree</span>
                   </div>
                   <div>
-                    <h3 className="font-['Plus_Jakarta_Sans'] text-lg font-extrabold text-[#191c1e]">
-                      Regional Branch Office
+                    <h3 className="font-headline-md text-xl font-bold text-[#191c1e]">
+                      Regional Operations
                     </h3>
-                    <p className="font-mono text-[10px] font-bold uppercase text-[#64748B]">
+                    <p className="font-label-caps text-xs text-[#64748B] uppercase">
                       Radhanagar, Dhaniakhali
                     </p>
                   </div>
                 </div>
 
-                <div className="space-y-2 font-['Inter'] text-xs text-[#45464d] leading-relaxed pt-2 border-t border-slate-100">
-                  <p className="flex items-start gap-2">
-                    <MapPin className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5" />
-                    <span>Radhanagar, PO Gopinagar, PS Dhaniakhali, Dist Hooghly - 712402</span>
+                <div className="space-y-3 font-body-base text-sm text-[#45464d] mb-6">
+                  <p className="flex items-start gap-3">
+                    <span className="material-symbols-outlined text-[#4b41e1] text-[20px] mt-0.5">location_on</span>
+                    <span>Field Office, Radhanagar, PO Gopinagar, PS Dhaniakhali 712402</span>
                   </p>
-                  <p className="flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span className="font-mono font-bold text-[#191c1e]">+91 9832274345</span>
+                  <p className="flex items-center gap-3">
+                    <span className="material-symbols-outlined text-[#4b41e1] text-[20px]">phone</span>
+                    <span>+91 9832274345</span>
                   </p>
                 </div>
-              </div>
-            </div>
 
-            {/* Timings Card */}
-            <div className="p-5 rounded-2xl bg-white border border-border-subtle shadow-xs flex items-center gap-4">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-[#2563eb]">
-                <Clock className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#191c1e]">
-                  Secretariat Operating Hours
-                </div>
-                <div className="font-mono text-[11px] text-[#64748B]">
-                  Monday – Saturday (10:00 AM – 07:00 PM IST)
+                <div className="w-full h-32 bg-slate-100 rounded-xl mt-auto overflow-hidden shadow-inner grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
+                  <img
+                    src="/tmf-assets/real-field-photos/tmf-field-22.jpeg"
+                    alt="Radhanagar Regional Operations"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </div>
 
           </div>
         </div>
-
-      </div>
-
-      {/* Embedded Vector Map & Office Selector */}
-      <VectorMapContact />
-
-      {/* Embedded FAQ */}
-      <div className="mt-12">
-        <FAQ />
       </div>
     </div>
   );

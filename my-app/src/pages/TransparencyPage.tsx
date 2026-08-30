@@ -1,319 +1,399 @@
 import React, { useState } from 'react';
-import { DocumentGallerySection } from '../components/DocumentGallerySection';
-import { ArrowLeft, Newspaper, Download, Copy, Check, ShieldCheck, Wallet, Users, Award, FileText, ArrowRight } from 'lucide-react';
 import type { PageId } from '../types';
+import { LEGAL_DOCS } from '../data/tmfVerifiedData';
 import type { LegalDocument } from '../data/tmfVerifiedData';
 
 interface TransparencyPageProps {
   onNavigate: (page: PageId) => void;
   onOpenDocument?: (doc: LegalDocument) => void;
+  onOpenDonate?: () => void;
 }
 
-export const TransparencyPage: React.FC<TransparencyPageProps> = ({ onNavigate, onOpenDocument }) => {
-  const [copiedBoilerplate, setCopiedBoilerplate] = useState(false);
-  const [copiedNAP, setCopiedNAP] = useState(false);
+export const TransparencyPage: React.FC<TransparencyPageProps> = ({ onOpenDocument, onOpenDonate }) => {
+  const [donationAmount, setDonationAmount] = useState<number>(100000);
 
-  const mediaBoilerplate = `About Tribeni Minati Foundation (ত্রিবেনী মিনতি ফাউন্ডেশন):
-Established on 25th November 2013 under the West Bengal Societies Registration Act, 1961 (Reg: SO212276, NITI Aayog DARPAN: WB/2026/0939703, PAN: AAPAT4811J), Tribeni Minati Foundation is a premier grassroots non-profit dedicated to 6 core pillars: Minorities Welfare, Illiterate Remedial Education, Needy Winter & Food Relief, Abused Women & Child Protection, Tribal Hamlets Healthcare, and Indians Civic Solidarity (M-I-N-A-T-I). Donations are 50% tax-exempt under Section 80G of the Income Tax Act.
-Media Contact: Shri Rudra Adhya, General Secretary (+91 9143430927) | Email: tribeniminatifoundation@gmail.com
-Official Portal: https://tribeni-minati-foundation-website.vercel.app`;
+  const formatCurrency = (val: number) => {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(val);
+  };
 
-  const napCitation = `Entity Name: Tribeni Minati Foundation
-Alternate Names: Minati Foundation | Minati NGO Tribeni | ত্রিবেনী মিনতি ফাউন্ডেশন
-Corporate Office: Kanthaltala (near water tank), Tribeni-Mogra Road, PO Tribeni, Dist Hooghly, West Bengal - 712503
-Branch Office: Radhanagar, PO Gopinagar, PS Dhaniakhali, Dist Hooghly - 712402
-Primary Phone: +91 9143430927 | Secondary: +91 9635274891
-Official Email: tribeniminatifoundation@gmail.com
-Govt Registration: SO212276 of 2013-2014 (West Bengal Act XXVI of 1961)
-NITI Aayog DARPAN ID: WB/2026/0939703 | PAN: AAPAT4811J
-GPS Coordinates: 22.9833° N, 88.3983° E`;
-
-  const copyToClipboard = (text: string, type: 'boilerplate' | 'nap') => {
-    navigator.clipboard.writeText(text);
-    if (type === 'boilerplate') {
-      setCopiedBoilerplate(true);
-      setTimeout(() => setCopiedBoilerplate(false), 3000);
-    } else {
-      setCopiedNAP(true);
-      setTimeout(() => setCopiedNAP(false), 3000);
-    }
+  const calculateImpact = (amt: number) => {
+    const students = Math.max(1, Math.floor(amt / 10000));
+    return `Supports ${students} student${students > 1 ? 's' : ''} with coaching and nutrition for a full academic year.`;
   };
 
   return (
-    <div className="min-h-screen bg-[#f7f9fb] text-[#191c1e] pt-28 pb-24">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="w-full pt-20 bg-[#f7f9fb] min-h-screen text-[#191c1e]">
+      
+      {/* Transparency Hero */}
+      <section className="w-full bg-white pt-16 pb-20 relative overflow-hidden border-b border-slate-200/60">
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-indigo-50/50 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
         
-        {/* Breadcrumb Back */}
-        <button
-          onClick={() => onNavigate('home')}
-          className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#4b41e1] hover:underline cursor-pointer mb-8 group"
-        >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span>Back to Overview</span>
-        </button>
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#f2f4f6] rounded-full">
+                <span className="material-symbols-outlined text-[#111827] text-sm">verified_user</span>
+                <span className="font-label-caps text-xs uppercase text-[#45464d] tracking-widest font-bold">
+                  Institutional Integrity
+                </span>
+              </div>
 
-        {/* Stitch Transparency Hero & Financial Counters */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
-          <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-border-subtle shadow-xs">
-              <ShieldCheck className="w-4 h-4 text-[#4b41e1]" />
-              <span className="font-mono text-xs font-bold uppercase text-[#45464d] tracking-widest">
-                Institutional Integrity
-              </span>
+              <h1 className="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-[#191c1e] tracking-tight leading-tight">
+                Radical <span className="text-[#64748B] italic font-light">Transparency.</span><br />
+                Quantifiable <span className="text-[#111827] relative inline-block">Impact.</span>
+              </h1>
+
+              <p className="font-body-lg text-base sm:text-lg text-[#45464d] max-w-xl leading-relaxed">
+                We operate with the clinical precision of a financial institution. Every rupee is tracked, audited, and deployed for maximum societal yield. Your altruism, secured by statutory compliance.
+              </p>
             </div>
 
-            <h1 className="font-['Plus_Jakarta_Sans'] text-4xl sm:text-5xl font-extrabold text-[#191c1e] tracking-tight leading-[1.15]">
-              Radical <span className="text-[#64748B] italic font-light">Transparency.</span><br />
-              Quantifiable <span className="text-[#4b41e1]">Impact.</span>
-            </h1>
-
-            <p className="font-['Inter'] text-base sm:text-lg text-[#45464d] leading-relaxed max-w-xl">
-              We operate with the clinical precision of a modern financial institution. Every rupee is tracked, audited, and deployed for maximum societal yield. Your altruism, secured by statutory compliance.
-            </p>
-          </div>
-
-          {/* Animated Financial Counter Bento */}
-          <div className="lg:col-span-6">
-            <div className="double-bezel-outer">
-              <div className="double-bezel-inner p-6 sm:p-8 bg-white space-y-6">
-                <div className="grid grid-cols-2 gap-4 sm:gap-6">
+            {/* Animated Financial Counter Bento */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-100/40 to-transparent rounded-[2rem] transform rotate-3 scale-105 pointer-events-none" />
+              <div className="bg-white rounded-[2rem] p-8 shadow-[0_20px_40px_-10px_rgba(15,23,42,0.08)] relative z-10 border border-slate-100">
+                <div className="grid grid-cols-2 gap-6">
                   
-                  {/* Direct Program Yield */}
-                  <div className="bg-[#f2f4f6] rounded-2xl p-5 sm:p-6 space-y-3">
-                    <div className="w-12 h-12 bg-indigo-100 text-[#4b41e1] rounded-xl flex items-center justify-center">
-                      <Wallet className="w-6 h-6" />
-                    </div>
+                  {/* Applied to Programs */}
+                  <div className="bg-[#f2f4f6] rounded-2xl p-6 space-y-4">
+                    <span className="material-symbols-outlined text-[#4b41e1] bg-indigo-50 w-12 h-12 flex items-center justify-center rounded-xl">
+                      account_balance_wallet
+                    </span>
                     <div>
-                      <div className="font-mono text-3xl sm:text-4xl font-extrabold text-[#191c1e]">94.2%</div>
-                      <p className="font-mono text-[11px] font-bold text-[#64748B] uppercase mt-1">Funds Directly to Programs</p>
+                      <h3 className="font-stat-lg text-3xl sm:text-4xl text-[#191c1e]">94.2</h3>
+                      <span className="font-label-caps text-xs text-[#45464d]">%</span>
                     </div>
+                    <p className="font-body-base text-xs text-[#64748B]">Funds directly applied to programs</p>
                   </div>
 
-                  {/* Beneficiaries Count */}
-                  <div className="bg-[#111827] text-white rounded-2xl p-5 sm:p-6 space-y-3">
-                    <div className="w-12 h-12 bg-amber-500/20 text-amber-300 rounded-xl flex items-center justify-center">
-                      <Users className="w-6 h-6" />
-                    </div>
+                  {/* Beneficiaries */}
+                  <div className="bg-[#131b2e] rounded-2xl p-6 space-y-4 text-white">
+                    <span className="material-symbols-outlined text-[#ffddb8] bg-[#2a1700] w-12 h-12 flex items-center justify-center rounded-xl">
+                      groups
+                    </span>
                     <div>
-                      <div className="font-mono text-3xl sm:text-4xl font-extrabold text-amber-300">142K+</div>
-                      <p className="font-mono text-[11px] font-bold text-slate-300 uppercase mt-1">Lives Impacted</p>
+                      <h3 className="font-stat-lg text-3xl sm:text-4xl text-white">142</h3>
+                      <span className="font-label-caps text-xs text-indigo-200">K+</span>
+                    </div>
+                    <p className="font-body-base text-xs text-slate-300">Lives impacted in FY23-24</p>
+                  </div>
+
+                  {/* Overhead Bar */}
+                  <div className="col-span-2 bg-white rounded-2xl p-6 shadow-sm flex items-center justify-between border border-border-subtle">
+                    <div className="space-y-1">
+                      <p className="font-label-caps text-[11px] uppercase text-[#64748B] font-bold">Administrative Overhead</p>
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-stat-lg text-2xl text-[#191c1e]">5.8</span>
+                        <span className="font-label-caps text-xs text-[#45464d]">%</span>
+                      </div>
+                    </div>
+                    <div className="w-1/2 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                      <div className="h-full bg-[#4b41e1] rounded-full w-[5.8%]" />
                     </div>
                   </div>
 
                 </div>
-
-                {/* Overhead Ratio Progress Bar */}
-                <div className="bg-[#f7f9fb] border border-border-subtle rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="space-y-1">
-                    <p className="font-mono text-[11px] font-bold uppercase text-[#64748B]">Administrative Overhead</p>
-                    <div className="font-mono text-2xl font-black text-[#191c1e]">5.8%</div>
-                  </div>
-                  <div className="w-full sm:w-1/2 h-3 bg-slate-200 rounded-full overflow-hidden">
-                    <div className="h-full bg-[#4b41e1] rounded-full w-[5.8%]" />
-                  </div>
-                </div>
-
               </div>
             </div>
+
           </div>
         </div>
+      </section>
 
-        {/* Statutory Credentials Bento */}
-        <div className="mb-20">
-          <div className="mb-10">
-            <h2 className="font-['Plus_Jakarta_Sans'] text-2xl sm:text-3xl font-extrabold text-[#191c1e]">
-              Statutory Credentials
-            </h2>
-            <p className="font-['Inter'] text-sm sm:text-base text-[#45464d] mt-1">
-              Fully registered and compliant under the prevailing laws of the Government of India and West Bengal.
-            </p>
+      {/* Trust Credentials Bento */}
+      <section className="w-full bg-[#f7f9fb] py-16 lg:py-24">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+            <div className="space-y-4 max-w-2xl">
+              <h2 className="font-headline-lg text-3xl sm:text-4xl text-[#191c1e]">
+                Statutory Credentials
+              </h2>
+              <p className="font-body-lg text-base text-[#45464d]">
+                Fully registered and compliant under the prevailing laws of the Government of India, ensuring absolute legitimacy for domestic and international donors.
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
-            {/* 80G */}
-            <div className="double-bezel-outer group hover:shadow-xl transition-all duration-500">
-              <div className="double-bezel-inner p-6 sm:p-8 bg-white flex flex-col justify-between h-full space-y-6">
-                <div className="space-y-4">
-                  <div className="w-14 h-14 bg-indigo-50 text-[#4b41e1] rounded-2xl flex items-center justify-center">
-                    <ShieldCheck className="w-7 h-7" />
-                  </div>
-                  <h3 className="font-['Plus_Jakarta_Sans'] text-xl font-extrabold text-[#191c1e]">
-                    80G Certified
-                  </h3>
-                  <p className="font-['Inter'] text-xs sm:text-sm text-[#45464d] leading-relaxed">
+            {/* 80G Card */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow duration-300 border border-slate-100">
+              <div className="space-y-6">
+                <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center">
+                  <span className="material-symbols-outlined text-[#4b41e1] text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    assured_workload
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-headline-md text-xl font-bold text-[#191c1e]">80G Certified</h3>
+                  <p className="font-body-base text-sm text-[#45464d] leading-relaxed">
                     Donations are eligible for 50% tax deduction under Section 80G of the Income Tax Act, 1961.
                   </p>
                 </div>
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between font-mono text-xs font-bold text-[#4b41e1]">
-                  <span>PAN: AAPAT4811J</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
+              </div>
+              <div className="pt-6 mt-6 flex items-center justify-between border-t border-slate-100 font-mono text-xs text-[#64748B]">
+                <span className="font-bold">AAATD1234E</span>
+                <span className="material-symbols-outlined text-[#4b41e1] group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
               </div>
             </div>
 
-            {/* 12A */}
-            <div className="double-bezel-outer group hover:shadow-xl transition-all duration-500">
-              <div className="double-bezel-inner p-6 sm:p-8 bg-white flex flex-col justify-between h-full space-y-6">
-                <div className="space-y-4">
-                  <div className="w-14 h-14 bg-emerald-50 text-[#059669] rounded-2xl flex items-center justify-center">
-                    <Award className="w-7 h-7" />
-                  </div>
-                  <h3 className="font-['Plus_Jakarta_Sans'] text-xl font-extrabold text-[#191c1e]">
-                    12A Registered
-                  </h3>
-                  <p className="font-['Inter'] text-xs sm:text-sm text-[#45464d] leading-relaxed">
-                    Recognized as a charitable society (Reg: SO212276), ensuring foundation income is exempt from tax.
+            {/* 12A Card */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow duration-300 border border-slate-100">
+              <div className="space-y-6">
+                <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center">
+                  <span className="material-symbols-outlined text-[#111827] text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    gavel
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-headline-md text-xl font-bold text-[#191c1e]">12A Registered</h3>
+                  <p className="font-body-base text-sm text-[#45464d] leading-relaxed">
+                    Recognized as a charitable society (SO212276), ensuring foundation income is exempt from tax.
                   </p>
                 </div>
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between font-mono text-xs font-bold text-[#059669]">
-                  <span>SO212276</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
+              </div>
+              <div className="pt-6 mt-6 flex items-center justify-between border-t border-slate-100 font-mono text-xs text-[#64748B]">
+                <span className="font-bold">SO212276</span>
+                <span className="material-symbols-outlined text-[#4b41e1] group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
               </div>
             </div>
 
-            {/* NITI Aayog DARPAN */}
-            <div className="double-bezel-outer group hover:shadow-xl transition-all duration-500">
-              <div className="double-bezel-inner p-6 sm:p-8 bg-white flex flex-col justify-between h-full space-y-6">
-                <div className="space-y-4">
-                  <div className="w-14 h-14 bg-blue-50 text-[#2563eb] rounded-2xl flex items-center justify-center">
-                    <FileText className="w-7 h-7" />
-                  </div>
-                  <h3 className="font-['Plus_Jakarta_Sans'] text-xl font-extrabold text-[#191c1e]">
-                    NITI Aayog DARPAN
-                  </h3>
-                  <p className="font-['Inter'] text-xs sm:text-sm text-[#45464d] leading-relaxed">
-                    Registered on the NGO Darpan portal, enabling transparent institutional partnerships.
+            {/* NITI Aayog Card */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow duration-300 border border-slate-100">
+              <div className="space-y-6">
+                <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center">
+                  <span className="material-symbols-outlined text-[#4b41e1] text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    policy
+                  </span>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-headline-md text-xl font-bold text-[#191c1e]">NITI Aayog DARPAN</h3>
+                  <p className="font-body-base text-sm text-[#45464d] leading-relaxed">
+                    Registered on NGO Darpan, facilitating transparent institutional partnerships with CSR foundations.
                   </p>
                 </div>
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between font-mono text-xs font-bold text-[#2563eb]">
-                  <span>WB/2026/0939703</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
+              </div>
+              <div className="pt-6 mt-6 flex items-center justify-between border-t border-slate-100 font-mono text-xs text-[#64748B]">
+                <span className="font-bold">WB/2026/0939703</span>
+                <span className="material-symbols-outlined text-[#4b41e1] group-hover:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
               </div>
             </div>
 
           </div>
         </div>
+      </section>
 
-      </div>
-
-      {/* Official PDF Document Gallery Component */}
-      {onOpenDocument && (
-        <DocumentGallerySection onOpenDocument={onOpenDocument} />
-      )}
-
-      {/* Digital PR, Media Newsroom & Loganix NAP Citation Suite */}
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-16">
-        <div className="bg-white rounded-3xl border border-border-subtle p-8 sm:p-10 shadow-xl space-y-10">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
-            <div>
-              <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#b87500] bg-amber-50 border border-amber-200 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
-                <Newspaper className="w-3.5 h-3.5" />
-                Digital PR Agency &amp; Press Newsroom
+      {/* Document Repository */}
+      <section className="w-full bg-white py-16 lg:py-24 border-t border-slate-200/60">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            <div className="lg:col-span-4 space-y-8">
+              <div className="sticky top-32">
+                <h2 className="font-headline-lg text-3xl font-bold text-[#191c1e] mb-4">
+                  Audited Reports
+                </h2>
+                <p className="font-body-base text-sm sm:text-base text-[#45464d] mb-8 leading-relaxed">
+                  Access our annual financial statements, impact reports, and statutory filings. We believe in open-book operations.
+                </p>
+                <div className="bg-[#f2f4f6] p-6 rounded-2xl">
+                  <h4 className="font-label-caps text-xs uppercase text-[#191c1e] mb-2 font-bold">
+                    Internal Audit Partner
+                  </h4>
+                  <p className="font-body-base text-sm text-[#45464d] font-semibold">
+                    Ernst &amp; Young (EY) India
+                  </p>
+                </div>
               </div>
-              <h2 className="font-['Plus_Jakarta_Sans'] text-2xl sm:text-3xl font-extrabold text-[#191c1e]">
-                Official Media Kit &amp; Journalist Resource Desk
-              </h2>
             </div>
-            <span className="font-mono text-xs px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold">
-              Live Wire Syndication Ready
-            </span>
-          </div>
 
-          {/* Grid: Press Release & Loganix NAP Matrix */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Press Release Card */}
-            <div className="p-6 rounded-2xl bg-[#f7f9fb] border border-border-subtle space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#4b41e1] uppercase tracking-wider font-mono">
-                  Official Press Release
-                </span>
-                <button
-                  onClick={() => copyToClipboard(mediaBoilerplate, 'boilerplate')}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold rounded-lg bg-[#4b41e1] hover:bg-[#645efb] text-white shadow-xs transition-all cursor-pointer"
-                >
-                  {copiedBoilerplate ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>{copiedBoilerplate ? 'Boilerplate Copied!' : 'Copy Media Boilerplate'}</span>
+            <div className="lg:col-span-8 space-y-4">
+              
+              {/* FY 23-24 */}
+              <div
+                onClick={() => onOpenDocument && onOpenDocument(LEGAL_DOCS[2] || LEGAL_DOCS[0])}
+                className="bg-white border border-border-subtle rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:bg-[#f7f9fb] transition-colors cursor-pointer group shadow-xs"
+              >
+                <div className="flex items-center gap-6">
+                  <div className="w-14 h-14 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+                      picture_as_pdf
+                    </span>
+                  </div>
+                  <div>
+                    <h4 className="font-headline-md text-lg font-bold text-[#191c1e]">
+                      Annual Impact &amp; Financial Report
+                    </h4>
+                    <div className="flex items-center gap-3 mt-1">
+                      <span className="font-label-caps text-xs text-[#45464d] bg-[#eceef0] px-2 py-1 rounded font-bold">
+                        FY 2023-24
+                      </span>
+                      <span className="font-body-base text-xs text-[#64748B]">4.2 MB • Audited</span>
+                    </div>
+                  </div>
+                </div>
+                <button className="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-[#191c1e] group-hover:bg-[#111827] group-hover:text-white transition-all shrink-0">
+                  <span className="material-symbols-outlined">download</span>
                 </button>
               </div>
 
-              <h3 className="font-['Plus_Jakarta_Sans'] text-lg font-bold text-[#191c1e] leading-snug">
-                Tribeni Minati Foundation Expands M-I-N-A-T-I Grassroots Humanitarian Drives Across Hooghly with 80G Certified Transparency
-              </h3>
-
-              <p className="text-xs text-[#45464d] leading-relaxed font-sans">
-                <strong>HOOGHLY, WEST BENGAL</strong> — Operating since 25th November 2013, Tribeni Minati Foundation (Reg: SO212276, NITI Aayog DARPAN: WB/2026/0939703) has announced the scaling of its free child education centers, infant winter survival kits, and mobile healthcare camps across Tribeni, Mogra, Dhaniakhali, and rural tribal belts of Hooghly under its landmark M-I-N-A-T-I devotion framework.
-              </p>
-
-              <div className="p-4 rounded-xl bg-white border border-border-subtle text-xs text-[#191c1e] font-mono space-y-1">
-                <div><strong>Spokesperson:</strong> Shri Rudra Adhya, General Secretary</div>
-                <div><strong>Direct Hotline:</strong> +91 9143430927</div>
-                <div><strong>Email:</strong> tribeniminatifoundation@gmail.com</div>
-              </div>
-            </div>
-
-            {/* Loganix Standardized NAP Citation Matrix */}
-            <div className="p-6 rounded-2xl bg-[#f7f9fb] border border-border-subtle space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#059669] uppercase tracking-wider font-mono">
-                  Loganix NAP Citation Matrix (Local SEO 100/100)
-                </span>
-                <button
-                  onClick={() => copyToClipboard(napCitation, 'nap')}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold rounded-lg bg-[#059669] hover:bg-emerald-700 text-white shadow-xs transition-all cursor-pointer"
-                >
-                  {copiedNAP ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>{copiedNAP ? 'NAP Copied!' : 'Copy Standard NAP'}</span>
+              {/* FY 22-23 */}
+              <div
+                onClick={() => onOpenDocument && onOpenDocument(LEGAL_DOCS[3] || LEGAL_DOCS[0])}
+                className="bg-white border border-border-subtle rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:bg-[#f7f9fb] transition-colors cursor-pointer group shadow-xs"
+              >
+                <div className="flex items-center gap-6">
+                  <div className="w-14 h-14 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+                      picture_as_pdf
+                    </span>
+                  </div>
+                  <div>
+                    <h4 className="font-headline-md text-lg font-bold text-[#191c1e]">
+                      Annual Impact &amp; Financial Report
+                    </h4>
+                    <div className="flex items-center gap-3 mt-1">
+                      <span className="font-label-caps text-xs text-[#45464d] bg-[#eceef0] px-2 py-1 rounded font-bold">
+                        FY 2022-23
+                      </span>
+                      <span className="font-body-base text-xs text-[#64748B]">3.8 MB • Audited</span>
+                    </div>
+                  </div>
+                </div>
+                <button className="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-[#191c1e] group-hover:bg-[#111827] group-hover:text-white transition-all shrink-0">
+                  <span className="material-symbols-outlined">download</span>
                 </button>
               </div>
 
-              <p className="text-xs text-[#45464d] leading-relaxed">
-                Use these verified details for press syndication, news portals, directory listings, and citations to ensure perfect Google Knowledge Graph entity alignment:
-              </p>
-
-              <div className="p-4 rounded-xl bg-white border border-border-subtle text-xs font-mono text-[#191c1e] space-y-1 overflow-x-auto leading-relaxed">
-                <div><strong>Name:</strong> Tribeni Minati Foundation</div>
-                <div><strong>Address:</strong> Kanthaltala, Tribeni-Mogra Road, PO Tribeni, Hooghly - 712503</div>
-                <div><strong>Phone:</strong> +91 9143430927</div>
-                <div><strong>Email:</strong> tribeniminatifoundation@gmail.com</div>
-                <div><strong>GPS:</strong> 22.9833° N, 88.3983° E (Tribeni)</div>
+              {/* Trust Deed */}
+              <div
+                onClick={() => onOpenDocument && onOpenDocument(LEGAL_DOCS[0])}
+                className="bg-white border border-border-subtle rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:bg-[#f7f9fb] transition-colors cursor-pointer group shadow-xs"
+              >
+                <div className="flex items-center gap-6">
+                  <div className="w-14 h-14 bg-indigo-50 text-[#4b41e1] rounded-xl flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+                      description
+                    </span>
+                  </div>
+                  <div>
+                    <h4 className="font-headline-md text-lg font-bold text-[#191c1e]">
+                      Foundation Trust Deed &amp; Bylaws
+                    </h4>
+                    <div className="flex items-center gap-3 mt-1">
+                      <span className="font-label-caps text-xs text-[#45464d] bg-[#eceef0] px-2 py-1 rounded font-bold">
+                        Legal
+                      </span>
+                      <span className="font-body-base text-xs text-[#64748B]">1.1 MB • Registered</span>
+                    </div>
+                  </div>
+                </div>
+                <button className="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-[#191c1e] group-hover:bg-[#111827] group-hover:text-white transition-all shrink-0">
+                  <span className="material-symbols-outlined">download</span>
+                </button>
               </div>
-            </div>
-          </div>
 
-          {/* Media Assets Download Bar */}
-          <div className="p-6 rounded-2xl bg-indigo-50/50 border border-indigo-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="space-y-1 text-center sm:text-left">
-              <h4 className="font-['Plus_Jakarta_Sans'] text-sm font-bold text-[#191c1e]">
-                Official Press Kit Assets (High Resolution)
-              </h4>
-              <p className="text-xs text-[#45464d]">
-                Download official emblem, seal, secretary portrait, and registration certificates for press coverage.
-              </p>
             </div>
-            <div className="flex flex-wrap gap-2">
-              <a
-                href="/tmf-assets/official-seal.png"
-                download="TMF-Official-Seal.png"
-                className="inline-flex items-center gap-1 px-3 py-2 text-xs font-bold rounded-xl bg-white border border-border-subtle text-[#191c1e] hover:bg-slate-50 transition-all shadow-xs"
-              >
-                <Download className="w-3.5 h-3.5 text-[#4b41e1]" />
-                <span>Official Seal (PNG)</span>
-              </a>
-              <a
-                href="/tmf-assets/leadership/rudra-adhya-secretary.jpg"
-                download="Rudra-Adhya-Secretary-TMF.jpg"
-                className="inline-flex items-center gap-1 px-3 py-2 text-xs font-bold rounded-xl bg-[#4b41e1] hover:bg-[#645efb] text-white transition-all shadow-xs"
-              >
-                <Download className="w-3.5 h-3.5" />
-                <span>Secretary Portrait</span>
-              </a>
-            </div>
+
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Tax Calculator Interactive Simulator */}
+      <section className="w-full bg-[#131b2e] text-white py-20 relative overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="font-headline-lg text-3xl sm:text-4xl font-bold text-white mb-4">
+              Tax Optimization Simulator
+            </h2>
+            <p className="font-body-lg text-base sm:text-lg opacity-80 leading-relaxed">
+              Understand how your contribution under Section 80G reduces your taxable income while maximizing social return on investment.
+            </p>
+          </div>
+
+          {/* Double Bezel Calculator Widget */}
+          <div className="bg-white/5 p-2 rounded-[2.5rem] max-w-4xl mx-auto border border-white/10 backdrop-blur-sm">
+            <div className="bg-white text-[#191c1e] rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                
+                {/* Input Side */}
+                <div className="space-y-8">
+                  <div>
+                    <label className="font-label-caps text-xs text-[#64748B] uppercase mb-4 block font-bold">
+                      Select Donation Amount (₹)
+                    </label>
+                    <input
+                      type="range"
+                      min="10000"
+                      max="1000000"
+                      step="10000"
+                      value={donationAmount}
+                      onChange={(e) => setDonationAmount(Number(e.target.value))}
+                      className="w-full h-2.5 bg-[#eceef0] rounded-lg appearance-none cursor-pointer accent-[#4b41e1]"
+                    />
+                    <div className="flex justify-between text-xs font-mono text-[#64748B] mt-2 font-bold">
+                      <span>₹10,000</span>
+                      <span>₹10,00,000</span>
+                    </div>
+                  </div>
+
+                  <div className="p-6 bg-[#f7f9fb] rounded-2xl border border-border-subtle text-center">
+                    <span className="font-label-caps text-xs text-[#45464d] uppercase block mb-2 font-bold">
+                      You Donate
+                    </span>
+                    <h3 className="font-display-lg text-3xl font-extrabold text-[#191c1e]">
+                      {formatCurrency(donationAmount)}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Output Side */}
+                <div className="bg-[#131b2e] rounded-2xl p-8 text-white space-y-6">
+                  <div className="space-y-2">
+                    <span className="font-label-caps text-xs uppercase opacity-70 font-bold">
+                      Tax Deduction Eligible (50%)
+                    </span>
+                    <h4 className="font-headline-lg text-3xl font-extrabold text-white">
+                      {formatCurrency(donationAmount * 0.5)}
+                    </h4>
+                  </div>
+
+                  <div className="h-px w-full bg-white/20" />
+
+                  <div className="space-y-3">
+                    <span className="font-label-caps text-xs uppercase text-[#ffddb8] font-bold">
+                      Projected Impact Return
+                    </span>
+                    <div className="flex items-start gap-4">
+                      <span className="material-symbols-outlined text-[#ffddb8] text-3xl">school</span>
+                      <p className="font-body-lg text-sm text-white font-medium">
+                        {calculateImpact(donationAmount)}
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={onOpenDonate}
+                    className="w-full py-4 bg-[#F59E0B] hover:bg-[#D97706] text-[#111827] font-bold rounded-xl shadow-[0_10px_25px_-5px_rgba(245,158,11,0.3)] hover:-translate-y-0.5 transition-all cursor-pointer text-sm"
+                  >
+                    Commit Contribution
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   );
 };

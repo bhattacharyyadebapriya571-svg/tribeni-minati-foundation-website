@@ -1,69 +1,143 @@
 @import 'tailwindcss';
-@import './styles/design-tokens.css';
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    background-color: #f7f9fb;
+    color: #191c1e;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  }
+  
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 @theme inline {
   --color-background: #f7f9fb;
-  --color-foreground: #191c1e;
-  --color-card: #FFFFFF;
-  --color-card-foreground: #191c1e;
-  --color-primary: #111827;
-  --color-primary-light: #1f2937;
-  --color-secondary: #4b41e1;
-  --color-secondary-container: #645efb;
-  --color-secondary-foreground: #ffffff;
-  --color-indigo-subdued: #EEF2FF;
-  --color-surface-container: #eceef0;
+  --color-surface: #f7f9fb;
+  --color-surface-dim: #d8dadc;
+  --color-surface-bright: #f7f9fb;
+  --color-surface-white: #FFFFFF;
+  --color-surface-container-lowest: #ffffff;
   --color-surface-container-low: #f2f4f6;
+  --color-surface-container: #eceef0;
   --color-surface-container-high: #e6e8ea;
   --color-surface-container-highest: #e0e3e5;
-  --color-surface-container-lowest: #ffffff;
+  --color-on-surface: #191c1e;
+  --color-on-surface-variant: #45464d;
+  --color-primary: #000000;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #131b2e;
+  --color-on-primary-container: #7c839b;
+  --color-primary-fixed: #dae2fd;
+  --color-primary-fixed-dim: #bec6e0;
+  --color-on-primary-fixed: #131b2e;
+  --color-secondary: #4b41e1;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #645efb;
+  --color-on-secondary-container: #fffbff;
+  --color-secondary-fixed: #e2dfff;
+  --color-secondary-fixed-dim: #c3c0ff;
+  --color-indigo-subdued: #EEF2FF;
   --color-accent-amber: #F59E0B;
   --color-text-muted: #64748B;
   --color-border-subtle: rgba(15, 23, 42, 0.08);
-  --radius: 24px;
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --font-bengali: 'Hind Siliguri', 'Inter', sans-serif;
+  --color-outline: #76777d;
+  --color-outline-variant: #c6c6cd;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
 }
 
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  box-sizing: border-box;
+/* Stitch Typography System */
+.font-display-lg {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 64px;
+  letter-spacing: -0.03em;
 }
 
-html {
-  scroll-behavior: smooth;
-  color-scheme: light;
+@media (max-width: 768px) {
+  .font-display-lg {
+    font-size: 40px;
+    line-height: 48px;
+    letter-spacing: -0.02em;
+  }
 }
 
-body {
-  background-color: #f7f9fb;
-  color: #191c1e;
-  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  margin: 0;
-  overflow-x: hidden;
+.font-display-lg-mobile {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 48px;
+  letter-spacing: -0.02em;
 }
 
-/* Stitch Double-Bezel Structural Enclosure */
+.font-headline-lg {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: -0.015em;
+}
+
+.font-headline-md {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: -0.01em;
+}
+
+.font-body-lg {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.font-body-base {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.font-label-caps {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+}
+
+.font-stat-lg {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 44px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Double-Bezel Architecture */
 .double-bezel-outer {
   padding: 0.5rem;
   border-radius: 2rem;
   background-color: #f2f4f6;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .double-bezel-inner {
   border-radius: calc(2rem - 0.5rem);
   background-color: #FFFFFF;
-  border: 1px solid rgba(15, 23, 42, 0.05);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
 }
 
-/* Reveal Animation */
+/* Animations */
 .reveal {
   opacity: 0;
   transform: translateY(24px) scale(0.99);
@@ -83,15 +157,20 @@ body {
 .stagger-5 { transition-delay: 500ms; }
 .stagger-6 { transition-delay: 600ms; }
 
-/* Gradient Animation */
-@keyframes gradient-x {
+/* Gradient text shimmer */
+@keyframes gradient-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
 
 .animate-gradient {
   background-size: 200% 200%;
-  animation: gradient-x 6s ease infinite;
+  animation: gradient-shift 5s ease infinite;
+}
+
+/* Magnetic Button Utility */
+.magnetic-btn {
+  transition: transform 0.25s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 /* Material Symbols */
@@ -109,27 +188,4 @@ body {
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
-}
-
-/* Magnetic Button Utility */
-.magnetic-btn {
-  transition: transform 0.25s cubic-bezier(0.33, 1, 0.68, 1);
-}
-
-/* Focus Visibility & Accessibility */
-:focus-visible {
-  outline: 2px solid #4b41e1;
-  outline-offset: 2px;
-}
-
-/* Reduced Motion Support */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
 }

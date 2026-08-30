@@ -3,13 +3,9 @@ import { CustomCursor3D } from './components/CustomCursor3D';
 import { AmbientCanvas3D } from './components/AmbientCanvas3D';
 import { Nav } from './components/Nav';
 import { Hero } from './components/Hero';
-import { TrustStrip } from './components/TrustStrip';
-import { PartnerMarquee } from './components/PartnerMarquee';
-import { StatBar } from './components/StatBar';
 import { ProgramExplorer } from './components/ProgramExplorer';
 import { MinatiBento3D } from './components/MinatiBento3D';
 import { InitiativesGrid } from './components/InitiativesGrid';
-import { StoryOfChangeSection } from './components/StoryOfChangeSection';
 import { DocumentGallerySection } from './components/DocumentGallerySection';
 import { BankingGateway } from './components/BankingGateway';
 import { TaxCalculatorWidget } from './components/TaxCalculatorWidget';
@@ -37,7 +33,7 @@ import { PillarDetailModal } from './components/PillarDetailModal';
 import { AuthModal } from './components/AuthModal';
 
 import type { PageId, PillarItem } from './types';
-import type { LegalDocument, TmfCampaign } from './data/tmfVerifiedData';
+import type { LegalDocument } from './data/tmfVerifiedData';
 
 // Helper to translate URL path into app state
 function parseUrlPath(pathname: string): { page: PageId; programId: string } {
@@ -183,10 +179,6 @@ function App() {
     setSelectedDoc(doc);
   };
 
-  const handleDonateCampaign = (campaign: TmfCampaign) => {
-    handleOpenDonate(5000, campaign.title);
-  };
-
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-[#151C18] font-['Plus_Jakarta_Sans',sans-serif] selection:bg-[#1B3B2B]/15 selection:text-[#1B3B2B] relative overflow-x-hidden">
       {/* Editorial Custom 3D Cursor */}
@@ -200,7 +192,6 @@ function App() {
         currentPage={currentPage}
         onNavigate={handleNavigate}
         onOpenDonate={() => handleOpenDonate()}
-        onOpenDocument={handleOpenDocument}
         onOpenAuth={() => setAuthOpen(true)}
       />
 
@@ -209,52 +200,31 @@ function App() {
         {/* 1. HOME PAGE VIEW */}
         {currentPage === 'home' && (
           <>
-            {/* 1. Mission-First Cinematic Hero Experience */}
+            {/* 1. Stitch Hero Experience & Floating Impact Metrics */}
             <Hero
               onOpenDonate={() => handleOpenDonate()}
-              onOpenDocument={handleOpenDocument}
+              onExploreWork={() => handleNavigate('programs')}
             />
 
-            {/* 2. Statutory Proof & Trust Strip */}
-            <TrustStrip
-              onOpenDocument={handleOpenDocument}
-              onNavigateTransparency={() => handleNavigate('transparency')}
-            />
-
-            {/* 3. Key Milestone & Live Impact Number Ticker */}
-            <StatBar />
-
-            {/* 4. Interactive 6-Pillar Programme Explorer */}
-            <ProgramExplorer
-              onSelectProgram={(id) => handleNavigate('program', id)}
-              onOpenDonate={(amt, cause) => handleOpenDonate(amt, cause)}
-            />
-
-            {/* 5. Corporate & Public Partners Marquee */}
-            <PartnerMarquee />
-
-            {/* 6. The 6-Letter "M-I-N-A-T-I" Asymmetric Bento Matrix */}
+            {/* 2. The 6-Pillar M-I-N-A-T-I Bento Matrix */}
             <MinatiBento3D />
 
-            {/* 7. Flagship Initiatives & Active Drives with Posters */}
-            <InitiativesGrid onDonateCampaign={handleDonateCampaign} />
+            {/* 3. Core Initiatives Showcase */}
+            <InitiativesGrid onNavigate={handleNavigate} />
 
-            {/* 8. Human Storytelling Spine */}
-            <StoryOfChangeSection onOpenDonate={(amt, cause) => handleOpenDonate(amt, cause)} />
-
-            {/* 9. Live Section 80G Tax Exemption & Impact Calculator */}
+            {/* 4. Live Section 80G Tax Exemption & Impact Calculator */}
             <TaxCalculatorWidget onDonateWithAmount={(amt, cause) => handleOpenDonate(amt, cause)} />
 
-            {/* 10. Statutory PDF & Legal Compliance File Vault */}
+            {/* 5. Statutory PDF & Legal Compliance File Vault */}
             <DocumentGallerySection onOpenDocument={handleOpenDocument} />
 
-            {/* 11. Central Bank of India Official Banking & Wire Gateway */}
+            {/* 6. Central Bank of India Official Banking & Wire Gateway */}
             <BankingGateway
               onOpenDonateModal={() => handleOpenDonate()}
               onOpenDocument={handleOpenDocument}
             />
 
-            {/* 12. Emotional Closing Signature Call to Action */}
+            {/* 7. Emotional Closing Signature Call to Action */}
             <FinalCTASection onOpenDonate={() => handleOpenDonate()} />
           </>
         )}
@@ -264,8 +234,6 @@ function App() {
           <AboutUsPage
             onNavigate={handleNavigate}
             onOpenDonate={() => handleOpenDonate()}
-            onOpenDocument={handleOpenDocument}
-            onOpenPartner={() => setPartnerOpen(true)}
           />
         )}
 
@@ -281,12 +249,10 @@ function App() {
 
         {/* 4. PROGRAMMES DIRECTORY PAGE */}
         {currentPage === 'programs' && (
-          <div className="pt-28 pb-16">
-            <ProgramExplorer
-              onSelectProgram={(id) => handleNavigate('program', id)}
-              onOpenDonate={(amt, cause) => handleOpenDonate(amt, cause)}
-            />
-          </div>
+          <ProgramExplorer
+            onNavigate={handleNavigate}
+            onOpenDonate={() => handleOpenDonate()}
+          />
         )}
 
         {/* 5. CAMPS & EVENTS CALENDAR */}
@@ -339,10 +305,7 @@ function App() {
 
         {/* 11. CONTACT & GRIEVANCE REDRESSAL */}
         {currentPage === 'contact' && (
-          <ContactPage
-            onNavigate={handleNavigate}
-            onOpenDonate={() => handleOpenDonate()}
-          />
+          <ContactPage />
         )}
       </main>
 
@@ -389,7 +352,6 @@ function App() {
       <Footer
         onNavigate={handleNavigate}
         onOpenDonate={() => handleOpenDonate()}
-        onOpenDocument={handleOpenDocument}
       />
     </div>
   );
