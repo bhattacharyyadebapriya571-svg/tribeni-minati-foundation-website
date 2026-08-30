@@ -186,21 +186,21 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onOpenDonate }) => {
 
       {/* Lightbox Preview Modal */}
       {previewPhoto && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-3xl w-full shadow-2xl relative max-h-[95vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md overflow-y-auto">
+          <div className="bg-white rounded-3xl p-5 sm:p-7 max-w-3xl w-full shadow-2xl relative my-auto max-h-[88vh] flex flex-col overflow-hidden">
             <button
               onClick={() => setPreviewPhoto(null)}
-              className="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-[#191c1e] hover:bg-slate-200 cursor-pointer z-10"
+              className="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-[#191c1e] hover:bg-slate-200 cursor-pointer z-20 shadow-xs"
             >
               ✕
             </button>
 
-            <div className="space-y-6">
-              <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden bg-slate-100 relative">
+            <div className="space-y-4 flex-1 overflow-y-auto pr-1">
+              <div className="w-full max-h-[38vh] aspect-[16/10] rounded-2xl overflow-hidden bg-black/5 relative flex items-center justify-center shrink-0">
                 <img
                   src={previewPhoto.url}
                   alt={previewPhoto.title}
-                  className="w-full h-full object-contain bg-black/5"
+                  className="w-full h-full object-contain"
                 />
               </div>
 
@@ -214,22 +214,22 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onOpenDonate }) => {
                   </span>
                 </div>
 
-                <h2 className="font-headline-lg text-2xl font-bold text-[#191c1e]">
+                <h2 className="font-headline-lg text-xl sm:text-2xl font-bold text-[#191c1e]">
                   {previewPhoto.title}
                 </h2>
 
-                <p className="font-body-base text-sm sm:text-base text-[#45464d] leading-relaxed">
+                <p className="font-body-base text-xs sm:text-sm text-[#45464d] leading-relaxed">
                   {previewPhoto.caption}
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row gap-4">
+              <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row gap-3 shrink-0">
                 <button
                   onClick={() => {
                     onOpenDonate();
                     setPreviewPhoto(null);
                   }}
-                  className="flex-1 py-4 bg-[#F59E0B] text-[#111827] font-extrabold rounded-2xl text-xs uppercase tracking-wider hover:shadow-lg transition-all cursor-pointer"
+                  className="flex-1 py-3.5 bg-[#F59E0B] text-[#111827] font-extrabold rounded-2xl text-xs uppercase tracking-wider hover:shadow-lg transition-all cursor-pointer"
                 >
                   Sponsor This Cause (80G)
                 </button>
@@ -238,7 +238,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onOpenDonate }) => {
                   download
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-4 bg-slate-100 hover:bg-slate-200 text-[#191c1e] font-bold rounded-2xl text-xs uppercase tracking-wider text-center"
+                  className="px-6 py-3.5 bg-slate-100 hover:bg-slate-200 text-[#191c1e] font-bold rounded-2xl text-xs uppercase tracking-wider text-center"
                 >
                   Download Asset
                 </a>

@@ -169,13 +169,13 @@ export const DonateModal: React.FC<DonateModalProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.2 }}
-          className="relative w-full max-w-lg bg-[#FAF8F5] rounded-3xl shadow-2xl border border-black/[0.08] overflow-hidden z-10 my-8 text-[#151C18]"
+          className="relative w-full max-w-lg bg-[#FAF8F5] rounded-3xl shadow-2xl border border-black/[0.08] overflow-hidden z-10 my-auto text-[#151C18] max-h-[88vh] flex flex-col"
         >
-          {/* Header */}
-          <div className="bg-[#111A15] p-6 text-white relative">
+          {/* Header (Sticky at top of modal) */}
+          <div className="bg-[#111A15] p-5 sm:p-6 text-white relative shrink-0">
             <button
               onClick={handleReset}
-              className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
+              className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer z-10"
             >
               <X className="w-4 h-4" />
             </button>
@@ -191,8 +191,8 @@ export const DonateModal: React.FC<DonateModalProps> = ({
             </p>
           </div>
 
-          {/* Body Content */}
-          <div className="p-6">
+          {/* Body Content (Scrollable) */}
+          <div className="p-5 sm:p-6 overflow-y-auto flex-1">
             {step === 'input' && (
               <form onSubmit={handleProceedToPayment} className="space-y-5">
                 {/* Frequency Toggle */}

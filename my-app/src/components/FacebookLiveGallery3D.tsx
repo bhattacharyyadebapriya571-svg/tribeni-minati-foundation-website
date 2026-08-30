@@ -305,16 +305,16 @@ export const FacebookLiveGallery3D: React.FC<FacebookLiveGallery3DProps> = ({ on
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActivePost(null)}
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl"
+              className="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl my-auto max-h-[88vh] flex flex-col"
             >
-              <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+              <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between shrink-0 sticky top-0 z-10">
                 <div className="flex items-center gap-2">
                   <span className="font-headline-md text-sm font-bold text-[#191c1e]">
                     {activePost.location}
@@ -331,8 +331,8 @@ export const FacebookLiveGallery3D: React.FC<FacebookLiveGallery3DProps> = ({ on
                 </button>
               </div>
 
-              <div className="p-4 sm:p-6 space-y-4">
-                <div className="aspect-[16/10] w-full rounded-2xl overflow-hidden bg-black">
+              <div className="p-4 sm:p-6 space-y-4 flex-1 overflow-y-auto">
+                <div className="aspect-[16/10] max-h-[38vh] w-full rounded-2xl overflow-hidden bg-black flex items-center justify-center">
                   <img
                     src={activePost.imagePath}
                     alt={activePost.text}
@@ -349,7 +349,7 @@ export const FacebookLiveGallery3D: React.FC<FacebookLiveGallery3DProps> = ({ on
                 </div>
               </div>
 
-              <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
+              <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between shrink-0">
                 <a
                   href={activePost.fbPostUrl}
                   target="_blank"

@@ -29,10 +29,10 @@ export const DocumentModal: React.FC<DocumentModalProps> = ({ document, onClose 
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-          className="relative w-full max-w-4xl bg-[#0B150F] rounded-3xl border border-white/15 shadow-2xl overflow-hidden z-10 my-8 text-white flex flex-col max-h-[88vh]"
+          className="relative w-full max-w-4xl bg-[#0B150F] rounded-3xl border border-white/15 shadow-2xl overflow-hidden z-10 my-auto text-white flex flex-col max-h-[88vh]"
         >
           {/* Header */}
-          <div className="p-5 sm:p-6 bg-black/50 border-b border-white/10 flex items-center justify-between">
+          <div className="p-4 sm:p-6 bg-black/50 border-b border-white/10 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-[#4E8B65]/20 flex items-center justify-center border border-[#4E8B65]/35 text-[#A3D9B5]">
                 <FileText className="w-5 h-5" />
@@ -46,7 +46,7 @@ export const DocumentModal: React.FC<DocumentModalProps> = ({ document, onClose 
                     {document.regNumber}
                   </span>
                 </div>
-                <h3 className="font-['DM_Serif_Display'] text-xl text-white mt-0.5">
+                <h3 className="font-['DM_Serif_Display'] text-lg sm:text-xl text-white mt-0.5">
                   {document.title}
                 </h3>
               </div>
@@ -61,7 +61,7 @@ export const DocumentModal: React.FC<DocumentModalProps> = ({ document, onClose 
           </div>
 
           {/* Document Preview Frame */}
-          <div className="flex-1 bg-black/90 p-4 min-h-[450px] relative overflow-hidden flex flex-col">
+          <div className="flex-1 bg-black/90 p-4 min-h-[260px] h-[52vh] max-h-[500px] relative overflow-hidden flex flex-col">
             <iframe
               src={`${document.fileUrl}#toolbar=1&navpanes=0`}
               title={document.title}

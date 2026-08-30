@@ -53,10 +53,10 @@ export const PillarDetailModal: React.FC<PillarDetailModalProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-          className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden z-10 my-8 border border-black/[0.08]"
+          className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden z-10 my-auto border border-black/[0.08] max-h-[88vh] flex flex-col"
         >
           {/* Header Banner */}
-          <div className="p-6 sm:p-8 bg-[#FAFAFA] border-b border-black/[0.06] flex items-start justify-between">
+          <div className="p-5 sm:p-7 bg-[#FAFAFA] border-b border-black/[0.06] flex items-start justify-between shrink-0">
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-2xl bg-[#4E8B65]/15 flex items-center justify-center border border-[#4E8B65]/20">
                 {getIcon(pillar.iconName)}
@@ -83,7 +83,7 @@ export const PillarDetailModal: React.FC<PillarDetailModalProps> = ({
           </div>
 
           {/* Modal Content */}
-          <div className="p-6 sm:p-8 space-y-6 max-h-[65vh] overflow-y-auto">
+          <div className="p-6 sm:p-8 space-y-6 flex-1 overflow-y-auto">
             {/* Long description */}
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#718096] mb-2">

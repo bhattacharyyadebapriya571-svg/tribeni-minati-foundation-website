@@ -75,10 +75,10 @@ export const PartnerModal: React.FC<PartnerModalProps> = ({ isOpen, onClose }) =
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-          className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden z-10 my-8 border border-black/[0.08]"
+          className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden z-10 my-auto border border-black/[0.08] max-h-[88vh] flex flex-col"
         >
           {/* Top Bar */}
-          <div className="p-6 sm:p-7 bg-[#0C1A11] text-white flex items-center justify-between">
+          <div className="p-5 sm:p-7 bg-[#0C1A11] text-white flex items-center justify-between shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-[#4E8B65]/20 flex items-center justify-center border border-[#4E8B65]/30">
                 <Building2 className="w-5 h-5 text-[#4E8B65]" />
@@ -102,7 +102,7 @@ export const PartnerModal: React.FC<PartnerModalProps> = ({ isOpen, onClose }) =
           </div>
 
           {step === 'form' ? (
-            <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-5 max-h-[70vh] overflow-y-auto">
+            <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-5 flex-1 overflow-y-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 mb-1.5">

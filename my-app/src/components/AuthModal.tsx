@@ -71,14 +71,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-md">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-md overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative w-full max-w-md double-bezel-outer"
+          className="relative w-full max-w-md double-bezel-outer my-auto max-h-[90vh] flex flex-col"
         >
-          <div className="double-bezel-inner p-6 sm:p-8 bg-white text-[#151C18] relative">
+          <div className="double-bezel-inner p-6 sm:p-8 bg-white text-[#151C18] relative overflow-y-auto max-h-[85vh]">
             {/* Close Button */}
             <button
               onClick={onClose}
