@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ParallaxTotem } from '../components/motion/ParallaxTotem';
 
 export const ContactPage: React.FC = () => {
   const [sent, setSent] = useState(false);
@@ -148,88 +149,92 @@ export const ContactPage: React.FC = () => {
             )}
           </div>
 
-          {/* Right Column: Locations */}
+          {/* Right Column: Locations — HorizonX ParallaxTotem */}
           <div className="flex-1 space-y-8 flex flex-col justify-center">
             
-            {/* Location Card 1 */}
-            <div className="group bg-[#eceef0] rounded-3xl p-2 transition-transform duration-500 hover:-translate-y-2 relative overflow-hidden">
-              <div className="bg-white rounded-[20px] p-8 shadow-[0_10px_25px_-5px_rgba(15,23,42,0.05)] h-full flex flex-col relative z-10">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-[#4b41e1]">
-                    <span className="material-symbols-outlined">business</span>
+            {/* Location Card 1 — ParallaxTotem #1 */}
+            <ParallaxTotem index={0} maxOffset={30}>
+              <div className="group bg-[#eceef0] rounded-3xl p-2 transition-transform duration-500 hover:-translate-y-2 relative overflow-hidden">
+                <div className="bg-white rounded-[20px] p-8 shadow-[0_10px_25px_-5px_rgba(15,23,42,0.05)] h-full flex flex-col relative z-10">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-[#4b41e1]">
+                      <span className="material-symbols-outlined">business</span>
+                    </div>
+                    <div>
+                      <h3 className="font-headline-md text-xl font-bold text-[#191c1e]">
+                        Corporate Headquarters
+                      </h3>
+                      <p className="font-label-caps text-xs text-[#64748B] uppercase">
+                        Tribeni, West Bengal
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-headline-md text-xl font-bold text-[#191c1e]">
-                      Corporate Headquarters
-                    </h3>
-                    <p className="font-label-caps text-xs text-[#64748B] uppercase">
-                      Tribeni, West Bengal
+
+                  <div className="space-y-3 font-body-base text-sm text-[#45464d] mb-6">
+                    <p className="flex items-start gap-3">
+                      <span className="material-symbols-outlined text-[#4b41e1] text-[20px] mt-0.5">location_on</span>
+                      <span>Kanthaltala (near water tank), Tribeni-Mogra Road, PO Tribeni, Dist Hooghly 712503</span>
+                    </p>
+                    <p className="flex items-center gap-3">
+                      <span className="material-symbols-outlined text-[#4b41e1] text-[20px]">phone</span>
+                      <span>+91 9143430927</span>
+                    </p>
+                    <p className="flex items-center gap-3">
+                      <span className="material-symbols-outlined text-[#4b41e1] text-[20px]">mail</span>
+                      <span>tribeniminatifoundation@gmail.com</span>
                     </p>
                   </div>
-                </div>
 
-                <div className="space-y-3 font-body-base text-sm text-[#45464d] mb-6">
-                  <p className="flex items-start gap-3">
-                    <span className="material-symbols-outlined text-[#4b41e1] text-[20px] mt-0.5">location_on</span>
-                    <span>Kanthaltala (near water tank), Tribeni-Mogra Road, PO Tribeni, Dist Hooghly 712503</span>
-                  </p>
-                  <p className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-[#4b41e1] text-[20px]">phone</span>
-                    <span>+91 9143430927</span>
-                  </p>
-                  <p className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-[#4b41e1] text-[20px]">mail</span>
-                    <span>tribeniminatifoundation@gmail.com</span>
-                  </p>
-                </div>
-
-                <div className="w-full h-40 bg-slate-100 rounded-xl mt-auto overflow-hidden shadow-inner grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
-                  <img
-                    src="/tmf-assets/real-field-photos/tmf-field-10.jpeg"
-                    alt="Tribeni Headquarters"
-                    className="w-full h-full object-cover"
-                  />
+                  <div className="w-full h-40 bg-slate-100 rounded-xl mt-auto overflow-hidden shadow-inner grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
+                    <img
+                      src="/tmf-assets/real-field-photos/tmf-field-10.jpeg"
+                      alt="Tribeni Headquarters"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+            </ParallaxTotem>
 
-            {/* Location Card 2 */}
-            <div className="group bg-[#eceef0] rounded-3xl p-2 transition-transform duration-500 hover:-translate-y-2 relative overflow-hidden">
-              <div className="bg-white rounded-[20px] p-8 shadow-[0_10px_25px_-5px_rgba(15,23,42,0.05)] h-full flex flex-col relative z-10">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-[#4b41e1]">
-                    <span className="material-symbols-outlined">account_tree</span>
+            {/* Location Card 2 — ParallaxTotem #2 */}
+            <ParallaxTotem index={1} maxOffset={30}>
+              <div className="group bg-[#eceef0] rounded-3xl p-2 transition-transform duration-500 hover:-translate-y-2 relative overflow-hidden">
+                <div className="bg-white rounded-[20px] p-8 shadow-[0_10px_25px_-5px_rgba(15,23,42,0.05)] h-full flex flex-col relative z-10">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-[#4b41e1]">
+                      <span className="material-symbols-outlined">account_tree</span>
+                    </div>
+                    <div>
+                      <h3 className="font-headline-md text-xl font-bold text-[#191c1e]">
+                        Regional Operations
+                      </h3>
+                      <p className="font-label-caps text-xs text-[#64748B] uppercase">
+                        Radhanagar, Dhaniakhali
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-headline-md text-xl font-bold text-[#191c1e]">
-                      Regional Operations
-                    </h3>
-                    <p className="font-label-caps text-xs text-[#64748B] uppercase">
-                      Radhanagar, Dhaniakhali
+
+                  <div className="space-y-3 font-body-base text-sm text-[#45464d] mb-6">
+                    <p className="flex items-start gap-3">
+                      <span className="material-symbols-outlined text-[#4b41e1] text-[20px] mt-0.5">location_on</span>
+                      <span>Field Office, Radhanagar, PO Gopinagar, PS Dhaniakhali 712402</span>
+                    </p>
+                    <p className="flex items-center gap-3">
+                      <span className="material-symbols-outlined text-[#4b41e1] text-[20px]">phone</span>
+                      <span>+91 9832274345</span>
                     </p>
                   </div>
-                </div>
 
-                <div className="space-y-3 font-body-base text-sm text-[#45464d] mb-6">
-                  <p className="flex items-start gap-3">
-                    <span className="material-symbols-outlined text-[#4b41e1] text-[20px] mt-0.5">location_on</span>
-                    <span>Field Office, Radhanagar, PO Gopinagar, PS Dhaniakhali 712402</span>
-                  </p>
-                  <p className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-[#4b41e1] text-[20px]">phone</span>
-                    <span>+91 9832274345</span>
-                  </p>
-                </div>
-
-                <div className="w-full h-32 bg-slate-100 rounded-xl mt-auto overflow-hidden shadow-inner grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
-                  <img
-                    src="/tmf-assets/real-field-photos/tmf-field-22.jpeg"
-                    alt="Radhanagar Regional Operations"
-                    className="w-full h-full object-cover"
-                  />
+                  <div className="w-full h-32 bg-slate-100 rounded-xl mt-auto overflow-hidden shadow-inner grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
+                    <img
+                      src="/tmf-assets/real-field-photos/tmf-field-22.jpeg"
+                      alt="Radhanagar Regional Operations"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+            </ParallaxTotem>
 
           </div>
         </div>

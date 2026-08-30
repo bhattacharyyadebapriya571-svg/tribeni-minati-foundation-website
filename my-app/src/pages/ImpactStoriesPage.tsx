@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { STORIES_OF_CHANGE } from '../data/foundationData';
+import { GridSweepContainer, GridSweepItem } from '../components/motion/GridSweep';
+import { MotionFocusGroup, MotionFocusItem } from '../components/motion/MotionFocus';
 import type { PageId, StoryItem } from '../types';
 
 interface ImpactStoriesPageProps {
@@ -68,64 +70,69 @@ export const ImpactStoriesPage: React.FC<ImpactStoriesPageProps> = ({ onOpenDona
         </div>
       </section>
 
-      {/* Stories Bento Grid */}
+      {/* Stories Bento Grid — HorizonX GridSweep & MotionFocus */}
       <section className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredStories.map((story) => {
-            const photo = story.imageUrl || '/tmf-assets/real-field-photos/tmf-field-1.jpeg';
-            return (
-              <div
-                key={story.id}
-                onClick={() => setActiveStory(story)}
-                className="bg-[#f2f4f6] p-2 sm:p-3 rounded-[32px] shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer group flex flex-col justify-between"
-              >
-                <div className="bg-white rounded-[24px] overflow-hidden p-6 flex flex-col h-full justify-between">
-                  <div>
-                    {/* Photo with double-bezel style */}
-                    <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-slate-100">
-                      <img
-                        src={photo}
-                        alt={story.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute top-3 left-3">
-                        <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full font-label-caps text-[10px] text-[#4b41e1] font-bold">
-                          {story.category}
-                        </span>
+        <MotionFocusGroup>
+          <GridSweepContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" stagger={0.08}>
+            {filteredStories.map((story) => {
+              const photo = story.imageUrl || '/tmf-assets/real-field-photos/tmf-field-1.jpeg';
+              return (
+                <GridSweepItem key={story.id}>
+                  <MotionFocusItem id={story.id}>
+                    <div
+                      onClick={() => setActiveStory(story)}
+                      className="bg-[#f2f4f6] p-2 sm:p-3 rounded-[32px] shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer group flex flex-col justify-between h-full"
+                    >
+                      <div className="bg-white rounded-[24px] overflow-hidden p-6 flex flex-col h-full justify-between">
+                        <div>
+                          {/* Photo with double-bezel style */}
+                          <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-slate-100">
+                            <img
+                              src={photo}
+                              alt={story.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            />
+                            <div className="absolute top-3 left-3">
+                              <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full font-label-caps text-[10px] text-[#4b41e1] font-bold">
+                                {story.category}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-1.5 text-xs font-mono text-[#64748B] mb-2">
+                            <span className="material-symbols-outlined text-[16px] text-[#4b41e1]">location_on</span>
+                            <span>{story.location}</span>
+                          </div>
+
+                          <h3 className="font-headline-md text-xl font-bold text-[#191c1e] mb-2 group-hover:text-[#4b41e1] transition-colors leading-snug">
+                            {story.title}
+                          </h3>
+
+                          <p className="font-body-base text-xs font-semibold text-[#64748B] mb-3">
+                            {story.beneficiaryName} {story.age ? `(${story.age} yrs)` : ''}
+                          </p>
+
+                          <p className="font-body-base text-sm text-[#45464d] line-clamp-3 leading-relaxed">
+                            {story.afterTransformation}
+                          </p>
+                        </div>
+
+                        <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
+                          <span className="font-mono text-xs font-bold text-[#4b41e1]">
+                            Read Documentary Proof
+                          </span>
+                          <span className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[#191c1e] group-hover:bg-[#111827] group-hover:text-white transition-colors">
+                            <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                          </span>
+                        </div>
                       </div>
                     </div>
-
-                    <div className="flex items-center gap-1.5 text-xs font-mono text-[#64748B] mb-2">
-                      <span className="material-symbols-outlined text-[16px] text-[#4b41e1]">location_on</span>
-                      <span>{story.location}</span>
-                    </div>
-
-                    <h3 className="font-headline-md text-xl font-bold text-[#191c1e] mb-2 group-hover:text-[#4b41e1] transition-colors leading-snug">
-                      {story.title}
-                    </h3>
-
-                    <p className="font-body-base text-xs font-semibold text-[#64748B] mb-3">
-                      {story.beneficiaryName} {story.age ? `(${story.age} yrs)` : ''}
-                    </p>
-
-                    <p className="font-body-base text-sm text-[#45464d] line-clamp-3 leading-relaxed">
-                      {story.afterTransformation}
-                    </p>
-                  </div>
-
-                  <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-[#4b41e1]">
-                      Read Documentary Proof
-                    </span>
-                    <span className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[#191c1e] group-hover:bg-[#111827] group-hover:text-white transition-colors">
-                      <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                  </MotionFocusItem>
+                </GridSweepItem>
+              );
+            })}
+          </GridSweepContainer>
+        </MotionFocusGroup>
       </section>
 
       {/* Story Full Modal */}

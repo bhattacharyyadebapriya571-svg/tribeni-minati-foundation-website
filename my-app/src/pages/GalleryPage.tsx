@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { GridSweepContainer, GridSweepItem } from '../components/motion/GridSweep';
+import { MotionFocusGroup, MotionFocusItem } from '../components/motion/MotionFocus';
 import type { PageId } from '../types';
 
 interface GalleryPageProps {
@@ -115,51 +117,56 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onOpenDonate }) => {
         </div>
       </section>
 
-      {/* Photojournalism Grid */}
+      {/* Photojournalism Grid — HorizonX GridSweep & MotionFocus */}
       <section className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pb-24">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filtered.map((photo) => (
-            <div
-              key={photo.id}
-              onClick={() => setPreviewPhoto(photo)}
-              className="bg-[#f2f4f6] p-2 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 group cursor-pointer hover:-translate-y-1 flex flex-col justify-between"
-            >
-              <div className="bg-white rounded-[20px] overflow-hidden p-3 flex flex-col h-full justify-between">
-                <div>
-                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-100 mb-3">
-                    <img
-                      src={photo.url}
-                      alt={photo.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-2 left-2">
-                      <span className="px-2 py-0.5 bg-white/90 backdrop-blur-md rounded-full font-label-caps text-[9px] text-[#4b41e1] font-bold">
-                        {photo.category}
-                      </span>
+        <MotionFocusGroup>
+          <GridSweepContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" stagger={0.06}>
+            {filtered.map((photo) => (
+              <GridSweepItem key={photo.id}>
+                <MotionFocusItem id={photo.id}>
+                  <div
+                    onClick={() => setPreviewPhoto(photo)}
+                    className="bg-[#f2f4f6] p-2 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 group cursor-pointer hover:-translate-y-1 flex flex-col justify-between h-full"
+                  >
+                    <div className="bg-white rounded-[20px] overflow-hidden p-3 flex flex-col h-full justify-between">
+                      <div>
+                        <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-100 mb-3">
+                          <img
+                            src={photo.url}
+                            alt={photo.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                          <div className="absolute top-2 left-2">
+                            <span className="px-2 py-0.5 bg-white/90 backdrop-blur-md rounded-full font-label-caps text-[9px] text-[#4b41e1] font-bold">
+                              {photo.category}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="text-[10px] font-mono text-[#64748B] mb-1">
+                          {photo.location}
+                        </div>
+
+                        <h3 className="font-headline-md text-sm font-bold text-[#191c1e] line-clamp-1 group-hover:text-[#4b41e1]">
+                          {photo.title}
+                        </h3>
+
+                        <p className="font-body-base text-xs text-[#45464d] line-clamp-2 mt-1">
+                          {photo.caption}
+                        </p>
+                      </div>
+
+                      <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono font-bold text-[#4b41e1]">
+                        <span>Enlarge Record</span>
+                        <span className="material-symbols-outlined text-[16px]">fullscreen</span>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="text-[10px] font-mono text-[#64748B] mb-1">
-                    {photo.location}
-                  </div>
-
-                  <h3 className="font-headline-md text-sm font-bold text-[#191c1e] line-clamp-1 group-hover:text-[#4b41e1]">
-                    {photo.title}
-                  </h3>
-
-                  <p className="font-body-base text-xs text-[#45464d] line-clamp-2 mt-1">
-                    {photo.caption}
-                  </p>
-                </div>
-
-                <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono font-bold text-[#4b41e1]">
-                  <span>Enlarge Record</span>
-                  <span className="material-symbols-outlined text-[16px]">fullscreen</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+                </MotionFocusItem>
+              </GridSweepItem>
+            ))}
+          </GridSweepContainer>
+        </MotionFocusGroup>
       </section>
 
       {/* Lightbox Preview Modal */}

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import type { PageId } from '../types';
 import { LEGAL_DOCS } from '../data/tmfVerifiedData';
+import { GridSweepContainer, GridSweepItem } from '../components/motion/GridSweep';
+import { MotionFocusGroup, MotionFocusItem } from '../components/motion/MotionFocus';
 import type { LegalDocument } from '../data/tmfVerifiedData';
 
 interface TransparencyPageProps {
@@ -214,92 +216,108 @@ export const TransparencyPage: React.FC<TransparencyPageProps> = ({ onOpenDocume
               </div>
             </div>
 
-            <div className="lg:col-span-8 space-y-4">
-              
-              {/* FY 23-24 */}
-              <div
-                onClick={() => onOpenDocument && onOpenDocument(LEGAL_DOCS[2] || LEGAL_DOCS[0])}
-                className="bg-white border border-border-subtle rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:bg-[#f7f9fb] transition-colors cursor-pointer group shadow-xs"
-              >
-                <div className="flex items-center gap-6">
-                  <div className="w-14 h-14 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      picture_as_pdf
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="font-headline-md text-lg font-bold text-[#191c1e]">
-                      Annual Impact &amp; Financial Report
-                    </h4>
-                    <div className="flex items-center gap-3 mt-1">
-                      <span className="font-label-caps text-xs text-[#45464d] bg-[#eceef0] px-2 py-1 rounded font-bold">
-                        FY 2023-24
-                      </span>
-                      <span className="font-body-base text-xs text-[#64748B]">4.2 MB • Audited</span>
-                    </div>
-                  </div>
-                </div>
-                <button className="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-[#191c1e] group-hover:bg-[#111827] group-hover:text-white transition-all shrink-0">
-                  <span className="material-symbols-outlined">download</span>
-                </button>
-              </div>
+            <div className="lg:col-span-8">
+              <MotionFocusGroup>
+                <GridSweepContainer className="space-y-4" stagger={0.08}>
+                  
+                  {/* FY 23-24 */}
+                  <GridSweepItem>
+                    <MotionFocusItem id="doc-fy2324">
+                      <div
+                        onClick={() => onOpenDocument && onOpenDocument(LEGAL_DOCS[2] || LEGAL_DOCS[0])}
+                        className="bg-white border border-border-subtle rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:bg-[#f7f9fb] transition-colors cursor-pointer group shadow-xs"
+                      >
+                        <div className="flex items-center gap-6">
+                          <div className="w-14 h-14 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center shrink-0">
+                            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+                              picture_as_pdf
+                            </span>
+                          </div>
+                          <div>
+                            <h4 className="font-headline-md text-lg font-bold text-[#191c1e]">
+                              Annual Impact &amp; Financial Report
+                            </h4>
+                            <div className="flex items-center gap-3 mt-1">
+                              <span className="font-label-caps text-xs text-[#45464d] bg-[#eceef0] px-2 py-1 rounded font-bold">
+                                FY 2023-24
+                              </span>
+                              <span className="font-body-base text-xs text-[#64748B]">4.2 MB • Audited</span>
+                            </div>
+                          </div>
+                        </div>
+                        <button className="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-[#191c1e] group-hover:bg-[#111827] group-hover:text-white transition-all shrink-0">
+                          <span className="material-symbols-outlined">download</span>
+                        </button>
+                      </div>
+                    </MotionFocusItem>
+                  </GridSweepItem>
 
-              {/* FY 22-23 */}
-              <div
-                onClick={() => onOpenDocument && onOpenDocument(LEGAL_DOCS[3] || LEGAL_DOCS[0])}
-                className="bg-white border border-border-subtle rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:bg-[#f7f9fb] transition-colors cursor-pointer group shadow-xs"
-              >
-                <div className="flex items-center gap-6">
-                  <div className="w-14 h-14 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      picture_as_pdf
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="font-headline-md text-lg font-bold text-[#191c1e]">
-                      Annual Impact &amp; Financial Report
-                    </h4>
-                    <div className="flex items-center gap-3 mt-1">
-                      <span className="font-label-caps text-xs text-[#45464d] bg-[#eceef0] px-2 py-1 rounded font-bold">
-                        FY 2022-23
-                      </span>
-                      <span className="font-body-base text-xs text-[#64748B]">3.8 MB • Audited</span>
-                    </div>
-                  </div>
-                </div>
-                <button className="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-[#191c1e] group-hover:bg-[#111827] group-hover:text-white transition-all shrink-0">
-                  <span className="material-symbols-outlined">download</span>
-                </button>
-              </div>
+                  {/* FY 22-23 */}
+                  <GridSweepItem>
+                    <MotionFocusItem id="doc-fy2223">
+                      <div
+                        onClick={() => onOpenDocument && onOpenDocument(LEGAL_DOCS[3] || LEGAL_DOCS[0])}
+                        className="bg-white border border-border-subtle rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:bg-[#f7f9fb] transition-colors cursor-pointer group shadow-xs"
+                      >
+                        <div className="flex items-center gap-6">
+                          <div className="w-14 h-14 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center shrink-0">
+                            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+                              picture_as_pdf
+                            </span>
+                          </div>
+                          <div>
+                            <h4 className="font-headline-md text-lg font-bold text-[#191c1e]">
+                              Annual Impact &amp; Financial Report
+                            </h4>
+                            <div className="flex items-center gap-3 mt-1">
+                              <span className="font-label-caps text-xs text-[#45464d] bg-[#eceef0] px-2 py-1 rounded font-bold">
+                                FY 2022-23
+                              </span>
+                              <span className="font-body-base text-xs text-[#64748B]">3.8 MB • Audited</span>
+                            </div>
+                          </div>
+                        </div>
+                        <button className="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-[#191c1e] group-hover:bg-[#111827] group-hover:text-white transition-all shrink-0">
+                          <span className="material-symbols-outlined">download</span>
+                        </button>
+                      </div>
+                    </MotionFocusItem>
+                  </GridSweepItem>
 
-              {/* Trust Deed */}
-              <div
-                onClick={() => onOpenDocument && onOpenDocument(LEGAL_DOCS[0])}
-                className="bg-white border border-border-subtle rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:bg-[#f7f9fb] transition-colors cursor-pointer group shadow-xs"
-              >
-                <div className="flex items-center gap-6">
-                  <div className="w-14 h-14 bg-indigo-50 text-[#4b41e1] rounded-xl flex items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      description
-                    </span>
-                  </div>
-                  <div>
-                    <h4 className="font-headline-md text-lg font-bold text-[#191c1e]">
-                      Foundation Trust Deed &amp; Bylaws
-                    </h4>
-                    <div className="flex items-center gap-3 mt-1">
-                      <span className="font-label-caps text-xs text-[#45464d] bg-[#eceef0] px-2 py-1 rounded font-bold">
-                        Legal
-                      </span>
-                      <span className="font-body-base text-xs text-[#64748B]">1.1 MB • Registered</span>
-                    </div>
-                  </div>
-                </div>
-                <button className="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-[#191c1e] group-hover:bg-[#111827] group-hover:text-white transition-all shrink-0">
-                  <span className="material-symbols-outlined">download</span>
-                </button>
-              </div>
+                  {/* Trust Deed */}
+                  <GridSweepItem>
+                    <MotionFocusItem id="doc-trustdeed">
+                      <div
+                        onClick={() => onOpenDocument && onOpenDocument(LEGAL_DOCS[0])}
+                        className="bg-white border border-border-subtle rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 hover:bg-[#f7f9fb] transition-colors cursor-pointer group shadow-xs"
+                      >
+                        <div className="flex items-center gap-6">
+                          <div className="w-14 h-14 bg-indigo-50 text-[#4b41e1] rounded-xl flex items-center justify-center shrink-0">
+                            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+                              description
+                            </span>
+                          </div>
+                          <div>
+                            <h4 className="font-headline-md text-lg font-bold text-[#191c1e]">
+                              Foundation Trust Deed &amp; Bylaws
+                            </h4>
+                            <div className="flex items-center gap-3 mt-1">
+                              <span className="font-label-caps text-xs text-[#45464d] bg-[#eceef0] px-2 py-1 rounded font-bold">
+                                Legal
+                              </span>
+                              <span className="font-body-base text-xs text-[#64748B]">1.1 MB • Registered</span>
+                            </div>
+                          </div>
+                        </div>
+                        <button className="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center text-[#191c1e] group-hover:bg-[#111827] group-hover:text-white transition-all shrink-0">
+                          <span className="material-symbols-outlined">download</span>
+                        </button>
+                      </div>
+                    </MotionFocusItem>
+                  </GridSweepItem>
 
+                </GridSweepContainer>
+              </MotionFocusGroup>
             </div>
 
           </div>

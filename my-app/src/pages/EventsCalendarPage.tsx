@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { TMF_META } from '../data/tmfVerifiedData';
+import { GridSweepContainer, GridSweepItem } from '../components/motion/GridSweep';
+import { MotionFocusGroup, MotionFocusItem } from '../components/motion/MotionFocus';
 import type { PageId } from '../types';
 
 interface EventsCalendarProps {
@@ -166,100 +168,105 @@ export const EventsCalendarPage: React.FC<EventsCalendarProps> = ({ onNavigate, 
         </div>
       </section>
 
-      {/* Camps List */}
+      {/* Camps List — HorizonX GridSweep & MotionFocus */}
       <section className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pb-24">
-        <div className="space-y-6">
-          {filteredCamps.map((camp) => (
-            <div
-              key={camp.id}
-              className="bg-[#f2f4f6] p-2 sm:p-3 rounded-[28px] shadow-sm hover:shadow-xl transition-all duration-300 group"
-            >
-              <div className="bg-white rounded-[22px] p-6 sm:p-8 flex flex-col lg:flex-row justify-between gap-8 items-start lg:items-center">
-                
-                {/* Left: Date Badge + Title + Location */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 flex-1">
-                  
-                  {/* Date Capsule */}
-                  <div className="w-24 h-24 rounded-2xl bg-indigo-50 text-[#4b41e1] flex flex-col items-center justify-center shrink-0 border border-indigo-100 p-2 text-center">
-                    <span className="font-stat-lg text-2xl font-black leading-none">
-                      {camp.date.split(' ')[0]}
-                    </span>
-                    <span className="font-label-caps text-[11px] uppercase font-bold text-[#4b41e1] mt-1">
-                      {camp.date.split(' ')[1]}
-                    </span>
-                    <span className="font-mono text-[9px] text-[#64748B]">
-                      {camp.date.split(' ')[2]}
-                    </span>
-                  </div>
-
-                  {/* Details */}
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <span className="px-3 py-1 bg-[#f2f4f6] text-[#191c1e] rounded-full text-[11px] font-bold font-label-caps uppercase">
-                        {camp.category}
-                      </span>
-                      <span className="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-[11px] font-bold font-label-caps uppercase">
-                        {camp.status}
-                      </span>
-                    </div>
-
-                    <h3 className="font-headline-md text-xl sm:text-2xl font-bold text-[#191c1e]">
-                      {camp.title}
-                    </h3>
-
-                    <p className="text-xs font-semibold text-[#64748B]">
-                      {camp.bengaliTitle}
-                    </p>
-
-                    <p className="font-body-base text-sm text-[#45464d] max-w-2xl leading-relaxed pt-1">
-                      {camp.description}
-                    </p>
-
-                    {/* Metadata strip */}
-                    <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#64748B] pt-2">
-                      <span className="flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[16px] text-[#4b41e1]">schedule</span>
-                        <span>{camp.time}</span>
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[16px] text-[#4b41e1]">location_on</span>
-                        <span>{camp.location}, {camp.district}</span>
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[16px] text-[#4b41e1]">groups</span>
-                        <span>{camp.expectedBeneficiaries}</span>
-                      </span>
-                    </div>
-                  </div>
-
-                </div>
-
-                {/* Right: Actions */}
-                <div className="flex flex-col sm:flex-row lg:flex-col gap-3 w-full lg:w-48 shrink-0">
-                  <button
-                    onClick={() => {
-                      setRsvpCampId(camp.id);
-                      setRsvpSubmitted(false);
-                    }}
-                    className="w-full py-3.5 bg-[#111827] hover:bg-[#4b41e1] text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2"
+        <MotionFocusGroup>
+          <GridSweepContainer className="space-y-6" stagger={0.08}>
+            {filteredCamps.map((camp) => (
+              <GridSweepItem key={camp.id}>
+                <MotionFocusItem id={camp.id}>
+                  <div
+                    className="bg-[#f2f4f6] p-2 sm:p-3 rounded-[28px] shadow-sm hover:shadow-xl transition-all duration-300 group"
                   >
-                    <span className="material-symbols-outlined text-[18px]">how_to_reg</span>
-                    <span>Join as Volunteer</span>
-                  </button>
+                    <div className="bg-white rounded-[22px] p-6 sm:p-8 flex flex-col lg:flex-row justify-between gap-8 items-start lg:items-center">
+                      
+                      {/* Left: Date Badge + Title + Location */}
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 flex-1">
+                        
+                        {/* Date Capsule */}
+                        <div className="w-24 h-24 rounded-2xl bg-indigo-50 text-[#4b41e1] flex flex-col items-center justify-center shrink-0 border border-indigo-100 p-2 text-center">
+                          <span className="font-stat-lg text-2xl font-black leading-none">
+                            {camp.date.split(' ')[0]}
+                          </span>
+                          <span className="font-label-caps text-[11px] uppercase font-bold text-[#4b41e1] mt-1">
+                            {camp.date.split(' ')[1]}
+                          </span>
+                          <span className="font-mono text-[9px] text-[#64748B]">
+                            {camp.date.split(' ')[2]}
+                          </span>
+                        </div>
 
-                  <button
-                    onClick={() => onOpenDonate(5000, `Sponsor Drive: ${camp.title}`)}
-                    className="w-full py-3.5 bg-[#F59E0B] text-[#111827] font-extrabold rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xs hover:shadow-md hover:-translate-y-0.5"
-                  >
-                    <span className="material-symbols-outlined text-[18px]">volunteer_activism</span>
-                    <span>Sponsor Drive</span>
-                  </button>
-                </div>
+                        {/* Details */}
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-3 flex-wrap">
+                            <span className="px-3 py-1 bg-[#f2f4f6] text-[#191c1e] rounded-full text-[11px] font-bold font-label-caps uppercase">
+                              {camp.category}
+                            </span>
+                            <span className="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-[11px] font-bold font-label-caps uppercase">
+                              {camp.status}
+                            </span>
+                          </div>
 
-              </div>
-            </div>
-          ))}
-        </div>
+                          <h3 className="font-headline-md text-xl sm:text-2xl font-bold text-[#191c1e]">
+                            {camp.title}
+                          </h3>
+
+                          <p className="text-xs font-semibold text-[#64748B]">
+                            {camp.bengaliTitle}
+                          </p>
+
+                          <p className="font-body-base text-sm text-[#45464d] max-w-2xl leading-relaxed pt-1">
+                            {camp.description}
+                          </p>
+
+                          {/* Metadata strip */}
+                          <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#64748B] pt-2">
+                            <span className="flex items-center gap-1">
+                              <span className="material-symbols-outlined text-[16px] text-[#4b41e1]">schedule</span>
+                              <span>{camp.time}</span>
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <span className="material-symbols-outlined text-[16px] text-[#4b41e1]">location_on</span>
+                              <span>{camp.location}, {camp.district}</span>
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <span className="material-symbols-outlined text-[16px] text-[#4b41e1]">groups</span>
+                              <span>{camp.expectedBeneficiaries}</span>
+                            </span>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      {/* Right: Actions */}
+                      <div className="flex flex-col sm:flex-row lg:flex-col gap-3 w-full lg:w-48 shrink-0">
+                        <button
+                          onClick={() => {
+                            setRsvpCampId(camp.id);
+                            setRsvpSubmitted(false);
+                          }}
+                          className="w-full py-3.5 bg-[#111827] hover:bg-[#4b41e1] text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2"
+                        >
+                          <span className="material-symbols-outlined text-[18px]">how_to_reg</span>
+                          <span>Join as Volunteer</span>
+                        </button>
+
+                        <button
+                          onClick={() => onOpenDonate(5000, `Sponsor Drive: ${camp.title}`)}
+                          className="w-full py-3.5 bg-[#F59E0B] text-[#111827] font-extrabold rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xs hover:shadow-md hover:-translate-y-0.5"
+                        >
+                          <span className="material-symbols-outlined text-[18px]">volunteer_activism</span>
+                          <span>Sponsor Drive</span>
+                        </button>
+                      </div>
+
+                    </div>
+                  </div>
+                </MotionFocusItem>
+              </GridSweepItem>
+            ))}
+          </GridSweepContainer>
+        </MotionFocusGroup>
       </section>
 
       {/* Volunteer RSVP Modal */}
