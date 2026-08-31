@@ -67,7 +67,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDonate, onExploreWork }) => {
                 <img
                   src="/tmf-assets/real-field-photos/tmf-field-1.jpeg"
                   alt="Free Child Remedial Education Center"
-                  className="w-full h-full object-cover rounded-[1.5rem] mix-blend-multiply group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover rounded-[1.5rem] group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 rounded-[1.5rem] ring-1 ring-inset ring-black/10 pointer-events-none" />
                 

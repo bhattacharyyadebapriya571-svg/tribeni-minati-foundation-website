@@ -186,7 +186,7 @@ export const ContactPage: React.FC = () => {
                     </p>
                   </div>
 
-                  <div className="w-full h-40 bg-slate-100 rounded-xl mt-auto overflow-hidden shadow-inner grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
+                  <div className="w-full h-40 bg-slate-100 rounded-xl mt-auto overflow-hidden shadow-inner group-hover:scale-[1.02] transition-all duration-700">
                     <img
                       src="/tmf-assets/real-field-photos/tmf-field-10.jpeg"
                       alt="Tribeni Headquarters"
@@ -226,7 +226,7 @@ export const ContactPage: React.FC = () => {
                     </p>
                   </div>
 
-                  <div className="w-full h-32 bg-slate-100 rounded-xl mt-auto overflow-hidden shadow-inner grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
+                  <div className="w-full h-32 bg-slate-100 rounded-xl mt-auto overflow-hidden shadow-inner group-hover:scale-[1.02] transition-all duration-700">
                     <img
                       src="/tmf-assets/real-field-photos/tmf-field-22.jpeg"
                       alt="Radhanagar Regional Operations"
