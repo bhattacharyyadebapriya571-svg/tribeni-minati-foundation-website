@@ -24,6 +24,7 @@
     "@vercel/global-config": "^1.5.1",
     "@vercel/speed-insights": "^2.0.0",
     "algoliasearch": "^5.57.0",
+    "firebase": "^12.18.0",
     "framer-motion": "^13.1.1",
     "lucide-react": "^1.34.0",
     "mongodb": "^7.6.0",
