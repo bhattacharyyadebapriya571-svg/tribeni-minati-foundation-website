@@ -3,6 +3,7 @@ import { Menu, X, LogOut, ShieldCheck, Sparkles, PhoneCall, ChevronDown } from '
 import { useAuth } from '../context/AuthContext';
 import { TMF_META } from '../data/tmfVerifiedData';
 import type { PageId } from '../types';
+import { AnimatedIcon } from './animations/AnimatedIcon';
 
 interface NavProps {
   currentPage: PageId;
@@ -176,12 +177,13 @@ export const Nav: React.FC<NavProps> = ({
           {/* Right CTA Actions */}
           <div className="flex items-center gap-3 sm:gap-5">
             
-            {/* Stitch Amber Donate Button */}
+            {/* Stitch Amber Donate Button with Animated Icon */}
             <button
               onClick={onOpenDonate}
-              className="hidden sm:flex items-center px-5 py-2.5 bg-[#F59E0B] text-[#111827] font-extrabold rounded-2xl shadow-[0_10px_25px_-5px_rgba(245,158,11,0.3)] hover:-translate-y-0.5 hover:shadow-[0_15px_30px_-5px_rgba(245,158,11,0.4)] hover:scale-105 transition-all duration-300 active:scale-95 cursor-pointer text-xs uppercase tracking-wider"
+              className="hidden sm:flex items-center gap-1.5 px-5 py-2.5 bg-[#F59E0B] text-[#111827] font-extrabold rounded-2xl shadow-[0_10px_25px_-5px_rgba(245,158,11,0.3)] hover:-translate-y-0.5 hover:shadow-[0_15px_30px_-5px_rgba(245,158,11,0.4)] hover:scale-105 transition-all duration-300 active:scale-95 cursor-pointer text-xs uppercase tracking-wider"
             >
-              Donate Now (80G)
+              <AnimatedIcon preset="heart" size={16} fallbackMaterialIcon="favorite" />
+              <span>Donate (80G)</span>
             </button>
 
             {/* User Account / Profile Icon */}

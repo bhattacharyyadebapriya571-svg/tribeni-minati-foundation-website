@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { TMF_META } from '../data/tmfVerifiedData';
 import { MotionColumn } from './motion/MotionColumn';
 import { MotionFocusGroup, MotionFocusItem } from './motion/MotionFocus';
+import { ShaderGradientHero } from './animations/ShaderGradientHero';
+import { AnimatedIcon } from './animations/AnimatedIcon';
+
+const SplineHeroScene = lazy(() => import('./animations/SplineHeroScene'));
 
 interface HeroProps {
   onOpenDonate: () => void;
@@ -9,19 +13,24 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenDonate, onExploreWork }) => {
+  const [viewMode, setViewMode] = useState<'photo' | '3d'>('photo');
+
   return (
     <>
-      {/* Hero Section — HorizonX MotionColumn Parallax */}
+      {/* Hero Section — HorizonX MotionColumn Parallax + Shader Gradient */}
       <section className="relative w-full overflow-hidden pb-16 lg:pb-32 pt-16 lg:pt-24">
+        {/* Dynamic WebGL Shader Gradient Background */}
+        <ShaderGradientHero speed={0.0012} opacity={0.35} />
+
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left Content */}
             <MotionColumn speed={0.05} className="lg:col-span-6 flex flex-col gap-6">
               
-              {/* Badge */}
+              {/* Badge with Animated Sparkle Icon */}
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-md rounded-full border border-border-subtle shadow-sm w-max hover:shadow-md transition-shadow">
-                <span className="w-2 h-2 rounded-full bg-[#4b41e1] animate-pulse" />
+                <AnimatedIcon preset="sparkle" size={16} fallbackMaterialIcon="star" />
                 <span className="font-label-caps text-xs text-[#45464d]">
                   Govt. Reg: {TMF_META.newRegNo} | 80G Certified
                 </span>
@@ -46,6 +55,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDonate, onExploreWork }) => {
                   onClick={onOpenDonate}
                   className="w-full sm:w-auto px-8 py-4 bg-[#F59E0B] text-[#111827] font-bold rounded-2xl shadow-[0_10px_25px_-5px_rgba(245,158,11,0.3)] hover:-translate-y-1 hover:shadow-[0_20px_35px_-5px_rgba(245,158,11,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer"
                 >
+                  <AnimatedIcon preset="heart" size={20} fallbackMaterialIcon="favorite" />
                   <span>Support Our Cause</span>
                   <span className="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-300">
                     arrow_forward
@@ -61,29 +71,69 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDonate, onExploreWork }) => {
               </div>
             </MotionColumn>
 
-            {/* Right Image */}
+            {/* Right Media Section with 3D / 2D Toggle */}
             <MotionColumn speed={-0.05} className="lg:col-span-6 relative">
-              <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] bg-[#f2f4f6] p-2 group hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.15)] transition-all duration-500 transform hover:-translate-y-2">
-                <img
-                  src="/tmf-assets/generated/hero_child_education.jpg"
-                  alt="Free Child Remedial Education Center"
-                  className="w-full h-full object-cover rounded-[1.5rem] group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 rounded-[1.5rem] ring-1 ring-inset ring-black/10 pointer-events-none" />
-                
-                {/* Decorative Focus Badge */}
-                <div className="absolute bottom-8 left-4 sm:-left-4 bg-white/90 backdrop-blur-xl p-4 rounded-2xl shadow-2xl border border-white/50 flex items-center gap-4 transform hover:scale-110 hover:-translate-y-2 transition-all duration-300 cursor-default">
-                  <div className="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-[#4b41e1] animate-bounce">
-                      school
-                    </span>
-                  </div>
-                  <div>
-                    <p className="font-label-caps text-[10px] text-[#45464d] uppercase">Focus Area</p>
-                    <p className="font-headline-md text-base font-bold text-[#191c1e]">Child Education</p>
-                  </div>
+              
+              {/* 3D / Photo Mode Switch Pill */}
+              <div className="flex items-center justify-end mb-3">
+                <div className="inline-flex items-center bg-white/80 backdrop-blur-md p-1 rounded-xl border border-border-subtle shadow-xs font-mono text-[11px]">
+                  <button
+                    onClick={() => setViewMode('photo')}
+                    className={`px-3 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                      viewMode === 'photo'
+                        ? 'bg-[#111827] text-white shadow-xs'
+                        : 'text-[#64748B] hover:text-[#191c1e]'
+                    }`}
+                  >
+                    Field Photo
+                  </button>
+                  <button
+                    onClick={() => setViewMode('3d')}
+                    className={`px-3 py-1 rounded-lg font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                      viewMode === '3d'
+                        ? 'bg-[#4b41e1] text-white shadow-xs'
+                        : 'text-[#64748B] hover:text-[#4b41e1]'
+                    }`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                    <span>Spline 3D</span>
+                  </button>
                 </div>
               </div>
+
+              {viewMode === '3d' ? (
+                <Suspense
+                  fallback={
+                    <div className="w-full aspect-[4/3] rounded-[2rem] bg-slate-900 animate-pulse flex items-center justify-center text-white/50 font-mono text-xs">
+                      Loading Interactive 3D World...
+                    </div>
+                  }
+                >
+                  <SplineHeroScene fallbackImage="/tmf-assets/generated/hero_child_education.jpg" />
+                </Suspense>
+              ) : (
+                <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] bg-[#f2f4f6] p-2 group hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.15)] transition-all duration-500 transform hover:-translate-y-2">
+                  <img
+                    src="/tmf-assets/generated/hero_child_education.jpg"
+                    alt="Free Child Remedial Education Center"
+                    className="w-full h-full object-cover rounded-[1.5rem] group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 rounded-[1.5rem] ring-1 ring-inset ring-black/10 pointer-events-none" />
+                  
+                  {/* Decorative Focus Badge */}
+                  <div className="absolute bottom-8 left-4 sm:-left-4 bg-white/90 backdrop-blur-xl p-4 rounded-2xl shadow-2xl border border-white/50 flex items-center gap-4 transform hover:scale-110 hover:-translate-y-2 transition-all duration-300 cursor-default">
+                    <div className="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center">
+                      <span className="material-symbols-outlined text-[#4b41e1] animate-bounce">
+                        school
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-label-caps text-[10px] text-[#45464d] uppercase">Focus Area</p>
+                      <p className="font-headline-md text-base font-bold text-[#191c1e]">Child Education</p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </MotionColumn>
 
           </div>
@@ -98,37 +148,57 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDonate, onExploreWork }) => {
               
               <MotionFocusItem id="metric-coached" className="pt-4 md:pt-0 px-4">
                 <div className="flex flex-col gap-2 group">
-                  <h3 className="font-stat-lg text-3xl sm:text-4xl text-[#111827] group-hover:scale-110 origin-left transition-transform duration-300">
-                    500+
-                  </h3>
-                  <p className="font-label-caps text-xs text-[#45464d]">Children Coached</p>
+                  <span className="font-stat-lg text-4xl sm:text-5xl font-bold text-[#191c1e] tracking-tight group-hover:text-[#4b41e1] transition-colors">
+                    6,400+
+                  </span>
+                  <span className="font-headline-md text-sm font-semibold text-[#191c1e]">
+                    Students Coached
+                  </span>
+                  <p className="font-body-sm text-xs text-[#45464d]">
+                    Enrolled across our free rural remedial education centers.
+                  </p>
                 </div>
               </MotionFocusItem>
 
-              <MotionFocusItem id="metric-relief" className="pt-4 md:pt-0 px-4">
+              <MotionFocusItem id="metric-blankets" className="pt-4 md:pt-0 px-4">
                 <div className="flex flex-col gap-2 group">
-                  <h3 className="font-stat-lg text-3xl sm:text-4xl text-[#111827] group-hover:scale-110 origin-left transition-transform duration-300">
+                  <span className="font-stat-lg text-4xl sm:text-5xl font-bold text-[#191c1e] tracking-tight group-hover:text-[#4b41e1] transition-colors">
                     1,200+
-                  </h3>
-                  <p className="font-label-caps text-xs text-[#45464d]">Relief Kits Distributed</p>
+                  </span>
+                  <span className="font-headline-md text-sm font-semibold text-[#191c1e]">
+                    Infant Winter Kits
+                  </span>
+                  <p className="font-body-sm text-xs text-[#45464d]">
+                    Insulated zipped bedding and warm clothing distributed.
+                  </p>
                 </div>
               </MotionFocusItem>
 
-              <MotionFocusItem id="metric-tax" className="pt-4 md:pt-0 px-4">
+              <MotionFocusItem id="metric-patients" className="pt-4 md:pt-0 px-4">
                 <div className="flex flex-col gap-2 group">
-                  <h3 className="font-stat-lg text-3xl sm:text-4xl text-[#4b41e1] group-hover:scale-110 origin-left transition-transform duration-300">
+                  <span className="font-stat-lg text-4xl sm:text-5xl font-bold text-[#191c1e] tracking-tight group-hover:text-[#4b41e1] transition-colors">
+                    3,500+
+                  </span>
+                  <span className="font-headline-md text-sm font-semibold text-[#191c1e]">
+                    Patients Treated
+                  </span>
+                  <p className="font-body-sm text-xs text-[#45464d]">
+                    Free general health screenings and specialist consultations.
+                  </p>
+                </div>
+              </MotionFocusItem>
+
+              <MotionFocusItem id="metric-governance" className="pt-4 md:pt-0 px-4">
+                <div className="flex flex-col gap-2 group">
+                  <span className="font-stat-lg text-4xl sm:text-5xl font-bold text-[#191c1e] tracking-tight group-hover:text-[#4b41e1] transition-colors">
                     100%
-                  </h3>
-                  <p className="font-label-caps text-xs text-[#45464d]">Tax Exempt (80G)</p>
-                </div>
-              </MotionFocusItem>
-
-              <MotionFocusItem id="metric-years" className="pt-4 md:pt-0 px-4">
-                <div className="flex flex-col gap-2 group">
-                  <h3 className="font-stat-lg text-3xl sm:text-4xl text-[#111827] group-hover:scale-110 origin-left transition-transform duration-300">
-                    10+
-                  </h3>
-                  <p className="font-label-caps text-xs text-[#45464d]">Years Ground Service</p>
+                  </span>
+                  <span className="font-headline-md text-sm font-semibold text-[#191c1e]">
+                    Statutory Compliance
+                  </span>
+                  <p className="font-body-sm text-xs text-[#45464d]">
+                    Audited utilization accounts under 12A &amp; 80G provisions.
+                  </p>
                 </div>
               </MotionFocusItem>
 
