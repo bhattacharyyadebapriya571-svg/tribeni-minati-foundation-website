@@ -10,15 +10,15 @@ interface ProgramDetailPageProps {
 }
 
 const PROGRAM_PHOTOS: Record<string, string> = {
-  education: '/tmf-assets/real-field-photos/tmf-field-1.jpeg',
-  'women-empowerment': '/tmf-assets/real-field-photos/tmf-field-18.jpeg',
-  healthcare: '/tmf-assets/real-field-photos/tmf-field-22.jpeg',
-  'winter-relief': '/tmf-assets/real-field-photos/tmf-field-14.jpeg',
-  'blood-donation': '/tmf-assets/real-field-photos/tmf-field-16.jpeg',
-  'food-relief': '/tmf-assets/real-field-photos/tmf-field-4.jpg',
-  'livelihood-farming': '/tmf-assets/real-field-photos/tmf-field-19.jpeg',
-  'green-transit': '/tmf-assets/real-field-photos/tmf-field-10.jpeg',
-  'disaster-relief': '/tmf-assets/real-field-photos/tmf-field-15.jpeg',
+  education: '/tmf-assets/generated/hero_child_education.jpg',
+  'women-empowerment': '/tmf-assets/generated/women_tailoring_hub.jpg',
+  healthcare: '/tmf-assets/generated/rural_medical_camp.jpg',
+  'winter-relief': '/tmf-assets/generated/winter_infant_bedding.jpg',
+  'blood-donation': '/tmf-assets/generated/blood_donation_camp.jpg',
+  'food-relief': '/tmf-assets/generated/community_food_relief.jpg',
+  'livelihood-farming': '/tmf-assets/generated/rural_medical_camp.jpg',
+  'green-transit': '/tmf-assets/generated/community_food_relief.jpg',
+  'disaster-relief': '/tmf-assets/generated/winter_infant_bedding.jpg',
 };
 
 export const ProgramDetailPage: React.FC<ProgramDetailPageProps> = ({

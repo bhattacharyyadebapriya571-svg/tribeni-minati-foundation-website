@@ -54,7 +54,7 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onNavigate, onOpenDona
           
           <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transition-transform duration-700 bg-slate-100 p-2 bg-[#f2f4f6]">
             <img
-              src="/tmf-assets/real-field-photos/tmf-field-10.jpeg"
+              src="/tmf-assets/generated/community_food_relief.jpg"
               alt="Tribeni Minati Foundation Field Deployment"
               className="w-full h-full object-cover rounded-[1.5rem] scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out"
             />

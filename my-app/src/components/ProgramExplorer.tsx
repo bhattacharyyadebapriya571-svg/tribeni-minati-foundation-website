@@ -54,7 +54,7 @@ export const ProgramExplorer: React.FC<ProgramExplorerProps> = ({ onNavigate }) 
               <div className="bg-white rounded-[24px] overflow-hidden flex flex-col lg:flex-row relative">
                 <div className="w-full lg:w-3/5 h-[300px] lg:h-[500px] relative overflow-hidden bg-slate-100">
                   <img
-                    src="/tmf-assets/real-field-photos/tmf-field-1.jpeg"
+                    src="/tmf-assets/generated/hero_child_education.jpg"
                     alt="Free Child Remedial Education Center"
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
@@ -98,7 +98,7 @@ export const ProgramExplorer: React.FC<ProgramExplorerProps> = ({ onNavigate }) 
               <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full relative">
                 <div className="w-full h-[280px] relative overflow-hidden bg-slate-100">
                   <img
-                    src="/tmf-assets/real-field-photos/tmf-field-14.jpeg"
+                    src="/tmf-assets/generated/winter_infant_bedding.jpg"
                     alt="Infant Winter Bedding Drive"
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
@@ -136,7 +136,7 @@ export const ProgramExplorer: React.FC<ProgramExplorerProps> = ({ onNavigate }) 
               <div className="bg-white rounded-[24px] overflow-hidden flex flex-col h-full relative">
                 <div className="w-full h-[280px] relative overflow-hidden bg-slate-100">
                   <img
-                    src="/tmf-assets/real-field-photos/tmf-field-22.jpeg"
+                    src="/tmf-assets/generated/rural_medical_camp.jpg"
                     alt="Rural Healthcare Camps"
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   />

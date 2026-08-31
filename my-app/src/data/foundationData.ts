@@ -233,7 +233,7 @@ export const STORIES_OF_CHANGE: StoryItem[] = [
     afterTransformation: 'After enrolling in the Minati Free Remedial Coaching Center, Priya received daily tutoring, school bags, and notebooks. She scored 88% in her 4th standard final exams.',
     quote: 'মিনতি সেন্টারে শিক্ষকরা আমাদের নিজের সন্তানের মতো পড়ান। আমি বড় হয়ে শিক্ষিকা হতে চাই।',
     readTime: '3 min read',
-    imageUrl: '/tmf-assets/real-field-photos/tmf-field-1.jpeg',
+    imageUrl: '/tmf-assets/generated/story_student_priya.jpg',
   },
   {
     id: 'story-anima',
@@ -246,7 +246,7 @@ export const STORIES_OF_CHANGE: StoryItem[] = [
     afterTransformation: 'Tribeni Minati Foundation volunteers delivered an insulated zipped mattress kit, woollen baby suit, and mother thermal shawl directly to her doorstep.',
     quote: 'এই জিপ দেওয়া শীতের নরম বিছানা আমার ছোট্ট সন্তানকে কনকনে ঠান্ডায় সুরক্ষিত রেখেছে।',
     readTime: '4 min read',
-    imageUrl: '/tmf-assets/real-field-photos/tmf-field-14.jpeg',
+    imageUrl: '/tmf-assets/generated/winter_infant_bedding.jpg',
   },
   {
     id: 'story-biren',
@@ -259,7 +259,7 @@ export const STORIES_OF_CHANGE: StoryItem[] = [
     afterTransformation: 'At our free diagnostic medical and eye camp, an optometrist evaluated his vision and provided free customized reading spectacles and eye drops.',
     quote: 'বিনামূল্যে চশমা পাওয়ার পর আমি আবার তাঁতের কাজ শুরু করতে পেরেছি। আমার সংসার বেঁচে গেল।',
     readTime: '3 min read',
-    imageUrl: '/tmf-assets/real-field-photos/tmf-field-23.jpeg',
+    imageUrl: '/tmf-assets/generated/story_elderly_artisan.jpg',
   },
   {
     id: 'story-kakali',
@@ -272,7 +272,7 @@ export const STORIES_OF_CHANGE: StoryItem[] = [
     afterTransformation: 'She completed the 3-month tailoring and jute bag stitching training at Minati Hub and now earns a steady monthly income supplying local markets.',
     quote: 'নিজের উপার্জনে ছেলেমেয়েদের পড়াচ্ছি—এই আত্মসম্মান মিনতি ফাউন্ডেশন আমাকে দিয়েছে।',
     readTime: '4 min read',
-    imageUrl: '/tmf-assets/real-field-photos/tmf-field-18.jpeg',
+    imageUrl: '/tmf-assets/generated/women_tailoring_hub.jpg',
   },
   {
     id: 'story-sanjoy',
@@ -285,7 +285,7 @@ export const STORIES_OF_CHANGE: StoryItem[] = [
     afterTransformation: 'TMF established regular mobile clinical health camps and provided water sanitization kits, reducing seasonal dysentery cases by 75%.',
     quote: 'ডাক্তারবাবুরা আমাদের গ্রামে এসে ওষুধ দেন। ফাউন্ডেশনের উদ্যোগে আমাদের গ্রামের মানুষের অনেক উপকার হয়েছে।',
     readTime: '3 min read',
-    imageUrl: '/tmf-assets/real-field-photos/tmf-field-22.jpeg',
+    imageUrl: '/tmf-assets/generated/rural_medical_camp.jpg',
   },
 ];
 

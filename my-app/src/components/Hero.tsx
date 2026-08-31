@@ -65,7 +65,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDonate, onExploreWork }) => {
             <MotionColumn speed={-0.05} className="lg:col-span-6 relative">
               <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] bg-[#f2f4f6] p-2 group hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.15)] transition-all duration-500 transform hover:-translate-y-2">
                 <img
-                  src="/tmf-assets/real-field-photos/tmf-field-1.jpeg"
+                  src="/tmf-assets/generated/hero_child_education.jpg"
                   alt="Free Child Remedial Education Center"
                   className="w-full h-full object-cover rounded-[1.5rem] group-hover:scale-105 transition-transform duration-700"
                 />
