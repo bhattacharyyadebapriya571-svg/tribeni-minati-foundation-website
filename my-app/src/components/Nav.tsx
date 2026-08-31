@@ -189,9 +189,17 @@ export const Nav: React.FC<NavProps> = ({
               <div className="relative">
                 <button
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="w-8 h-8 rounded-full bg-[#111827] text-white flex items-center justify-center hover:scale-110 transition-transform cursor-pointer shadow-lg hover:shadow-xl"
+                  className="w-8 h-8 rounded-full bg-[#111827] text-white flex items-center justify-center hover:scale-110 transition-transform cursor-pointer shadow-lg hover:shadow-xl overflow-hidden border border-white/20"
                 >
-                  <span className="material-symbols-outlined text-[18px]">person</span>
+                  {user.user_metadata?.avatar_url || user.user_metadata?.picture ? (
+                    <img
+                      src={user.user_metadata?.avatar_url || user.user_metadata?.picture}
+                      alt={user.user_metadata?.full_name || 'User'}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="material-symbols-outlined text-[18px]">person</span>
+                  )}
                 </button>
 
                 {userDropdownOpen && (
