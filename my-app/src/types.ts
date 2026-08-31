@@ -10,6 +10,8 @@ export type PageId =
   | 'transparency'
   | 'calculator'
   | 'donor-portal'
+  | 'donor-login'
+  | 'login'
   | 'events'
   | 'contact';
 

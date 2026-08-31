@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TMF_META } from '../data/tmfVerifiedData';
+import { useAuth } from '../context/AuthContext';
 import type { PageId } from '../types';
 
 interface DonorDashboardProps {
@@ -60,8 +61,14 @@ const SAMPLE_DONATIONS: DonationRecord[] = [
 ];
 
 export const DonorDashboardPage: React.FC<DonorDashboardProps> = ({ onNavigate, onOpenDonate }) => {
+  const { user, signOut } = useAuth();
   const [searchPhone, setSearchPhone] = useState<string>('9143430927');
   const [selectedReceipt, setSelectedReceipt] = useState<DonationRecord | null>(null);
+
+  const handleLogout = async () => {
+    await signOut();
+    onNavigate('donor-login');
+  };
 
   const filtered = searchPhone.trim()
     ? SAMPLE_DONATIONS.filter(d => d.phone.includes(searchPhone.trim()) || d.donorPan.toLowerCase().includes(searchPhone.trim().toLowerCase()))
@@ -70,11 +77,70 @@ export const DonorDashboardPage: React.FC<DonorDashboardProps> = ({ onNavigate, 
   const totalDonated = filtered.reduce((acc, curr) => acc + curr.amount, 0);
   const taxExemptSavings = totalDonated * 0.5;
 
+  const avatarUrl = user?.user_metadata?.avatar_url || user?.user_metadata?.picture;
+  const userDisplayName = user?.user_metadata?.full_name || user?.user_metadata?.name || user?.email?.split('@')[0] || 'Verified Donor';
+
   return (
     <div className="w-full pt-20 bg-[#f7f9fb] min-h-screen text-[#191c1e]">
       
       {/* Page Hero */}
       <section className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pt-16 pb-12">
+        
+        {/* User Authentication Status Banner */}
+        {user ? (
+          <div className="mb-8 p-6 bg-white border border-indigo-100 rounded-3xl shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              {avatarUrl ? (
+                <img
+                  src={avatarUrl}
+                  alt={userDisplayName}
+                  className="w-14 h-14 rounded-2xl object-cover ring-2 ring-[#4b41e1]/20"
+                />
+              ) : (
+                <div className="w-14 h-14 rounded-2xl bg-[#4b41e1]/10 text-[#4b41e1] flex items-center justify-center font-bold text-xl">
+                  {userDisplayName.charAt(0).toUpperCase()}
+                </div>
+              )}
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="font-bold text-base text-slate-900">{userDisplayName}</h2>
+                  <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[10px] font-bold uppercase rounded-md tracking-wider">
+                    Verified Donor
+                  </span>
+                </div>
+                <p className="text-xs text-slate-500 font-mono mt-0.5">{user.email}</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 w-full sm:w-auto">
+              <button
+                onClick={handleLogout}
+                className="px-5 py-2.5 bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-700 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 cursor-pointer ml-auto"
+              >
+                <span className="material-symbols-outlined text-[16px]">logout</span>
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="mb-8 p-6 bg-gradient-to-r from-[#0F172A] to-[#1E1B4B] rounded-3xl text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-amber-400 text-[20px]">account_circle</span>
+                <h3 className="font-bold text-base text-white">Donor Login Available</h3>
+              </div>
+              <p className="text-xs text-slate-300">Sign in with Google or Email OTP to link your 80G receipts directly to your profile.</p>
+            </div>
+            <button
+              onClick={() => onNavigate('donor-login')}
+              className="px-6 py-3 bg-[#4b41e1] hover:bg-[#3b31cc] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center gap-2 shadow-md cursor-pointer shrink-0"
+            >
+              <span>Donor Sign In</span>
+              <span className="material-symbols-outlined text-[16px]">login</span>
+            </button>
+          </div>
+        )}
+
         <div className="flex flex-col lg:flex-row justify-between items-end gap-8 mb-12">
           <div className="space-y-4 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 text-[#4b41e1] rounded-full text-xs font-bold font-label-caps uppercase tracking-wider">

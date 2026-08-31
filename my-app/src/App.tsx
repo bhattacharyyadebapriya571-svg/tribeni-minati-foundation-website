@@ -31,6 +31,7 @@ import { VolunteerPage } from './pages/VolunteerPage';
 import { TransparencyPage } from './pages/TransparencyPage';
 import { ContactPage } from './pages/ContactPage';
 import { DonorDashboardPage } from './pages/DonorDashboardPage';
+import { DonorLoginPage } from './pages/DonorLoginPage';
 import { EventsCalendarPage } from './pages/EventsCalendarPage';
 
 // Modals
@@ -91,6 +92,15 @@ function parseUrlPath(pathname: string, hash: string = ''): { page: PageId; prog
   ) {
     return { page: 'donor-portal', programId: 'healthcare' };
   }
+  if (
+    clean === '/donor-login' ||
+    clean === '/login' ||
+    clean === '/signin' ||
+    clean === '/sign-in' ||
+    clean === '/auth'
+  ) {
+    return { page: 'donor-login', programId: 'healthcare' };
+  }
   if (clean === '/stories' || clean === '/impact' || clean === '/case-studies' || clean === '/testimonials') {
     return { page: 'stories', programId: 'healthcare' };
   }
@@ -131,6 +141,9 @@ function stateToPath(page: PageId, programId?: string): string {
       return '/events';
     case 'donor-portal':
       return '/donor-portal';
+    case 'donor-login':
+    case 'login':
+      return '/donor-login';
     case 'stories':
       return '/stories';
     case 'gallery':
@@ -336,6 +349,14 @@ function App() {
           <DonorDashboardPage
             onOpenDonate={() => handleOpenDonate()}
             onNavigate={handleNavigate}
+          />
+        )}
+
+        {/* 6B. DEDICATED DONOR LOGIN & AUTH PAGE */}
+        {(currentPage === 'donor-login' || currentPage === 'login') && (
+          <DonorLoginPage
+            onNavigate={handleNavigate}
+            onOpenDonate={handleOpenDonate}
           />
         )}
 

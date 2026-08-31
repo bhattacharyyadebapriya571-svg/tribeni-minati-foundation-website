@@ -250,9 +250,9 @@ export const Nav: React.FC<NavProps> = ({
               </div>
             ) : (
               <button
-                onClick={onOpenAuth}
+                onClick={() => (onOpenAuth ? onOpenAuth() : onNavigate('donor-login'))}
                 className="w-8 h-8 rounded-full bg-[#111827] text-white flex items-center justify-center hover:scale-110 transition-transform cursor-pointer shadow-md"
-                title="Sign In / 80G Portal"
+                title="Donor Sign In / 80G Portal"
               >
                 <span className="material-symbols-outlined text-[18px]">person</span>
               </button>

@@ -50,6 +50,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://tribeni-minati-foundation-website.vercel.app/donor-login</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://tribeni-minati-foundation-website.vercel.app/volunteer</loc>
     <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
