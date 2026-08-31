@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import type { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../services/supabaseClient';
 
@@ -44,6 +44,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signInWithGoogle = async () => {
     try {
+      // 1. Primary: Try Vercel Connect (google/cinereous-ball)
+      const res = await fetch('/api/auth/google-connect?action=start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: `usr_${Date.now()}` }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        const targetUrl = data.authorizationUrl || data.url;
+        if (targetUrl) {
+          window.location.href = typeof targetUrl === 'string' ? targetUrl : targetUrl.url || targetUrl.href;
+          return { error: null };
+        }
+      }
+
+      // 2. Fallback: Try Supabase OAuth
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
@@ -52,6 +69,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
       return { error };
     } catch (err: any) {
+      console.error('Google Sign-In Error:', err);
       return { error: err };
     }
   };
