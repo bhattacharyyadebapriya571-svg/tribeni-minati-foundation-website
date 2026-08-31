@@ -263,9 +263,35 @@ export const DonorLoginPage: React.FC<DonorLoginPageProps> = ({ onNavigate }) =>
             )}
 
             {successMsg && (
-              <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold rounded-2xl flex items-start gap-2.5">
-                <span className="material-symbols-outlined text-[18px] shrink-0">check_circle</span>
-                <span className="flex-1">{successMsg}</span>
+              <div className="p-5 bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200/90 text-emerald-900 rounded-2xl space-y-3">
+                <div className="flex items-start gap-2.5">
+                  <span className="material-symbols-outlined text-[22px] text-emerald-600 shrink-0">mark_email_read</span>
+                  <div className="flex-1">
+                    <h4 className="text-xs font-bold text-emerald-950">Verification Link Sent to your Gmail!</h4>
+                    <p className="text-xs text-emerald-800 mt-0.5">{successMsg}</p>
+                  </div>
+                </div>
+
+                <div className="pt-2 flex flex-wrap items-center gap-2">
+                  <a
+                    href="https://mail.google.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 min-w-[180px] py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-xs"
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                    </svg>
+                    <span>Open Gmail (mail.google.com)</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setSuccessMsg('')}
+                    className="px-3 py-2.5 bg-white border border-emerald-300 hover:bg-emerald-100/50 text-emerald-800 text-xs font-semibold rounded-xl cursor-pointer"
+                  >
+                    Dismiss
+                  </button>
+                </div>
               </div>
             )}
 
