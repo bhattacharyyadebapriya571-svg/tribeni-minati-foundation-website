@@ -1,17 +1,17 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "nvidia/nvidia/nemotron-3-ultra-550b-a55b",
+  "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
   "provider": {
     "nvidia": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "nvidia",
       "options": {
         "baseURL": "https://integrate.api.nvidia.com/v1",
-        "apiKey": "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"
+        "apiKey": "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"
       },
       "models": {
-        "nvidia/nemotron-3-ultra-550b-a55b": {
-          "name": "nvidia/nemotron-3-ultra-550b-a55b"
+        "nvidia/nemotron-3.5-lightning-30b-a3b": {
+          "name": "nvidia/nemotron-3.5-lightning-30b-a3b"
         }
       }
     }
