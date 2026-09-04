@@ -120,14 +120,22 @@ export const DonorDashboardPage: React.FC<DonorDashboardProps> = ({ onNavigate, 
   const [searchPhone, setSearchPhone] = useState<string>('9143430927');
   const [selectedReceipt, setSelectedReceipt] = useState<DonationRecord | null>(null);
 
-  // Sync user email when auth loads
+  // Sync user email & phone when auth loads
   useEffect(() => {
-    if (user?.email && profile.email !== user.email) {
+    if (user) {
+      const userPhone = user.phone || user.user_metadata?.phone;
+      const cleanDigits = userPhone ? userPhone.replace(/\D/g, '').slice(-10) : '';
+
       setProfile(prev => ({
         ...prev,
         email: user.email || prev.email,
         fullName: user.user_metadata?.full_name || prev.fullName,
+        phone: cleanDigits || prev.phone,
       }));
+
+      if (cleanDigits) {
+        setSearchPhone(cleanDigits);
+      }
     }
   }, [user]);
 

@@ -10,7 +10,7 @@ interface DonorLoginPageProps {
 }
 
 export const DonorLoginPage: React.FC<DonorLoginPageProps> = ({ onNavigate }) => {
-  const { user, loading, signInWithGoogle, signInWithOtp, signInWithPassword, signUpWithPassword } = useAuth();
+  const { user, loading, signInWithGoogle, signInWithOtp, signInWithPassword, signUpWithPassword, signInWithMobileSession } = useAuth();
   
   const [authMode, setAuthMode] = useState<'mobile' | 'otp' | 'password' | 'signup'>('mobile');
   const [phone, setPhone] = useState('');
@@ -107,7 +107,38 @@ export const DonorLoginPage: React.FC<DonorLoginPageProps> = ({ onNavigate }) =>
 
     try {
       if (confirmationResult) {
-        await confirmationResult.confirm(otpCode);
+        const res = await confirmationResult.confirm(otpCode);
+        const cleanDigits = phone.replace(/\D/g, '').slice(-10);
+        const formattedPhone = `+91 ${cleanDigits}`;
+
+        if (signInWithMobileSession) {
+          signInWithMobileSession({
+            id: res?.user?.uid || `usr_mob_${Date.now()}`,
+            phone: formattedPhone,
+            fullName: fullName || 'Verified Mobile Donor',
+          });
+        }
+
+        const existingProfile = localStorage.getItem('tmf_donor_profile');
+        if (!existingProfile) {
+          localStorage.setItem(
+            'tmf_donor_profile',
+            JSON.stringify({
+              fullName: fullName || 'Verified Mobile Donor',
+              email: email || '',
+              phone: cleanDigits,
+              panNumber: '',
+              aadhaarLast4: '',
+              donorType: 'Individual',
+              address: 'Hooghly, West Bengal',
+              city: 'Tribeni',
+              state: 'West Bengal',
+              pincode: '712503',
+              kycStatus: 'Not Submitted',
+            })
+          );
+        }
+
         onNavigate('donor-portal');
       } else {
         throw new Error('Please request OTP first');

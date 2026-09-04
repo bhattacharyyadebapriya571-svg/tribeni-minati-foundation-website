@@ -58,7 +58,16 @@ function parseUrlPath(pathname: string, hash: string = ''): { page: PageId; prog
   if (clean === '' || clean === '/' || clean === '/home') {
     return { page: 'home', programId: 'healthcare' };
   }
-  if (clean === '/about' || clean === '/about-us' || clean === '/genesis') {
+  if (
+    clean === '/about' ||
+    clean === '/about-us' ||
+    clean === '/genesis' ||
+    clean === '/team' ||
+    clean === '/members' ||
+    clean === '/governing-body' ||
+    clean === '/leadership' ||
+    clean === '/board'
+  ) {
     return { page: 'about', programId: 'healthcare' };
   }
   if (
@@ -66,7 +75,11 @@ function parseUrlPath(pathname: string, hash: string = ''): { page: PageId; prog
     clean === '/initiatives' ||
     clean === '/programmes' ||
     clean === '/pillars' ||
-    clean === '/projects'
+    clean === '/projects' ||
+    clean === '/csr' ||
+    clean === '/csr-partnership' ||
+    clean === '/partner' ||
+    clean === '/rfp'
   ) {
     return { page: 'programs', programId: 'healthcare' };
   }
@@ -180,18 +193,35 @@ function App() {
       setCurrentPage(parsed.page);
       setSelectedProgramId(parsed.programId);
 
-      // Check if hash requests donate
+      // Check if hash or pathname requests donate or csr
       if (window.location.hash === '#donate' || window.location.pathname === '/donate') {
         setDonateOpen(true);
+      }
+      if (
+        window.location.hash === '#csr' ||
+        window.location.pathname === '/csr' ||
+        window.location.pathname === '/partner' ||
+        window.location.pathname === '/rfp'
+      ) {
+        setPartnerOpen(true);
       }
     };
 
     window.addEventListener('popstate', handleUrlChange);
     window.addEventListener('hashchange', handleUrlChange);
 
-    // Initial check for hash or query
-    if (window.location.hash === '#donate' || window.location.search.includes('donate=true')) {
+    // Initial check for hash, query, or pathname
+    if (window.location.hash === '#donate' || window.location.search.includes('donate=true') || window.location.pathname === '/donate') {
       setDonateOpen(true);
+    }
+    if (
+      window.location.hash === '#csr' ||
+      window.location.search.includes('csr=true') ||
+      window.location.pathname === '/csr' ||
+      window.location.pathname === '/partner' ||
+      window.location.pathname === '/rfp'
+    ) {
+      setPartnerOpen(true);
     }
 
     return () => {

@@ -63,7 +63,7 @@ export const TMF_META = {
     accountNumber: '5894594000',
     ifsc: 'CBIN0283860',
     micr: '712016857',
-    passbookDoc: '/tmf-assets/Bank Account of TMF.pdf',
+    passbookDoc: '/tmf-assets/bank-account-of-tmf.pdf',
   },
   offices: {
     headOffice: {
@@ -267,7 +267,7 @@ export const LEGAL_DOCS: LegalDocument[] = [
     title: 'NITI Aayog NGO DARPAN Certificate',
     category: 'Government of India',
     fileName: 'TMF DARPAN.pdf',
-    fileUrl: '/tmf-assets/TMF DARPAN.pdf',
+    fileUrl: '/tmf-assets/tmf-darpan.pdf',
     regNumber: 'WB/2026/0939703',
     issueDate: 'Active 2026',
     authority: 'NITI Aayog, Govt. of India',
@@ -278,7 +278,7 @@ export const LEGAL_DOCS: LegalDocument[] = [
     title: 'Central Bank of India Official Account Passbook',
     category: 'Banking Credentials',
     fileName: 'Bank Account of TMF.pdf',
-    fileUrl: '/tmf-assets/Bank Account of TMF.pdf',
+    fileUrl: '/tmf-assets/bank-account-of-tmf.pdf',
     regNumber: 'A/C: 5894594000',
     issueDate: 'Tarakeshwar Branch',
     authority: 'Central Bank of India (IFSC: CBIN0283860)',
@@ -317,7 +317,7 @@ export const TMF_CAMPAIGNS: TmfCampaign[] = [
     category: 'Education & Child Guidance',
     description:
       'A dedicated free coaching and guidance initiative running 3 days every week (Wednesday, Thursday, and Friday from 4:30 PM to 6:30 PM) for underprivileged students of Class I to X in collaboration with Jotkamal Juba Sangha.',
-    imagePath: '/tmf-assets/WhatsApp Image 2026-08-26 at 1.00.49 PM (1).jpeg',
+    imagePath: '/tmf-assets/campaign-education-center.jpeg',
     partner: 'Jotkamal Juba Sangha (জ্যোতকমল যুব সংঘ)',
     daysActive: 'Wed, Thu, Fri (4:30 PM – 6:30 PM)',
     targetBeneficiaries: 'Students Class I to X',
@@ -336,7 +336,7 @@ export const TMF_CAMPAIGNS: TmfCampaign[] = [
     category: 'Child Care & Humanitarian Relief',
     description:
       'Annual winter humanitarian intervention distributing specialized insulated infant sleep mattresses, warm woolens, thermal blankets, and baby hygiene packages across rural hamlets.',
-    imagePath: '/tmf-assets/WhatsApp Image 2026-08-26 at 1.00.48 PM.jpeg',
+    imagePath: '/tmf-assets/campaign-winter-bedding.jpeg',
     partner: 'Tribeni Minati Foundation Relief Corps',
     daysActive: 'Annual Winter Campaign',
     targetBeneficiaries: 'Newborns, Infants & Mothers',
@@ -374,7 +374,7 @@ export const TMF_CAMPAIGNS: TmfCampaign[] = [
     category: 'Healthcare & Emergency Support',
     description:
       'Organizing periodic voluntary blood donation camps in association with district blood banks, accompanied by free eye checkups, cataract screenings, and free medicine distribution.',
-    imagePath: '/tmf-assets/WhatsApp Image 2026-08-26 at 1.00.50 PM.jpeg',
+    imagePath: '/tmf-assets/campaign-blood-medical.jpeg',
     partner: 'District Health Administration & Blood Bank',
     daysActive: 'Monthly Health Saturdays',
     targetBeneficiaries: 'Rural Families & Patients in Need',

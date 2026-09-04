@@ -51,9 +51,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       error: 'Invalid action. Use action=start or action=token.',
     });
   } catch (err: any) {
-    console.error('Vercel Connect Google OAuth Error:', err);
-    return res.status(500).json({
-      error: err.message || 'Failed to process Google Connect authorization',
+    console.warn('Vercel Connect Google OAuth fallback mode:', err?.message);
+    return res.status(200).json({
+      success: false,
+      fallback: true,
+      message: 'Vercel Connect not linked; client will use direct Supabase Google OAuth.',
       connection: CONNECTION_NAME,
     });
   }

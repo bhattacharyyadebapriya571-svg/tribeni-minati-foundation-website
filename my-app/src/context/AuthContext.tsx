@@ -10,6 +10,7 @@ interface AuthContextType {
   signInWithOtp: (email: string) => Promise<{ error: Error | null; message?: string }>;
   signInWithPassword: (email: string, pass: string) => Promise<{ error: Error | null }>;
   signUpWithPassword: (email: string, pass: string, name?: string) => Promise<{ error: Error | null }>;
+  signInWithMobileSession: (data: { phone: string; fullName?: string; id?: string }) => void;
   signOut: () => Promise<void>;
 }
 
@@ -21,19 +22,48 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    // 1. Fetch initial session
+    // 1. Fetch initial session from Supabase
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
+      if (session?.user) {
+        setSession(session);
+        setUser(session.user);
+        setLoading(false);
+      } else {
+        // Check for active verified mobile donor session
+        const savedMobile = localStorage.getItem('tmf_donor_session');
+        if (savedMobile) {
+          try {
+            const d = JSON.parse(savedMobile);
+            if (d && d.phone) {
+              const mockUser = {
+                id: d.id || `usr_mob_${Date.now()}`,
+                app_metadata: {},
+                user_metadata: {
+                  full_name: d.fullName || 'Verified Donor',
+                  phone: d.phone,
+                },
+                aud: 'authenticated',
+                created_at: d.timestamp || new Date().toISOString(),
+                email: d.email || undefined,
+                phone: d.phone,
+                role: 'authenticated',
+              } as unknown as User;
+              setUser(mockUser);
+            }
+          } catch (_) {}
+        }
+        setLoading(false);
+      }
     });
 
-    // 2. Listen to state changes
+    // 2. Listen to state changes from Supabase
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
+      if (session) {
+        setSession(session);
+        setUser(session.user ?? null);
+      }
       setLoading(false);
     });
 
@@ -42,29 +72,37 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
   }, []);
 
+  const signInWithMobileSession = (data: { phone: string; fullName?: string; id?: string }) => {
+    const donorRecord = {
+      id: data.id || `usr_mob_${Date.now()}`,
+      phone: data.phone,
+      fullName: data.fullName || 'Verified Donor',
+      timestamp: new Date().toISOString(),
+    };
+    localStorage.setItem('tmf_donor_session', JSON.stringify(donorRecord));
+
+    const mockUser = {
+      id: donorRecord.id,
+      app_metadata: {},
+      user_metadata: {
+        full_name: donorRecord.fullName,
+        phone: donorRecord.phone,
+      },
+      aud: 'authenticated',
+      created_at: donorRecord.timestamp,
+      phone: donorRecord.phone,
+      role: 'authenticated',
+    } as unknown as User;
+
+    setUser(mockUser);
+  };
+
   const signInWithGoogle = async () => {
     try {
-      // 1. Primary: Try Vercel Connect (google/cinereous-ball)
-      const res = await fetch('/api/auth/google-connect?action=start', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: `usr_${Date.now()}` }),
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        const targetUrl = data.authorizationUrl || data.url;
-        if (targetUrl) {
-          window.location.href = typeof targetUrl === 'string' ? targetUrl : targetUrl.url || targetUrl.href;
-          return { error: null };
-        }
-      }
-
-      // 2. Fallback: Try Supabase OAuth
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: window.location.origin,
+          redirectTo: `${window.location.origin}/donor-portal`,
         },
       });
       return { error };
@@ -118,7 +156,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    localStorage.removeItem('tmf_donor_session');
+    setUser(null);
+    setSession(null);
+    try {
+      await supabase.auth.signOut();
+    } catch (_) {}
   };
 
   return (
@@ -131,6 +174,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         signInWithOtp,
         signInWithPassword,
         signUpWithPassword,
+        signInWithMobileSession,
         signOut,
       }}
     >
