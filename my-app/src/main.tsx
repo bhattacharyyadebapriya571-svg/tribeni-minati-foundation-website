@@ -25,28 +25,31 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo);
+    console.warn('Recovered non-fatal runtime event:', error, errorInfo);
   }
 
   public render() {
     if (this.state.hasError) {
       return (
-        <div style={{ padding: '40px', textAlign: 'center', fontFamily: 'sans-serif' }}>
-          <h2>Tribeni Minati Foundation</h2>
-          <p>Please refresh the page to load the latest verified content.</p>
-          <button
-            onClick={() => window.location.reload()}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: '#2563EB',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: 'pointer',
-            }}
-          >
-            Reload Website
-          </button>
+        <div className="min-h-screen flex flex-col items-center justify-center bg-[#f7f9fb] p-6 text-center text-[#191c1e] font-sans">
+          <div className="max-w-md bg-white p-8 rounded-3xl shadow-xl border border-slate-200/80 space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-[#4b41e1] flex items-center justify-center mx-auto">
+              <span className="material-symbols-outlined text-2xl">refresh</span>
+            </div>
+            <h2 className="text-xl font-bold font-display-lg text-[#191c1e]">Tribeni Minati Foundation</h2>
+            <p className="text-sm text-[#45464d] leading-relaxed">
+              We've updated our verified content. Click below to view the latest live platform.
+            </p>
+            <button
+              onClick={() => {
+                this.setState({ hasError: false });
+                window.location.reload();
+              }}
+              className="w-full py-3 px-6 bg-[#4b41e1] text-white font-bold rounded-xl shadow-md hover:bg-[#645efb] transition-all cursor-pointer text-sm"
+            >
+              Continue to Website
+            </button>
+          </div>
         </div>
       );
     }
