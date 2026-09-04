@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TMF_META } from '../data/tmfVerifiedData';
 import { useAuth } from '../context/AuthContext';
+import { generate80GCertificatePdf, download80GCertificate } from '../lib/certificateGenerator';
 import type { PageId } from '../types';
 
 interface DonorDashboardProps {
@@ -119,6 +120,7 @@ export const DonorDashboardPage: React.FC<DonorDashboardProps> = ({ onNavigate, 
 
   const [searchPhone, setSearchPhone] = useState<string>('9143430927');
   const [selectedReceipt, setSelectedReceipt] = useState<DonationRecord | null>(null);
+  const [isDownloadingPdf, setIsDownloadingPdf] = useState<boolean>(false);
 
   // Sync user email & phone when auth loads
   useEffect(() => {
@@ -786,14 +788,39 @@ export const DonorDashboardPage: React.FC<DonorDashboardProps> = ({ onNavigate, 
                 <span>Print</span>
               </button>
               <button
-                onClick={() => {
-                  alert(`Downloading Official 80G Tax Receipt PDF: ${selectedReceipt.receiptNumber}.pdf`);
-                  setSelectedReceipt(null);
+                disabled={isDownloadingPdf}
+                onClick={async () => {
+                  try {
+                    setIsDownloadingPdf(true);
+                    const pdfBytes = await generate80GCertificatePdf({
+                      id: selectedReceipt.id,
+                      paymentId: selectedReceipt.id,
+                      amount: selectedReceipt.amount,
+                      currency: 'INR',
+                      donorName: selectedReceipt.donorName,
+                      donorEmail: profile.email || 'donor@tmf.org.in',
+                      donorPhone: selectedReceipt.phone || profile.phone,
+                      donorPan: selectedReceipt.donorPan || profile.panNumber,
+                      donorAddress: profile.address
+                        ? `${profile.address}, ${profile.city}, ${profile.state} - ${profile.pincode}`
+                        : 'Hooghly, West Bengal',
+                      cause: selectedReceipt.cause,
+                      date: selectedReceipt.date || new Date().toISOString(),
+                      certificateNumber: selectedReceipt.receiptNumber,
+                    });
+                    download80GCertificate(pdfBytes, `${selectedReceipt.receiptNumber}.pdf`);
+                  } catch (err) {
+                    console.error('PDF generation error:', err);
+                    window.print();
+                  } finally {
+                    setIsDownloadingPdf(false);
+                    setSelectedReceipt(null);
+                  }
                 }}
-                className="px-6 py-2.5 bg-[#4b41e1] hover:bg-[#3b31cc] text-white font-bold rounded-xl text-xs flex items-center gap-1.5 cursor-pointer shadow-md"
+                className="px-6 py-2.5 bg-[#4b41e1] hover:bg-[#3b31cc] text-white font-bold rounded-xl text-xs flex items-center gap-1.5 cursor-pointer shadow-md disabled:opacity-50"
               >
                 <span className="material-symbols-outlined text-[16px]">download</span>
-                <span>Download PDF</span>
+                <span>{isDownloadingPdf ? 'Generating PDF...' : 'Download Official PDF'}</span>
               </button>
             </div>
           </div>
